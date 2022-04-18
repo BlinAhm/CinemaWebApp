@@ -1,0 +1,17 @@
+.nav-bar-link {
+    border: solid 1px black;
+    padding: 1rem;
+    border-radius: 10px;
+    background: #fff;
+    font-weight: 500;
+    margin-inline: 3px;
+}
+.login {
+    border: solid 1px black;
+    padding: .8rem;
+    border-radius: 10px;
+    background: #6DA34D;
+    color: #fff;
+    font-weight: 500;
+    margin-inline: 3px;
+}
