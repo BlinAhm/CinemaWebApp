@@ -1,17 +1,23 @@
 .nav-bar-link {
-    border: solid 1px black;
+    border: solid 1px transparent;
     padding: 1rem;
     border-radius: 10px;
     background: #fff;
     font-weight: 500;
-    margin-inline: 3px;
+    margin-inline: 6px;
+    color: #000;
+    text-decoration: none;
+    box-shadow: 2px 2px 5px black;
 }
 .login {
-    border: solid 1px black;
+    border: solid 1px transparent;
     padding: .8rem;
     border-radius: 10px;
     background: #6DA34D;
     color: #fff;
     font-weight: 500;
-    margin-inline: 3px;
+    margin-inline: 6px;
+    color: #fff;
+    text-decoration: none;
+    box-shadow: 2px 2px 5px black;
 }

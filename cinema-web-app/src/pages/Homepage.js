@@ -1,9 +1,7 @@
-import PageHeader from './UI/Header/PageHeader';
-
 const Homepage = () => {
     return (
         <div>
-            <PageHeader />
+            <h2>Home</h2>
         </div>
     );
 }

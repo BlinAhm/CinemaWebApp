@@ -1,0 +1,10 @@
+.page-footer {
+    width: 80%;
+    background: #202020;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: baseline;
+    padding-inline: 10%;
+    padding-block: 2%;
+}
