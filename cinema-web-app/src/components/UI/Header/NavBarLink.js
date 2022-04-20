@@ -13,7 +13,7 @@ const NavBarLink = (props) => {
     return (
         <NavLink style={
             ({ isActive }) =>
-                isActive ? { background: "#6DA34D" } : undefined
+                isActive ? { background: "#D7263D" } : undefined
         } className={className} to={`/${link}`} > {props.value}</NavLink >
     );
 }

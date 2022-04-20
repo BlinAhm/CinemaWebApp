@@ -13,11 +13,21 @@
     border: solid 1px transparent;
     padding: .8rem;
     border-radius: 10px;
-    background: #6DA34D;
+    /*background: #6DA34D;*/
+    /*background: #D7263D;*/
+    background: linear-gradient(to right, #D7263D,#A31F30);
     color: #fff;
     font-weight: 500;
     margin-inline: 6px;
     color: #fff;
     text-decoration: none;
     box-shadow: 2px 2px 5px black;
+}
+.nav-bar-link:hover {
+    transition: 0.5s;
+    background: linear-gradient(to right, #D7263D,#A31F30);
+}
+.login:hover {
+    transition: 0.5s;
+    background: linear-gradient(to right, #D7263D,#A31F30);
 }

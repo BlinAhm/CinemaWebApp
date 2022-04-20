@@ -1,0 +1,6 @@
+.input-div{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    min-height: 200px;
+}

@@ -1,6 +1,7 @@
 .page-footer {
     width: 80%;
-    background: #202020;
+    /*background: #202020;*/
+    background: linear-gradient(to right, #050505,#101010,#111111,#151515);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
