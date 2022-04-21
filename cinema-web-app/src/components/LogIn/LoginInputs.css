@@ -4,3 +4,15 @@
     justify-content: space-around;
     min-height: 200px;
 }
+#link-btn2 {
+    color: #A31F30;
+    font-size: 18px;
+    font-weight: 400;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-decoration: none;
+    margin-top: 10px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    padding: 0;
+}

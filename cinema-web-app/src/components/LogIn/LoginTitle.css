@@ -1,0 +1,18 @@
+div > h1, h5{
+    text-align: center;
+}
+h1 {
+    color: whitesmoke;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 76px;
+    font-weight: 400;
+    margin-bottom: -10px;
+}
+
+h5 {
+    color: whitesmoke;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    letter-spacing: 1.2px;
+}

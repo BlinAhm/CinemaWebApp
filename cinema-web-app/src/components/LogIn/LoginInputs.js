@@ -12,7 +12,7 @@ const LoginInputs = () => {
                 <div className="check">
                     <input type="checkbox" /><p>Remember me</p>
                 </div>
-                <a>Forgot your password?</a>
+                <button disabled id="link-btn2">Forgot your password?</button>
             </div>
         </div>
         );

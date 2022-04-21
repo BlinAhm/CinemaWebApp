@@ -4,6 +4,7 @@ const LogIn = () => {
     return (
         <div className="main">
             <LoginForm />
-        </div>);
+        </div>
+    );
 }
 export default LogIn;
