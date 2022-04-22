@@ -1,10 +1,10 @@
-.input-div{
+.LoginForm .input-div {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    min-height: 200px;
+    min-height: 230px;
 }
-#link-btn2 {
+.LoginForm #link-btn2 {
     color: #A31F30;
     font-size: 18px;
     font-weight: 400;
