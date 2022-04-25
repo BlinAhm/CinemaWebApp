@@ -1,3 +1,4 @@
+// eslint-disable-next-line
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import './App.css';
 import PageHeader from './components/UI/Header/PageHeader';
@@ -9,8 +10,6 @@ import AboutUs from './pages/AboutUs';
 import ContactUs from './pages/ContactUs';
 import LogIn from './pages/LogIn';
 import SignUp from './pages/SignUp';
-
-
 
 function App() {
     return (
