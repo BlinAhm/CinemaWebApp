@@ -1,0 +1,7 @@
+.SignupForm .input-div2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    min-height: 350px;
+    margin-top: -40px;
+}

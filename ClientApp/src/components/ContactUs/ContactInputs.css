@@ -1,0 +1,79 @@
+.contact-head .contact-right {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 750px;
+    height: 400px;
+}
+.contact-head #write {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-bottom: 50px;
+}
+    .contact-head #write > h2 {
+        margin-bottom: 10px;
+        margin-left: -240px;
+        color: whitesmoke;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        font-size: 24px;
+    }
+    .contact-head #write > input {
+        padding-top: 7px;
+        padding-bottom: 7px;
+        padding-left: 10px;
+        padding-right: 10px;
+        border: solid whitesmoke 0px;
+        height: 24px;
+        width: 320px;
+        background-color: whitesmoke;
+        color: black;
+        font-size: 14px;
+        font-weight: 200;
+        margin-top: 10px;
+        margin-right: 10px;
+    }
+        .contact-head #write > input::placeholder {
+            color: rgb(87, 87, 87);
+            font-size: 14px;
+            font-weight: 200;
+        }
+
+.contact-head .write2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-bottom: 30px;
+}
+    .contact-head .write2 > button {
+        padding-top: 7px;
+        padding-bottom: 7px;
+        padding-left: 10px;
+        padding-right: 10px;
+        border: solid #2C7F75 0px;
+        height: 38px;
+        width: 340px;
+        background: #D7263D;
+        box-shadow: 1px 1px 5px black;
+        color: whitesmoke;
+        font-size: 16px;
+        font-weight: 200;
+        margin-top: 20px;
+        cursor: pointer;
+    }
+    .contact-head .write2 > textarea {
+        padding-top: 7px;
+        padding-bottom: 7px;
+        padding-left: 10px;
+        padding-right: 10px;
+        margin-top: 106px;
+        width: 320px;
+        height: 120px;
+        resize: none;
+        color: black;
+        font-size: 14px;
+        font-weight: 200;
+    }

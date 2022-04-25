@@ -1,0 +1,9 @@
+.contact-head .map {
+    width: max-content;
+    height: max-content;
+    margin-top: -80px;
+}
+    .contact-head .map > iframe {
+        width: 900px;
+        height: 400px;
+    }

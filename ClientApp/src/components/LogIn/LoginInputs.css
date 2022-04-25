@@ -1,0 +1,65 @@
+.LoginForm .input-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    min-height: 230px;
+}
+
+.LoginForm #link-btn2 {
+    color: #A31F30;
+    font-size: 18px;
+    font-weight: 400;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-decoration: none;
+    margin-top: 10px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    padding: 0;
+}
+
+.LoginForm .texts {
+    padding-top: 7px;
+    padding-bottom: 7px;
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 30px;
+    width: 360px;
+    border: solid transparent 1px;
+    background: #525356;
+    border-radius: 10px;
+    color: whitesmoke;
+    font-size: 16px;
+    font-weight: 200;
+}
+
+    .LoginForm .texts::placeholder {
+        color: whitesmoke;
+        font-size: 16px;
+        font-weight: 200;
+    }
+
+.LoginForm .remember-me {
+    width: 380px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: -20px;
+}
+
+.LoginForm .check {
+    width: 150px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    margin-top: 10px;
+}
+
+.LoginForm .sign-in p {
+    color: whitesmoke;
+    font-size: 18px;
+    font-weight: 200;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}

@@ -1,0 +1,22 @@
+.footer-socials {
+    display: flex;
+    align-items: center;
+    color: #fff;
+}
+
+    .footer-socials h4 {
+        margin-right: 50px;
+    }
+
+    .footer-socials a {
+        margin-left: 10px;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        color: #fff;
+        text-decoration: none;
+        font-weight: 500;
+    }
+    .footer-socials img{
+        width: 28px;
+        height: 28px;
+        margin-top: 10px;
+    }
