@@ -5,8 +5,9 @@
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
-    background-image: repeating-linear-gradient(90deg, rgb(9,9,9) 0px, rgb(9,9,9) 35px,rgb(5,5,5) 35px, rgb(5,5,5) 70px,rgb(3,3,3) 70px, rgb(3,3,3) 105px,rgb(9,9,9) 105px, rgb(9,9,9) 140px,rgb(5,5,5) 140px, rgb(5,5,5) 175px,rgb(3,3,3) 175px, rgb(3,3,3) 210px,rgb(9,9,9) 210px, rgb(9,9,9) 245px,rgb(5,5,5) 245px, rgb(5,5,5) 280px);
-}
+    background-image:url(../../img/Contactus-img.jpg);
+/*    background-image: repeating-linear-gradient(90deg, rgb(9,9,9) 0px, rgb(9,9,9) 35px,rgb(5,5,5) 35px, rgb(5,5,5) 70px,rgb(3,3,3) 70px, rgb(3,3,3) 105px,rgb(9,9,9) 105px, rgb(9,9,9) 140px,rgb(5,5,5) 140px, rgb(5,5,5) 175px,rgb(3,3,3) 175px, rgb(3,3,3) 210px,rgb(9,9,9) 210px, rgb(9,9,9) 245px,rgb(5,5,5) 245px, rgb(5,5,5) 280px);
+*/}
     .contact-head .contact-main {
         position: sticky;
         width: 70%;
