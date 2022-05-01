@@ -1,9 +1,12 @@
+using CinemaApp.DAL;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllersWithViews();
-
+builder.Services.AddSingleton<DbContext>();
+builder.Services.AddTransient<User>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -17,10 +20,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
 
-
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller}/{action=Index}/{id?}");
+app.MapDefaultControllerRoute();
 
 app.MapFallbackToFile("index.html"); ;
 
