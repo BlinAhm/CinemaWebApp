@@ -19,7 +19,7 @@ namespace CinemaApp.DAL
             {
                 CommandType = System.Data.CommandType.Text
             };
-           
+
             command.Parameters.AddWithValue("@UserId", id);
 
             var reader = command.ExecuteReader();
@@ -40,7 +40,8 @@ namespace CinemaApp.DAL
             return user;
         }
 
-        public List<Models.User> GetAll(){
+        public List<Models.User> GetAll()
+        {
 
             List<Models.User> userList = new List<Models.User>();
 
@@ -67,6 +68,11 @@ namespace CinemaApp.DAL
             }
 
             return userList;
+        }
+
+        public void AddUser(Models.User user)
+        {
+            
         }
     }
 }

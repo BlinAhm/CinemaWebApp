@@ -5,7 +5,7 @@ import './SignUpForm.css';
 
 const SignUpForm = () => {
     return (
-        <form method="post" id="form" name="form" className="SignupForm">
+        <form action="https://localhost:7197/User/Add" method="post" id="form" name="form" className="SignupForm">
             <div className="sign-up-container" id="sign-up-container">
                 <div className="sign-up">
                     <SignUpTitle />

@@ -28,5 +28,12 @@ namespace CinemaApp.Controllers
         {
             return _dalUser.GetAll();
         }
+
+        [HttpPost]
+        [Route("Add")]
+        public IActionResult AddUser([FromForm]User user)
+        {
+            return Redirect("https://localhost:44465/home");
+        }
     }
 }
