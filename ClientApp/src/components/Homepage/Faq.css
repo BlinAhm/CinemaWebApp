@@ -1,7 +1,7 @@
 ﻿.accordion {
     display: flex;
-    height: 100vh;
-    width: 100vw;
+    height: 100%;
+    width: 100%;
     justify-content: center;
     align-items: center;
 }
@@ -12,7 +12,7 @@
 
     .accordion .item {
         background: linear-gradient(to right, #8e1616,#a52121,#ad2b2b,#b73838,#b73838,#ad2b2b,#a52121,#8e1616);
-        margin-bottom: 5px;
+        margin-bottom: 3px;
         padding: 10px 20px;
         box-shadow: #000 1px 1px 5px;
         cursor: default;
@@ -23,7 +23,7 @@
         font-size: 26px;
     }
     .accordion .item p{
-        font-size: 20px;
+        font-size: 15px;
     }
 
     .accordion .accordion-link {
@@ -37,7 +37,7 @@
         overflow: hidden;
         max-height: 0;
         transition: all 0.5s cubic-bezier(0,1,0,1);
-        margin: auto;
+        margin:auto;
     }
 
         .accordion .content.show {
