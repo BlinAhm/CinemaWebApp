@@ -1,9 +1,20 @@
+using CinemaApp.DAL;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllersWithViews();
-
+builder.Services.AddSingleton<DbContext>();
+builder.Services.AddTransient<User>();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("default", policy =>
+    {
+        policy.WithOrigins("https://localhost:44465");
+        policy.WithHeaders("*");
+    });
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -13,14 +24,12 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+app.UseCors("default");
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
 
-
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller}/{action=Index}/{id?}");
+app.MapDefaultControllerRoute();
 
 app.MapFallbackToFile("index.html"); ;
 
