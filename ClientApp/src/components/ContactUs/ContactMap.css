@@ -2,8 +2,10 @@
     width: max-content;
     height: max-content;
     margin-top: -80px;
+    border-radius:3px;
 }
     .contact-head .map > iframe {
         width: 900px;
         height: 400px;
+        border-radius:5px;
     }
