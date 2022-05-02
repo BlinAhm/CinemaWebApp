@@ -1,4 +1,4 @@
-﻿{
+{
   "iisSettings": {
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
@@ -10,12 +10,13 @@
   "profiles": {
     "CinemaApp": {
       "commandName": "Project",
+      "commandLineArgs": "--user-data-dir=\"C://Chrome dev session\" --disable-web-security",
       "launchBrowser": true,
-      "applicationUrl": "https://localhost:7197;http://localhost:5197",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
         "ASPNETCORE_HOSTINGSTARTUPASSEMBLIES": "Microsoft.AspNetCore.SpaProxy"
-      }
+      },
+      "applicationUrl": "https://localhost:7197;http://localhost:5197"
     },
     "IIS Express": {
       "commandName": "IISExpress",

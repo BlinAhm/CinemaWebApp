@@ -72,7 +72,37 @@ namespace CinemaApp.DAL
 
         public void AddUser(Models.User user)
         {
-            
+            var cmd = "Insert into Users (Name,LastName,Email,Password) Values (@Name,@LastName,@Email,@Password)";
+            var command = new SqlCommand(cmd, _context.GetConnection())
+            {
+                CommandType = System.Data.CommandType.Text
+            };
+
+            command.Parameters.AddWithValue("@Name", user.Name);
+            command.Parameters.AddWithValue("@LastName", user.LastName);
+            command.Parameters.AddWithValue("@Email", user.Email);
+            command.Parameters.AddWithValue("@Password", user.Password);
+
+            command.ExecuteNonQuery();
+        }
+
+        public bool isEmailRegistered(Models.User user)
+        {
+            var cmd = "Select * from Users where Email = @Email";
+            var command = new SqlCommand(cmd, _context.GetConnection())
+            {
+                CommandType = System.Data.CommandType.Text
+            };
+
+            command.Parameters.AddWithValue("@Email", user.Email);
+
+            var reader = command.ExecuteReader();
+
+            if (reader.Read())
+            {
+                return true;
+            }
+            else { return false; }
         }
     }
 }

@@ -33,7 +33,14 @@ namespace CinemaApp.Controllers
         [Route("Add")]
         public IActionResult AddUser([FromForm]User user)
         {
-            return Redirect("https://localhost:44465/home");
+            if(!_dalUser.isEmailRegistered(user))
+            {
+                _dalUser.AddUser(user);
+
+                return StatusCode(200);
+            }
+
+            return StatusCode(400, "Email already registered");
         }
     }
 }

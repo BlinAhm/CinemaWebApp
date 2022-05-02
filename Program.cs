@@ -7,6 +7,14 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddSingleton<DbContext>();
 builder.Services.AddTransient<User>();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("default", policy =>
+    {
+        policy.WithOrigins("https://localhost:44465");
+        policy.WithHeaders("*");
+    });
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -16,6 +24,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+app.UseCors("default");
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
