@@ -31,16 +31,24 @@ namespace CinemaApp.Controllers
 
         [HttpPost]
         [Route("Add")]
-        public IActionResult AddUser([FromForm]User user)
+        public IActionResult AddUser([FromForm] User user)
         {
-            if(!_dalUser.isEmailRegistered(user))
+            if (!_dalUser.isEmailRegistered(user))
             {
                 _dalUser.AddUser(user);
 
                 return StatusCode(200);
             }
 
-            return StatusCode(400, "Email already registered");
+            return StatusCode(400, "Email already registered!");
+        }
+
+        public IActionResult LogIn(User user)
+        {
+            if (_dalUser.accountExists(user))
+                return StatusCode(200);
+            else
+                return StatusCode(400, "Account does not Exist!");
         }
     }
 }

@@ -104,5 +104,22 @@ namespace CinemaApp.DAL
             }
             else { return false; }
         }
+
+        public bool accountExists(Models.User user)
+        {
+            var cmd = "Select * from Users where Email = @Email and Password = @Password";
+            var command = new SqlCommand(cmd, _context.GetConnection())
+            {
+                CommandType = System.Data.CommandType.Text
+            };
+
+            command.Parameters.AddWithValue("@Email", user.Email);
+            command.Parameters.AddWithValue("@Password", user.Password);
+
+            var reader = command.ExecuteReader();
+
+            return reader.Read();
+
+        }
     }
 }
