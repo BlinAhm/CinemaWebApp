@@ -13,8 +13,8 @@ const SignUpInputs = () => {
 
                 //Sends post, checks if email is registered, returns error if email is registered
                 var values = $('#form').serialize();
-
                 $.ajax({
+                    contentType: "application/x-www-form-urlencoded; charset=UTF-8",
                     method: 'POST',
                     url: 'https://localhost:7197/User/Add',
                     data: values,

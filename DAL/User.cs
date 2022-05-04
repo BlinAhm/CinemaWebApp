@@ -13,15 +13,16 @@ namespace CinemaApp.DAL
 
         public Models.User GetById(int id)
         {
+            using var connection = _context.GetConnection();
             var cmd = "Select * from Users where UserId = @UserId";
-
-            var command = new SqlCommand(cmd, _context.GetConnection())
+            var command = new SqlCommand(cmd, connection)
             {
                 CommandType = System.Data.CommandType.Text
             };
 
             command.Parameters.AddWithValue("@UserId", id);
 
+            connection.Open();
             var reader = command.ExecuteReader();
 
             Models.User user = new Models.User();
@@ -45,14 +46,16 @@ namespace CinemaApp.DAL
 
             List<Models.User> userList = new List<Models.User>();
 
-            var cmd = "Select * from Users";
-            var command = new SqlCommand(cmd, _context.GetConnection())
+            using var connection = _context.GetConnection();
+            var cmd = "SELECT * FROM Users ORDER BY UserId ASC";
+            var command = new SqlCommand(cmd, connection)
             {
                 CommandType = System.Data.CommandType.Text
             };
 
+            connection.Open();
             var reader = command.ExecuteReader();
-            var user = new Models.User();
+            Models.User user;
             while (reader.Read())
             {
                 user = new Models.User()
@@ -72,8 +75,9 @@ namespace CinemaApp.DAL
 
         public void AddUser(Models.User user)
         {
+            using var connection = _context.GetConnection();
             var cmd = "Insert into Users (Name,LastName,Email,Password) Values (@Name,@LastName,@Email,@Password)";
-            var command = new SqlCommand(cmd, _context.GetConnection())
+            var command = new SqlCommand(cmd, connection)
             {
                 CommandType = System.Data.CommandType.Text
             };
@@ -83,19 +87,22 @@ namespace CinemaApp.DAL
             command.Parameters.AddWithValue("@Email", user.Email);
             command.Parameters.AddWithValue("@Password", user.Password);
 
+            connection.Open();
             command.ExecuteNonQuery();
         }
 
         public bool isEmailRegistered(Models.User user)
         {
+            using var connection = _context.GetConnection();
             var cmd = "Select * from Users where Email = @Email";
-            var command = new SqlCommand(cmd, _context.GetConnection())
+            var command = new SqlCommand(cmd, connection)
             {
                 CommandType = System.Data.CommandType.Text
             };
 
             command.Parameters.AddWithValue("@Email", user.Email);
 
+            connection.Open();
             var reader = command.ExecuteReader();
 
             if (reader.Read())
@@ -105,20 +112,25 @@ namespace CinemaApp.DAL
             else { return false; }
         }
 
-        public bool accountExists(Models.User user)
+        public int accountExists(string email, string password)
         {
+            using var connection = _context.GetConnection();
             var cmd = "Select * from Users where Email = @Email and Password = @Password";
-            var command = new SqlCommand(cmd, _context.GetConnection())
+            var command = new SqlCommand(cmd, connection)
             {
                 CommandType = System.Data.CommandType.Text
             };
 
-            command.Parameters.AddWithValue("@Email", user.Email);
-            command.Parameters.AddWithValue("@Password", user.Password);
+            command.Parameters.AddWithValue("@Email", email);
+            command.Parameters.AddWithValue("@Password", password);
 
+            connection.Open();
             var reader = command.ExecuteReader();
 
-            return reader.Read();
+            if (reader.Read())
+                return int.Parse(reader["UserId"].ToString());
+            
+            return -1;
 
         }
     }

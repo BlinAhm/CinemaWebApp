@@ -10,6 +10,7 @@ import AboutUs from './pages/AboutUs';
 import ContactUs from './pages/ContactUs';
 import LogIn from './pages/LogIn';
 import SignUp from './pages/SignUp';
+import Dashboard from './pages/Dashboard';
 
 function App() {
     return (
@@ -23,6 +24,10 @@ function App() {
                 <Route path='/contact-us' element={<ContactUs />} />
                 <Route path='/log-in' element={<LogIn />} />
                 <Route path='/sign-up' element={<SignUp />} />
+                <Route path='/dashboard/users' element={<Dashboard id="users" />} />
+                <Route path='/dashboard/admin' element={<Dashboard id="admin" />} />
+                <Route path='/dashboard/contact-us' element={<Dashboard id="contact-us" />} />
+                <Route path='/dashboard/' element={<Dashboard />} />
                 <Route
                     path="*"
                     element={<Navigate to="/home" replace />}
