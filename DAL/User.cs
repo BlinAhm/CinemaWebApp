@@ -45,14 +45,16 @@ namespace CinemaApp.DAL
 
             List<Models.User> userList = new List<Models.User>();
 
-            var cmd = "Select * from Users";
-            var command = new SqlCommand(cmd, _context.GetConnection())
+            using var connection = _context.GetConnection();
+            var cmd = "SELECT * FROM Users ORDER BY UserId ASC";
+            var command = new SqlCommand(cmd, connection)
             {
                 CommandType = System.Data.CommandType.Text
             };
 
+            connection.Open();
             var reader = command.ExecuteReader();
-            var user = new Models.User();
+            Models.User user;
             while (reader.Read())
             {
                 user = new Models.User()

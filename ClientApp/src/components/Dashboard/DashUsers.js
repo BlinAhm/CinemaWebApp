@@ -1,6 +1,26 @@
-﻿import './DashUsers.css';
+﻿import { useEffect, useState } from 'react';
+import $ from 'jquery';
+import './DashUsers.css';
 
 const DashUsers = () => {
+    const [response, setResponse] = useState([]);
+
+
+    useEffect(() => {
+        $.ajax({
+            type: "GET",
+            url: "https://localhost:7197/User/GetAll",
+            success: function (data) {
+                if (response !== data) {
+                    setResponse(data);
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert(jqXHR.status);
+            }
+        });
+    }, []);
+
     return (
         <div className="contents">
             <form className="form">
@@ -19,14 +39,14 @@ const DashUsers = () => {
                             <th>Password</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>2</td>
-                            <td>3</td>
-                            <td>4</td>
-                            <td>5</td>
-                        </tr>
+                    <tbody>{response?.map((key, value) => (
+                        <tr key={key.id}>
+                            <td>{key.id}</td>
+                            <td>{key.name}</td>
+                            <td>{key.lastName}</td>
+                            <td>{key.email}</td>
+                            <td>{key.password}</td>
+                        </tr>)) ?? ""}
                     </tbody>
                 </table>
             </form>
