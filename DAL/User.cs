@@ -105,7 +105,7 @@ namespace CinemaApp.DAL
             else { return false; }
         }
 
-        public bool accountExists(Models.User user)
+        public int accountExists(string email, string password)
         {
             var cmd = "Select * from Users where Email = @Email and Password = @Password";
             var command = new SqlCommand(cmd, _context.GetConnection())
@@ -113,12 +113,15 @@ namespace CinemaApp.DAL
                 CommandType = System.Data.CommandType.Text
             };
 
-            command.Parameters.AddWithValue("@Email", user.Email);
-            command.Parameters.AddWithValue("@Password", user.Password);
+            command.Parameters.AddWithValue("@Email", email);
+            command.Parameters.AddWithValue("@Password", password);
 
             var reader = command.ExecuteReader();
 
-            return reader.Read();
+            if (reader.Read())
+                return int.Parse(reader["UserId"].ToString());
+            
+            return -1;
 
         }
     }

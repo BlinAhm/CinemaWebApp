@@ -5,7 +5,7 @@ import LoginTitle from './LoginTitle';
 
 const LoginForm = () => {
     return (
-        <form method="post" id="formSignIn" className="LoginForm">
+        <form action="https://localhost:7197/User/Login" method="post" id="formSignIn" className="LoginForm">
             <div className="sign-in-container">
                 <div className="sign-in">
                     <LoginTitle />

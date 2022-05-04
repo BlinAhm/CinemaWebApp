@@ -1,0 +1,151 @@
+﻿#admin {
+    border: solid transparent 20px;
+    border-bottom: solid transparent 40px;
+    height: max-content;
+    width: calc(100%-40px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: left;
+    background-image: linear-gradient(200deg, rgba(171, 171, 171,0.05) 0%, rgba(171, 171, 171,0.05) 23%,rgba(90, 90, 90,0.05) 23%, rgba(90, 90, 90,0.05) 48%,rgba(65, 65, 65,0.05) 48%, rgba(65, 65, 65,0.05) 61%,rgba(232, 232, 232,0.05) 61%, rgba(232, 232, 232,0.05) 100%),linear-gradient(126deg, rgba(194, 194, 194,0.05) 0%, rgba(194, 194, 194,0.05) 11%,rgba(127, 127, 127,0.05) 11%, rgba(127, 127, 127,0.05) 33%,rgba(117, 117, 117,0.05) 33%, rgba(117, 117, 117,0.05) 99%,rgba(248, 248, 248,0.05) 99%, rgba(248, 248, 248,0.05) 100%),linear-gradient(144deg, rgba(64, 64, 64,0.05) 0%, rgba(64, 64, 64,0.05) 33%,rgba(211, 211, 211,0.05) 33%, rgba(211, 211, 211,0.05) 50%,rgba(53, 53, 53,0.05) 50%, rgba(53, 53, 53,0.05) 75%,rgba(144, 144, 144,0.05) 75%, rgba(144, 144, 144,0.05) 100%),linear-gradient(329deg, hsl(148,0%,0%),hsl(148,0%,0%));
+}
+
+    #admin .dashboard-nav {
+        margin-block: 15px;
+        margin-left: 150px;
+        width: 30%;
+        height: 55px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        list-style: none;
+    }
+
+        #admin .dashboard-nav > li > a {
+            background: linear-gradient(#40434E,#383B44);
+            text-decoration: none;
+            color: whitesmoke;
+            font-size: 18px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            border: solid transparent 2px;
+            border-top: solid #40434E 2px;
+            border-bottom: solid #383B44 2px;
+            border-radius: 5px;
+            padding: 6px;
+            padding-left: 12px;
+            padding-right: 12px;
+        }
+
+    #admin #currentPage {
+        background: linear-gradient(0deg,#205C55,#10514C);
+        border-top: solid #10514C 2px;
+        border-bottom: solid #205C55 2px;
+    }
+
+    #admin .divider2 {
+        align-self: center;
+        height: 2px;
+        width: 97%;
+        background-color: #10514C;
+        margin-bottom: 20px;
+    }
+
+    #admin .commands {
+        width: 12%;
+        height: 35px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        margin-left: 167px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        list-style: none;
+    }
+
+        #admin .commands > li > button {
+            background: linear-gradient(#31333b,#282a30);
+            text-decoration: none;
+            color: whitesmoke;
+            font-size: 16px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            border: solid transparent 2px;
+            border-top: solid #31333b 2px;
+            border-bottom: solid #282a30 2px;
+            border-radius: 5px;
+            padding: 3px;
+            padding-left: 10px;
+            padding-right: 10px;
+            cursor: pointer;
+        }
+
+        #admin .commands > li > a {
+            background: linear-gradient(#31333b,#282a30);
+            text-decoration: none;
+            color: whitesmoke;
+            font-size: 16px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            border: solid transparent 2px;
+            border-top: solid #31333b 2px;
+            border-bottom: solid #282a30 2px;
+            border-radius: 5px;
+            padding: 3px;
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+
+    #admin .form {
+        background: linear-gradient(#50545f,#696d7a);
+        width: 97%;
+        min-height: 800px;
+        align-self: center;
+    }
+
+    #admin .table {
+        margin: auto;
+        float: left;
+        margin-left: 5%;
+        width: 30%;
+        margin-top: 40px;
+        border: solid rgb(211, 211, 211) 2px;
+        border-collapse: collapse;
+    }
+
+        #admin .table th {
+            background-color: #D7263D;
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 22px;
+            font-weight: 400;
+        }
+
+    #admin .activity {
+        margin: auto;
+        width: 50%;
+        margin-top: 50px;
+        border: solid rgb(211, 211, 211) 2px;
+        border-collapse: collapse;
+    }
+
+        #admin .activity th {
+            background-color: #D7263D;
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 22px;
+            font-weight: 400;
+            text-align: left;
+            padding-left: 30px;
+        }
+
+    #admin tbody tr > td {
+        color: rgb(231, 231, 231);
+        font-size: 18px;
+        text-align: center;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    #admin tbody > tr {
+        background-color: #31333b;
+        border-top: solid white 2px;
+    }
