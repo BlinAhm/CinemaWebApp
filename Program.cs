@@ -1,6 +1,7 @@
 using CinemaApp.DAL;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -8,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddSingleton<DbContext>();
 builder.Services.AddTransient<User>();
+builder.Services.AddTransient<Admin>();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("default", policy =>

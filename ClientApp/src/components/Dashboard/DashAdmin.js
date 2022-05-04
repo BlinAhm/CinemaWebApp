@@ -1,6 +1,26 @@
-﻿import './DashAdmin.css';
+﻿
+import './DashAdmin.css';
+import { useEffect, useState } from 'react';
+import $ from 'jquery';
 
 const DashAdmin = () => {
+    const [response, setResponse] = useState([]);
+
+    useEffect(() => {
+        $.ajax({
+            type: "GET",
+            url: "https://localhost:7197/Admin/GetAll",
+            success: function (data) {
+                if (response !== data) {
+                    setResponse(data);
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert(jqXHR.status);
+            }
+        });
+    }, []);
+
     return (
         <div id="admin">
             <form class="form">
@@ -17,13 +37,13 @@ const DashAdmin = () => {
                             <th>Last name</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>2</td>
-                            <td>3</td>
-                            <td>4</td>
-                        </tr>
+                    <tbody>{response?.map((key, value) => (
+                        <tr key={key.id}>
+                            <td>{key.id}</td>
+                            <td>{key.userId}</td>
+                            <td>{key.name}</td>
+                            <td>{key.lastName}</td>
+                        </tr>)) ?? ""}
                     </tbody>
                 </table>
                 <table class="activity">
@@ -34,7 +54,7 @@ const DashAdmin = () => {
                     <tbody>
                         <tr>
                             <td>1234</td>
-                            <td class="act">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</td>
+                            <td class="act">testms</td>
                         </tr>
                     </tbody>
                 </table>
