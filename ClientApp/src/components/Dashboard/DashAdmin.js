@@ -4,6 +4,23 @@ import { useEffect, useState } from 'react';
 import $ from 'jquery';
 
 const DashAdmin = () => {
+    const [response, setResponse] = useState([]);
+
+    useEffect(() => {
+        $.ajax({
+            type: "GET",
+            url: "https://localhost:7197/Admin/GetAll",
+            success: function (data) {
+                if (response !== data) {
+                    setResponse(data);
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert(jqXHR.status);
+            }
+        });
+    }, []);
+
     return (
         <div id="admin">
             <form class="form">
