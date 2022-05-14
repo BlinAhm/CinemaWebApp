@@ -9,7 +9,6 @@ const SignUpInputs = () => {
             $(this).off();
             e.preventDefault();
             if (SignUp()) {
-                console.log("true");
 
                 //Sends post, checks if email is registered, returns error if email is registered
                 var values = $('#form').serialize();
