@@ -1,4 +1,4 @@
-﻿
+
 import './DashAdmin.css';
 import { useEffect, useState } from 'react';
 import $ from 'jquery';
@@ -53,8 +53,8 @@ const DashAdmin = () => {
                     </thead>
                     <tbody>
                         <tr>
-                            <td>1234</td>
-                            <td class="act">testms</td>
+                            <td>1</td>
+                            <td class="act">Test</td>
                         </tr>
                     </tbody>
                 </table>

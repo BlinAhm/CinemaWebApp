@@ -1,4 +1,4 @@
-﻿import '../components/Dashboard/Dashboard.css';
+import '../components/Dashboard/Dashboard.css';
 import DashContact from '../components/Dashboard/DashContact';
 import DashAdmin from '../components/Dashboard/DashAdmin';
 import DashUsers from '../components/Dashboard/DashUsers';
