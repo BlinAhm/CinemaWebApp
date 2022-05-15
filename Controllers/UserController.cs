@@ -48,6 +48,31 @@ namespace CinemaApp.Controllers
 
             return StatusCode(400, "Email already registered!");
         }
+
+        [HttpPost]
+        [Route("Update")]
+        public IActionResult UpdateUser([FromForm]User user)
+        {
+            _dalUser.UpdateUser(user);
+            return StatusCode(200);
+        }
+
+        [HttpGet]
+        [Route("Delete/{id}")]
+        public IActionResult DeleteUser(int id)
+        {
+            var user = _dalUser.GetById(id);
+
+            if(user.Name == null)
+                return StatusCode(404, "User not found!");
+            else
+            {
+                _dalUser.DeleteUser(id);
+                return StatusCode(200);
+            }
+            
+        }
+
         //WIP
         [HttpPost]
         [AllowAnonymous]

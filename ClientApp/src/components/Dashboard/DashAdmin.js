@@ -19,6 +19,8 @@ const DashAdmin = () => {
                 alert(jqXHR.status);
             }
         });
+
+        //eslint-disable-next-line
     }, []);
 
     return (

@@ -26,6 +26,13 @@ const DashUsers = () => {
             e.preventDefault();
             next();
         });
+        //Update action listener
+        $('[name="update"]').on('click', (e) => {
+            $(this).off();
+            e.preventDefault();
+
+            updateUser();
+        });
 
         //Delete action listener
         $('#delete').on('click', (e) => {
@@ -158,7 +165,7 @@ const DashUsers = () => {
                 <form className="deleteForm" method="GET">
                     <span className="close">x</span>
                     <p id="headP">User id:</p>
-                    <input className="deleteId" type="number" name="id" />
+                    <input className="deleteId" type="number" name="deleteID" />
                     <label id="labelDel"></label>
 
                     <input className="delete" id="delete" type="submit" value="Delete" />
@@ -216,7 +223,7 @@ function addUser() {
 }
 
 function next() {
-    let id = $('[name="id"]').val();
+    var id = $('[name="id"]').val();
 
     $.ajax({
         type: "GET",
@@ -236,8 +243,26 @@ function next() {
     });
 }
 
+function updateUser() {
+    var id = $('[name="id"]').val();
+    var values = $('.updateForm').serialize();
+    values = "id=" + id +"&" + values;
+    console.log(values);
+    $.ajax({
+        type: "POST",
+        url: "https://localhost:7197/User/Update",
+        data: values,
+        success: function () {
+            window.location.href = "https://localhost:44465/dashboard/users";
+        },
+        error: function (jqXHR) {
+            alert(jqXHR.status);
+        }
+    });
+}
+
 function deleteUser() {
-    let id = $('[name="id"').val();
+    var id = $('[name="deleteID"]').val();
 
     $.ajax({
         type: "GET",
