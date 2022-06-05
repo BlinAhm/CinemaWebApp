@@ -72,43 +72,5 @@ namespace CinemaApp.Controllers
             }
             
         }
-
-        //WIP
-        [HttpPost]
-        [AllowAnonymous]
-        [Route("Login")]
-        public async Task<IActionResult> LogIn([FromForm] string email, [FromForm] string password)
-        {
-            var userId = _dalUser.accountExists(email, password);
-
-            if (userId != -1)
-            {
-                var user = _dalUser.GetById(userId);
-                var claims = new[]
-                {
-                    new Claim("UserId", user.Id.ToString()),
-                    new Claim(ClaimTypes.Name, user.Name),
-                    new Claim("LastName", user.LastName),
-                    new Claim(ClaimTypes.Email, user.Email),
-                    new Claim(ClaimTypes.Role, user.Role == 1 ? "Admin" : "Client")
-                };
-
-                var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-                await HttpContext.SignInAsync(new ClaimsPrincipal(identity));
-                return Redirect("https://localhost:44465/home");
-            }
-            else
-                return StatusCode(400, "Account does not Exist!");
-        }
-        //WIP
-        [HttpPost]
-        [Route("Logout")]
-        public async Task<IActionResult> OnGetAsync()
-        {
-
-            // Clear the existing external cookie
-            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            return Redirect("https://localhost:44465/home");
-        }
     }
 }

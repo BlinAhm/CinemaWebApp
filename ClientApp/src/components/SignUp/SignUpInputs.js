@@ -13,15 +13,17 @@ const SignUpInputs = () => {
                 //Sends post, checks if email is registered, returns error if email is registered
                 var values = $('#form').serialize();
                 $.ajax({
-                    contentType: "application/x-www-form-urlencoded; charset=UTF-8",
                     method: 'POST',
-                    url: 'https://localhost:7197/User/Add',
+                    url: 'https://localhost:7197/api/Authenticate/register',
                     data: values,
                     success: function() {
                         window.location.href = "https://localhost:44465/home";
                     },
                     error: function (error) {
-                        $('#labelEmail').html(error.responseText);
+                        var json = JSON.parse(error.responseText);
+                        var message = json.message;
+
+                        $('#labelEmail').html(message);
                     }
                 });
             }
@@ -31,7 +33,7 @@ const SignUpInputs = () => {
 
     return (
         <div className="input-div2">
-            <input name="Name" id="sName" className="texts" type="text" placeholder="Name" />
+            <input name="FirstName" id="sName" className="texts" type="text" placeholder="Name" />
             <label id="labelName"></label>
             <input name="LastName" id="sLName" className="texts" type="text" placeholder="Last name" />
             <label id="labelLName"></label>
@@ -59,7 +61,7 @@ function SignUp() {
     const isAlpha = new RegExp(/^[a-zA-Z\s]+$/);
     const isEmail = new RegExp(/^[\S]+@[\S]+\.[a-zA-Z]{2,3}$/);
 
-    const name = $('[name="Name"]');
+    const name = $('[name="FirstName"]');
     const lastName = $('[name="LastName"]');
     const email = $('[name="Email"]');
     const password = $('[name="Password"]');
