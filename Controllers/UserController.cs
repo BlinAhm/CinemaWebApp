@@ -48,42 +48,29 @@ namespace CinemaApp.Controllers
 
             return StatusCode(400, "Email already registered!");
         }
-        //WIP
+
         [HttpPost]
-        [AllowAnonymous]
-        [Route("Login")]
-        public async Task<IActionResult> LogIn([FromForm] string email, [FromForm] string password)
+        [Route("Update")]
+        public IActionResult UpdateUser([FromForm]User user)
         {
-            var userId = _dalUser.accountExists(email, password);
-
-            if (userId != -1)
-            {
-                var user = _dalUser.GetById(userId);
-                var claims = new[]
-                {
-                    new Claim("UserId", user.Id.ToString()),
-                    new Claim(ClaimTypes.Name, user.Name),
-                    new Claim("LastName", user.LastName),
-                    new Claim(ClaimTypes.Email, user.Email),
-                    new Claim(ClaimTypes.Role, user.Role == 1 ? "Admin" : "Client")
-                };
-
-                var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-                await HttpContext.SignInAsync(new ClaimsPrincipal(identity));
-                return Redirect("https://localhost:44465/home");
-            }
-            else
-                return StatusCode(400, "Account does not Exist!");
+            _dalUser.UpdateUser(user);
+            return StatusCode(200);
         }
-        //WIP
-        [HttpPost]
-        [Route("Logout")]
-        public async Task<IActionResult> OnGetAsync()
-        {
 
-            // Clear the existing external cookie
-            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            return Redirect("https://localhost:44465/home");
+        [HttpGet]
+        [Route("Delete/{id}")]
+        public IActionResult DeleteUser(int id)
+        {
+            var user = _dalUser.GetById(id);
+
+            if(user.Name == null)
+                return StatusCode(404, "User not found!");
+            else
+            {
+                _dalUser.DeleteUser(id);
+                return StatusCode(200);
+            }
+            
         }
     }
 }

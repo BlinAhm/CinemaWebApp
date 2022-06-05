@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using CinemaApp.Models;
-
+using Microsoft.AspNetCore.Authorization;
 
 namespace CinemaApp.Controllers
 {
@@ -23,6 +23,21 @@ namespace CinemaApp.Controllers
         {
             return _dalAdmin.GetAll();
         }
+        [HttpPost]
+        [AllowAnonymous]
+        [Route("Add")]
+        public IActionResult AddAdmin([FromForm] int userId)
+        {
+            _dalAdmin.AddAdmin(userId);
+            return StatusCode(200);
+        }
 
+        [HttpGet]
+        [Route("Remove/{id}")]
+        public IActionResult RemoveAdmin(int id)
+        {
+            _dalAdmin.RemoveAdmin(id);
+            return StatusCode(200);
+        }
     }
 }

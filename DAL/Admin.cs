@@ -40,5 +40,34 @@ namespace CinemaApp.DAL
 
             return adminList;
         }
+        public void AddAdmin(int id)
+        {
+            using var connection = _context.GetConnection();
+            var cmd = "INSERT INTO Admin (UserId) VALUES (@UserId)";
+            var command = new SqlCommand(cmd, connection)
+            {
+                CommandType = System.Data.CommandType.Text
+            };
+
+            command.Parameters.AddWithValue("@UserId", id);
+
+            connection.Open();
+            command.ExecuteNonQuery();
+        }
+
+        public void RemoveAdmin(int id)
+        {
+            using var connection = _context.GetConnection();
+            var cmd = "DELETE FROM Admin WHERE UserId = @UserId";
+            var command = new SqlCommand(cmd, connection)
+            {
+                CommandType = System.Data.CommandType.Text
+            };
+
+            command.Parameters.AddWithValue("@UserId", id);
+
+            connection.Open();
+            command.ExecuteNonQuery();
+        }
     }
 }

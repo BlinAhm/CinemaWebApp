@@ -129,9 +129,50 @@ namespace CinemaApp.DAL
 
             if (reader.Read())
                 return int.Parse(reader["UserId"].ToString());
-            
+
             return -1;
 
+        }
+
+        public void UpdateUser(Models.User user)
+        {
+
+            using var connection = _context.GetConnection();
+            var cmd = "UPDATE Users SET Name = @Name, " +
+                                        "LastName = @LastName, " +
+                                        "Email = @Email, " +
+                                        "Password = @Password " +
+                      "WHERE UserId = @UserId";
+
+            var command = new SqlCommand(cmd, connection)
+            {
+                CommandType = System.Data.CommandType.Text
+            };
+
+            command.Parameters.AddWithValue("@Name", user.Name);
+            command.Parameters.AddWithValue("@LastName", user.LastName);
+            command.Parameters.AddWithValue("@Email", user.Email);
+            command.Parameters.AddWithValue("@Password", user.Password);
+            command.Parameters.AddWithValue("@UserId", user.Id);
+
+            connection.Open();
+            command.ExecuteNonQuery();
+        }
+
+        public void DeleteUser(int id)
+        {
+            using var connection = _context.GetConnection();
+            var cmd = "DELETE FROM Users WHERE UserId = @UserId";
+
+            var command = new SqlCommand(cmd, connection)
+            {
+                CommandType = System.Data.CommandType.Text
+            };
+
+            command.Parameters.AddWithValue("@UserId", id);
+
+            connection.Open();
+            command.ExecuteNonQuery();
         }
     }
 }
