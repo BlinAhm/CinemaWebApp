@@ -4,9 +4,11 @@ import $ from 'jquery';
 
 const DashAdmin = () => {
     const [response, setResponse] = useState([]);
+    const [activity, setActivity] = useState([]);
 
     useEffect(() => {
         displayAdmins();
+        displayActivities();
 
         $('[name="insert"]').on('click', (e) => {
             $(this).off();
@@ -77,12 +79,12 @@ const DashAdmin = () => {
                             <th>Date</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td className="act">Test</td>
-                            <td>2022-01-01</td>
-                        </tr>
+                    <tbody>{activity?.map((acts) =>(
+                        <tr key={acts.id}>
+                            <td>{acts.id}</td>
+                            <td className="act">{acts.act}</td>
+                            <td>{acts.date}</td>
+                        </tr>)) ?? ""}
                     </tbody>
                 </table>
             </form>
@@ -132,6 +134,20 @@ const DashAdmin = () => {
             }
         });
     }
+    function displayActivities() {
+        $.ajax({
+            type: "GET",
+            url: "https://localhost:7197/api/Activity/GetAll",
+            success: function (data) {
+                if (activity !== data) {
+                    setActivity(data);
+                }
+            },
+            error: function (jqXHR) {
+                alert(jqXHR.status);
+            }
+        });
+    }
 }
 
 function addAdmin() {
@@ -162,4 +178,5 @@ function removeAdmin() {
         }
     });
 }
+
 export default DashAdmin;

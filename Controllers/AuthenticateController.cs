@@ -1,4 +1,5 @@
 ﻿using CinemaApp.Auth;
+using CinemaApp.Database;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -16,16 +17,35 @@ namespace CinemaApp.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IConfiguration _configuration;
+        private readonly CinemaDbContext _context;
 
         public AuthenticateController(
             UserManager<ApplicationUser> userManager,
             RoleManager<IdentityRole> roleManager,
-            IConfiguration configuration)
+            IConfiguration configuration,
+            CinemaDbContext context)
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _configuration = configuration;
+            _context = context;
         }
+        
+        [HttpGet]
+        [Route("GetAll")]
+        public List<ApplicationUser> GetUsers()
+        {
+            return _userManager.Users.ToList();
+        }
+
+        [HttpPost]
+        [Route("GetByEmail")]
+        public ApplicationUser GetUser([FromForm]string email)
+        {
+            var user = _userManager.FindByEmailAsync(email);
+            return user.Result;
+        }
+
         [AllowAnonymous]
         [HttpPost]
         [Route("login")]
@@ -51,6 +71,12 @@ namespace CinemaApp.Controllers
 
                 var token = GetToken(authClaims);
 
+                _context.Activities.Add(new Models.Activity()
+                {
+                    Act = $"New login from: {user.Email}",
+                    Date = DateTime.Parse(DateTime.Now.ToString())
+                }) ;
+                _context.SaveChanges();
                 return Ok(new
                 {
                     token = new JwtSecurityTokenHandler().WriteToken(token),
@@ -80,6 +106,12 @@ namespace CinemaApp.Controllers
             if (!result.Succeeded)
                 return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User creation failed! Please check user details and try again." });
 
+            _context.Activities.Add(new Models.Activity()
+            {
+                Act = $"New user registration: {user.Email}",
+                Date = DateTime.Parse(DateTime.Now.ToString())
+            });
+            _context.SaveChanges();
             return Ok(new Response { Status = "Success", Message = "User created successfully!" });
         }
 
@@ -117,8 +149,16 @@ namespace CinemaApp.Controllers
             {
                 await _userManager.AddToRoleAsync(user, UserRoles.User);
             }
+
+            _context.Activities.Add(new Models.Activity()
+            {
+                Act = $"New admin registration: {user.Email}",
+                Date = DateTime.Parse(DateTime.Now.ToString())
+            });
+            _context.SaveChanges();
             return Ok(new Response { Status = "Success", Message = "User created successfully!" });
         }
+        
 
         private JwtSecurityToken GetToken(List<Claim> authClaims)
         {
