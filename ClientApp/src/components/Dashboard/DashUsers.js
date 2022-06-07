@@ -71,8 +71,6 @@ const DashUsers = () => {
             <form className="form">
                 <ul className="commands">
                     <li><button id="insertBtn">Insert</button></li>
-{/*                    <li><button id="editBtn">Edit</button></li>
-                    <li><button id="deleteBtn">Delete</button></li>*/}
                 </ul>
                 <table className="table">
                     <thead>
@@ -92,7 +90,7 @@ const DashUsers = () => {
                             <td>{key.email}</td>
                             <td>{key.id}</td>
                             <td><div onClick={() => { edit(key.email) }} id="editBtn">Edit</div></td>
-                            <td><div id="deleteBtn">Delete</div></td>
+                            <td><div onClick={() => { delUser(key.email) }} id="deleteBtn">Delete</div></td>
                         </tr>)) ?? ""}
                     </tbody>
                 </table>
@@ -240,6 +238,20 @@ function edit(email) {
             console.log(jqXHR.status);
         }
     });
+}
+
+function delUser(email){
+    
+    $.ajax({
+        type: "DELETE",
+        url: "https://localhost:7197/api/Authenticate/DeleteUser/"+email,
+        success: function () {
+            window.location.href = "https://localhost:44465/dashboard/users";
+        },
+        error: function (jqXHR) {
+            console.log(jqXHR.status);
+        }
+    })
 }
 
 function updateUser() {

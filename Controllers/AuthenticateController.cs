@@ -30,7 +30,7 @@ namespace CinemaApp.Controllers
             _configuration = configuration;
             _context = context;
         }
-        
+
         [HttpGet]
         [Route("GetAll")]
         public List<ApplicationUser> GetUsers()
@@ -40,10 +40,23 @@ namespace CinemaApp.Controllers
 
         [HttpPost]
         [Route("GetByEmail")]
-        public ApplicationUser GetUser([FromForm]string email)
+        public ApplicationUser GetUser([FromForm] string email)
         {
             var user = _userManager.FindByEmailAsync(email);
             return user.Result;
+        }
+
+        [HttpDelete]
+        [Route("DeleteUser/{email}")]
+        public async Task<IActionResult> Delete(string email)
+        {
+            await _userManager.DeleteAsync(GetUser(email));
+            var user = _userManager.FindByEmailAsync(email);
+            if (user.Result != null)
+            {
+                return StatusCode(500, new Response { Status = "Error", Message = "Unable to delete user!" });
+            }
+            return StatusCode(200, new Response { Status = "Success", Message = "User deleted successfully!"});
         }
 
         [AllowAnonymous]
@@ -75,7 +88,7 @@ namespace CinemaApp.Controllers
                 {
                     Act = $"New login from: {user.Email}",
                     Date = DateTime.Parse(DateTime.Now.ToString())
-                }) ;
+                });
                 _context.SaveChanges();
                 return Ok(new
                 {
@@ -130,7 +143,7 @@ namespace CinemaApp.Controllers
                 LastName = model.LastName,
                 Email = model.Email,
                 SecurityStamp = Guid.NewGuid().ToString()
-                 
+
             };
             var result = await _userManager.CreateAsync(user, model.Password);
             if (!result.Succeeded)
@@ -158,7 +171,7 @@ namespace CinemaApp.Controllers
             _context.SaveChanges();
             return Ok(new Response { Status = "Success", Message = "User created successfully!" });
         }
-        
+
 
         private JwtSecurityToken GetToken(List<Claim> authClaims)
         {

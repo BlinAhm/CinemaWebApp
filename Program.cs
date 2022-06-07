@@ -20,8 +20,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("default", policy =>
     {
-        policy.WithOrigins("https://localhost:44465","https://localhost:7197");
-        policy.WithHeaders("*");
+        policy.WithOrigins("https://localhost:44465", "https://localhost:7197").AllowAnyMethod().AllowAnyHeader();
     });
 });
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("ConnStr")));
