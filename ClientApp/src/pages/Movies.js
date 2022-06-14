@@ -1,4 +1,10 @@
+import Featured from "../components/Movies/Featured";
+
 const Movies = () => {
-    return (<h2>Movies</h2>);
+    return (
+        <div className="movies-main">
+            <Featured />
+        </div>
+    );
 }
 export default Movies;

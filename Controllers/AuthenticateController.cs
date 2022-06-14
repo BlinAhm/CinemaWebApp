@@ -1,9 +1,12 @@
 ﻿using CinemaApp.Auth;
 using CinemaApp.Database;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.Net.Http.Headers;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -46,17 +49,26 @@ namespace CinemaApp.Controllers
             return user.Result;
         }
 
+        [Authorize]
         [HttpDelete]
         [Route("DeleteUser/{email}")]
         public async Task<IActionResult> Delete(string email)
         {
             await _userManager.DeleteAsync(GetUser(email));
-            var user = _userManager.FindByEmailAsync(email);
-            if (user.Result != null)
+            var user = await _userManager.FindByEmailAsync(email);
+            if (user != null)
             {
                 return StatusCode(500, new Response { Status = "Error", Message = "Unable to delete user!" });
             }
-            return StatusCode(200, new Response { Status = "Success", Message = "User deleted successfully!"});
+
+            var adminEmail = HttpContext.User.Claims.Where(x => x.Type == ClaimTypes.Email).FirstOrDefault();
+            _context.Activities.Add(new Models.Activity()
+            {
+                Act = $"Admin {adminEmail} deleted user: {email}",
+                Date = DateTime.Parse(DateTime.Now.ToString())
+            });
+            _context.SaveChanges();
+            return StatusCode(200, new Response { Status = "Success", Message = "User test deleted successfully!" });
         }
 
         [AllowAnonymous]
@@ -72,7 +84,7 @@ namespace CinemaApp.Controllers
                 var authClaims = new List<Claim>
                 {
                     new Claim(ClaimTypes.Name, user.FirstName),
-                    new Claim(ClaimTypes.Name, user.LastName),
+                    new Claim("lastName", user.LastName),
                     new Claim(ClaimTypes.Email, user.Email),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 };
@@ -90,6 +102,10 @@ namespace CinemaApp.Controllers
                     Date = DateTime.Parse(DateTime.Now.ToString())
                 });
                 _context.SaveChanges();
+                /*var cookieOptions = new CookieOptions { Domain = "localhost", MaxAge = new TimeSpan(3,0,0),  IsEssential = true, SameSite = Microsoft.AspNetCore.Http.SameSiteMode.Strict};
+                HttpContext.Response.Cookies.Append("JWTtoken", new JwtSecurityTokenHandler().WriteToken(token),cookieOptions);
+                HttpContext.Response.Cookies.Append("JWTExpiration", token.ValidTo.ToString("yyyy-MM-ddTHH:mm"),cookieOptions);*/
+                
                 return Ok(new
                 {
                     token = new JwtSecurityTokenHandler().WriteToken(token),

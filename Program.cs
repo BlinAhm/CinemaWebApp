@@ -16,6 +16,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddSingleton<CinemaApp.DAL.DbContext>();
 builder.Services.AddTransient<User>();
 builder.Services.AddTransient<Admin>();
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("default", policy =>
@@ -60,7 +61,7 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseCors("default");
-app.UseHttpsRedirection();
+/*app.UseHttpsRedirection();*/
 app.UseStaticFiles();
 app.UseAuthentication();
 app.UseRouting();
