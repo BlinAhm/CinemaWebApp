@@ -4,8 +4,11 @@ import Banner from './Banner.js';
 const Featured = () => {
     return (
         <div className="featured">
-            <Banner />
-            <Banner />
+            <h2>Featured!</h2>
+            <div className="featured-holder">
+                <Banner />
+                <Banner />
+            </div>
         </div>
     );
 }

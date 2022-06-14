@@ -9,7 +9,7 @@
 }
 .featured .banner-body img{
     height: 100%;
-    width: 8%;
+    width: 10%;
     margin-inline: 15px;
 }
     .featured .banner-body .banner-details {
@@ -20,7 +20,7 @@
         align-items: center;
         justify-content: space-between;
     }
-    .featured .banner-body .banner-details h2{
+    .featured .banner-body .banner-details h3{
         font-size: 22px;
         margin: 15px;
         color: #fff;
@@ -29,8 +29,10 @@
     .featured .banner-body .banner-details p {
         font-size: 16px;
         width: 90%;
-        margin-right:8px;
+        margin-right:14px;
         background: linear-gradient(to right,#151515,#202020,#202020,#191919);
-        height: 90%;
+        
         color: #fff;
+        text-align:justify;
+        
     }

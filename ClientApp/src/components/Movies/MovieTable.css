@@ -1,0 +1,19 @@
+﻿.movies-main .list-body .movie-table {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    width: 98%;
+    margin-inline: auto;
+    background: #D7263D;
+    border-radius: 10px 10px 0px 0px;
+    border-collapse: collapse;
+    color: #fff;
+}
+    .movies-main .list-body .movie-table thead tr {
+        height: 40px;
+        
+    }
+    .movies-main .list-body .movie-table tbody tr {
+        background: linear-gradient(to right,#151515,#202020,#202020,#191919);
+        height: 200px;
+        border-bottom: solid lightgray 4px;
+    }
