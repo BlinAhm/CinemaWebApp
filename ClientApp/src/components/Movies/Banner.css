@@ -6,6 +6,7 @@
     height: 40%;
     background: linear-gradient(to right, #050505,#101010,#151515,#202020,#151515);
     border-radius: 10px;
+    margin-bottom: 20px;
 }
 .featured .banner-body img{
     height: 100%;
@@ -26,11 +27,16 @@
         color: #fff;
         max-width: 30%;
     }
+        .featured .banner-body .banner-details h4 {
+            margin: 15px;
+            color: #fff;
+            max-width: 10%;
+        }
     .featured .banner-body .banner-details p {
         font-size: 16px;
-        width: 90%;
+        width: 50%;
         margin-right:14px;
-        background: linear-gradient(to right,#151515,#202020,#202020,#191919);
+        /*background: linear-gradient(to right,#151515,#202020,#202020,#191919);*/
         
         color: #fff;
         text-align:justify;

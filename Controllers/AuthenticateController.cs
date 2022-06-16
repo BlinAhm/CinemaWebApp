@@ -68,7 +68,7 @@ namespace CinemaApp.Controllers
                 Date = DateTime.Parse(DateTime.Now.ToString())
             });
             _context.SaveChanges();
-            return StatusCode(200, new Response { Status = "Success", Message = "User test deleted successfully!" });
+            return StatusCode(200, new Response { Status = "Success", Message = "User deleted successfully!" });
         }
 
         [AllowAnonymous]
@@ -188,6 +188,53 @@ namespace CinemaApp.Controllers
             return Ok(new Response { Status = "Success", Message = "User created successfully!" });
         }
 
+        [HttpPost]
+        [Route("CreateUser")]
+        public async Task<IActionResult> CreateUser([FromForm] RegisterModel model)
+        {
+            var userExists = await _userManager.FindByEmailAsync(model.Email);
+            if (userExists != null)
+                return StatusCode(StatusCodes.Status400BadRequest, new Response { Status = "Error", Message = "User already exists!" });
+
+            ApplicationUser user = new()
+            {
+                UserName = model.Email,
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                Email = model.Email,
+                SecurityStamp = Guid.NewGuid().ToString()
+            };
+            var result = await _userManager.CreateAsync(user, model.Password);
+            if (!result.Succeeded)
+                return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User creation failed! Please check user details and try again." });
+
+            _context.Activities.Add(new Models.Activity()
+            {
+                Act = $"Admin created a new user: {user.Email}",
+                Date = DateTime.Parse(DateTime.Now.ToString())
+            });
+            _context.SaveChanges();
+            return Ok(new Response { Status = "Success", Message = "User created successfully!" });
+        }
+
+        [HttpPost]
+        [Route("EditUser")]
+        public async Task<IActionResult> EditUser([FromForm] EditModel model)
+        {
+            var user = await _userManager.FindByEmailAsync(model.FirstEmail);
+
+            user.FirstName = model.FirstName;
+            user.LastName = model.LastName;
+            user.Email = model.Email;
+
+            var result = await _userManager.UpdateAsync(user);
+            if (!result.Succeeded)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User update failed!" });
+            }
+
+            return Ok(new Response { Status = "Success", Message = "User edit successful!" });
+        }
 
         private JwtSecurityToken GetToken(List<Claim> authClaims)
         {

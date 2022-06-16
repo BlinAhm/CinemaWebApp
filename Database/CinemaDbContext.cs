@@ -11,10 +11,22 @@ namespace CinemaApp.Database
         }
 
         public DbSet<Activity> Activities { get; set; }
+        public DbSet<Movie> Movies { get; set; }
+        public DbSet<ComingSoon> SoonMovies { get; set; }
+        public DbSet<Actor> Actors { get; set; }
+        public DbSet<Dictionary<string, object>> ActorMovie => Set<Dictionary<string, object>>("ActorMovie");
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Activity>().ToTable("Activity");
+            modelBuilder.Entity<Movie>().ToTable("Movie");
+            modelBuilder.Entity<ComingSoon>().ToTable("ComingSoonMovies");
+            modelBuilder.Entity<Actor>().ToTable("Actor");
+            modelBuilder.Entity<Movie>()
+                .HasMany(a => a.Actors)
+                .WithMany(m => m.Movies)
+                .UsingEntity(x => x.ToTable("ActorMovie"));
+
         }
     }
 }

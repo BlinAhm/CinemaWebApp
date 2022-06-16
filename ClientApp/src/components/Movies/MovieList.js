@@ -8,7 +8,6 @@ const MovieList = () => {
             <h2>All Movies:</h2>
             <SearchBar />
             <MovieTable />
-
         </div>
     );
 }

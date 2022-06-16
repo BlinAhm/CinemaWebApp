@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using CinemaApp.Database;
+using Newtonsoft.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 ConfigurationManager configuration = builder.Configuration;
@@ -16,6 +17,10 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddSingleton<CinemaApp.DAL.DbContext>();
 builder.Services.AddTransient<User>();
 builder.Services.AddTransient<Admin>();
+builder.Services.AddControllers().AddNewtonsoftJson(options =>
+{
+    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+});
 
 builder.Services.AddCors(options =>
 {
