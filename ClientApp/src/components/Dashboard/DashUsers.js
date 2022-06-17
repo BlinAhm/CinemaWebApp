@@ -20,26 +20,11 @@ const DashUsers = () => {
             }
         });
 
-        //Edit action listener
-        $('#next').on('click', (e) => {
-            $(this).off();
-            e.preventDefault();
-            next();
-        });
         //Update action listener
-        $('[name="update"]').on('click', (e) => {
+        $('#update').on('click', (e) => {
             $(this).off();
             e.preventDefault();
-
-            updateUser();
-        });
-
-        //Delete action listener
-        $('#delete').on('click', (e) => {
-            $(this).off();
-            e.preventDefault();
-
-            deleteUser();
+            update();
         });
 
         //Show/hide forms
@@ -48,11 +33,8 @@ const DashUsers = () => {
             e.preventDefault();
             $('#insertForm').css('display', 'block');
         });
-        $('#editBtn').on('click', (e) => {
-            $(this).off();
-            e.preventDefault();
-            $('#editForm').css('display', 'block');
-        });
+
+
         $('#deleteBtn').on('click', (e) => {
             $(this).off();
             e.preventDefault();
@@ -74,38 +56,38 @@ const DashUsers = () => {
             <form className="form">
                 <ul className="commands">
                     <li><button id="insertBtn">Insert</button></li>
-                    <li><button id="editBtn">Edit</button></li>
-                    <li><button id="deleteBtn">Delete</button></li>
                 </ul>
                 <table className="table">
                     <thead>
                         <tr>
-                            <th>User Id</th>
-                            <th>Name</th>
+                            <th>First Name</th>
                             <th>Last name</th>
                             <th>Email</th>
-                            <th>Password</th>
+                            <th>User Id</th>
+                            <th></th>
+                            <th></th>
                         </tr>
                     </thead>
-                    <tbody>{response?.map((key, value) => (
+                    <tbody>{response?.map((key) => (
                         <tr key={key.id}>
-                            <td>{key.id}</td>
-                            <td>{key.name}</td>
+                            <td>{key.firstName}</td>
                             <td>{key.lastName}</td>
                             <td>{key.email}</td>
-                            <td>{key.password}</td>
+                            <td>{key.id}</td>
+                            <td><div onClick={() => { edit(key.email) }} id="editBtn">Edit</div></td>
+                            <td><div onClick={() => { delUser(key.email) }} id="deleteBtn">Delete</div></td>
                         </tr>)) ?? ""}
                     </tbody>
                 </table>
             </form>
 
-            <div id="insertForm" action="https://localhost:7197/User/Add">
+            <div id="insertForm">
                 <form className="insertForm" method="POST">
                     <span className="close">x</span>
                     <p id="headP">Insert user:</p>
                     <div>
                         <p>Name:</p>
-                        <input className="userInputs" type="text" name="name" />
+                        <input className="userInputs" type="text" name="firstName" />
                     </div>
                     <div>
                         <p>Last name:</p>
@@ -114,11 +96,11 @@ const DashUsers = () => {
                     <div>
                         <p>Email:</p>
                         <input className="userInputs" type="email" name="email" />
-                        <label id="labelEmail"></label>
                     </div>
                     <div>
                         <p>Password:</p>
                         <input className="userInputs" type="text" name="password" />
+                        <label id="labelEmail"></label>
                     </div>
 
                     <input className="save" type="submit" name="insert" value="Save" />
@@ -139,10 +121,10 @@ const DashUsers = () => {
                 <form className="updateForm" method="POST">
 
                     <span className="close">x</span>
-                    <p id="headP">Update user:</p>
+                    <p id="headP">Edit user:</p>
                     <div>
                         <p>Name:</p>
-                        <input id="updateName" className="updateInputs" type="text" name="name" />
+                        <input id="updateName" className="updateInputs" type="text" name="firstName" />
                     </div>
                     <div>
                         <p>Last name:</p>
@@ -152,10 +134,7 @@ const DashUsers = () => {
                         <p>Email:</p>
                         <input id="updateEmail" className="updateInputs" type="email" name="email" />
                     </div>
-                    <div>
-                        <p>Password:</p>
-                        <input id="updatePassword" className="updateInputs" type="text" name="password" />
-                    </div>
+                    <input id="firstEmail" className="updateInputs" type="email" disabled name="firstEmail" style={{"display":"none"}} />
 
                     <input id="update" className="update" type="submit" name="update" value="Update" />
                 </form>
@@ -178,13 +157,13 @@ const DashUsers = () => {
     function displayUsers() {
         $.ajax({
             type: "GET",
-            url: "https://localhost:7197/User/GetAll",
+            url: "https://localhost:7197/api/Authenticate/GetAll",
             success: function (data) {
                 if (response !== data) {
                     setResponse(data);
                 }
             },
-            error: function (jqXHR, textStatus, errorThrown) {
+            error: function (jqXHR) {
                 alert(jqXHR.status);
             }
         });
@@ -192,7 +171,7 @@ const DashUsers = () => {
 }
 
 function inputsNotEmpty() {
-    const name = $('[name="name"]');
+    const name = $('[name="firstName"]');
     const lastName = $('[name="lastName"]');
     const email = $('[name="email"]');
     const password = $('[name="password"]');
@@ -209,69 +188,66 @@ function inputsNotEmpty() {
 function addUser() {
     var values = $('.insertForm').serialize();
     $.ajax({
-        contentType: "application/x-www-form-urlencoded; charset=UTF-8",
         method: 'POST',
-        url: 'https://localhost:7197/User/Add',
+        url: 'https://localhost:7197/api/Authenticate/CreateUser',
         data: values,
         success: function () {
             window.location.href = "https://localhost:44465/dashboard/users";
         },
         error: function (error) {
-            $('#labelEmail').html(error.responseText);
+            $('#labelEmail').html(error.status);
         }
     });
 }
 
-function next() {
-    var id = $('[name="id"]').val();
+function edit(email) {
+    var send = "email=" + email;
 
-    $.ajax({
-        type: "GET",
-        url: "https://localhost:7197/User/GetById/" + id,
-        success: function (data) {
-            $('#editForm').css('display', 'none');
-            $('#updateForm').css('display', 'block');
-
-            $('#updateName').val(data.name);
-            $('#updateLName').val(data.lastName);
-            $('#updateEmail').val(data.email);
-            $('#updatePassword').val(data.password);
-        },
-        error: function (jqXHR) {
-            alert(jqXHR.status);
-        }
-    });
-}
-
-function updateUser() {
-    var id = $('[name="id"]').val();
-    var values = $('.updateForm').serialize();
-    values = "id=" + id +"&" + values;
-    console.log(values);
     $.ajax({
         type: "POST",
-        url: "https://localhost:7197/User/Update",
-        data: values,
+        url: "https://localhost:7197/api/Authenticate/GetByEmail",
+        data: send,
+        success: function (data) {
+            $('#updateForm').css('display', 'block');
+
+            $('#updateName').val(data.firstName);
+            $('#updateLName').val(data.lastName);
+            $('#updateEmail').val(data.email);
+            $('#firstEmail').val(data.email);
+        },
+        error: function (jqXHR) {
+            console.log(jqXHR.status);
+        }
+    });
+}
+function update() {
+    var emailFirst = $('#firstEmail').val();
+    var values = $('.updateForm').serialize();
+    var send = values + "&firstEmail=" + emailFirst;
+
+    $.ajax({
+        type: "POST",
+        url: "https://localhost:7197/api/Authenticate/EditUser",
+        data: send,
         success: function () {
             window.location.href = "https://localhost:44465/dashboard/users";
         },
         error: function (jqXHR) {
-            alert(jqXHR.status);
+            console.log(jqXHR.responseText);
         }
     });
 }
 
-function deleteUser() {
-    var id = $('[name="deleteID"]').val();
-
+function delUser(email){
+    
     $.ajax({
-        type: "GET",
-        url: "https://localhost:7197/User/Delete/" + id,
+        type: "DELETE",
+        url: "https://localhost:7197/api/Authenticate/DeleteUser/"+email,
         success: function () {
             window.location.href = "https://localhost:44465/dashboard/users";
         },
-        error: function (error) {
-            $('#labelDel').html(error.responseText);
+        error: function (jqXHR) {
+            console.log(jqXHR.status);
         }
     })
 }

@@ -1,0 +1,28 @@
+﻿.movies-main .list-body .search-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+    .movies-main .list-body .search-bar .category, .name {
+        font-size: 18px;
+        font-weight: 500;
+        margin-inline: 30px;
+    }
+    .movies-main .list-body .search-bar .name input {
+        height: 24px;
+        width: 240px;
+        font-size: 14px;
+    }
+    .movies-main .list-body .search-bar .category select {
+        height: 30px;
+        width: 100px;
+        font-size: 14px;
+    }
+    .movies-main .list-body .search-bar button {
+        height: 30px;
+        width: 80px;
+        font-size: 14px;
+    }
+
+

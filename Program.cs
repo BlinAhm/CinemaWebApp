@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using CinemaApp.Database;
+using Newtonsoft.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 ConfigurationManager configuration = builder.Configuration;
@@ -15,15 +17,20 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddSingleton<CinemaApp.DAL.DbContext>();
 builder.Services.AddTransient<User>();
 builder.Services.AddTransient<Admin>();
+builder.Services.AddControllers().AddNewtonsoftJson(options =>
+{
+    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+});
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("default", policy =>
     {
-        policy.WithOrigins("https://localhost:44465","https://localhost:7197");
-        policy.WithHeaders("*");
+        policy.WithOrigins("https://localhost:44465", "https://localhost:7197").AllowAnyMethod().AllowAnyHeader();
     });
 });
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("ConnStr")));
+builder.Services.AddDbContext<CinemaDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("CinemaConnStr")));
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders();
@@ -59,7 +66,7 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseCors("default");
-app.UseHttpsRedirection();
+/*app.UseHttpsRedirection();*/
 app.UseStaticFiles();
 app.UseAuthentication();
 app.UseRouting();

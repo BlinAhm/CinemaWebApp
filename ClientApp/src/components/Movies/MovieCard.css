@@ -1,0 +1,24 @@
+﻿.movies-main .soon-body .movie-card {
+    background: #151515;
+    height: 85%;
+    width: 200px;
+    border: #151515 solid 4px;
+    border-radius: 10px;
+}
+    .movies-main .soon-body .movie-card:hover {
+        transition: ease-in .09s;
+        background: #222222;
+        border: #222222 solid 4px;
+    }
+
+    .movies-main .soon-body .movie-card img {
+        height: 80%;
+        width: 100%;
+        border-radius: 10px 10px 2px 2px;
+    }
+
+    .movies-main .soon-body .movie-card h4 {
+        height: 20%;
+        color: #fff;
+        margin-top: 0;
+    }

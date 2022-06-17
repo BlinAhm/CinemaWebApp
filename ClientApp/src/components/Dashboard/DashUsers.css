@@ -43,10 +43,10 @@
     }
 
     .contents .commands {
-        width: 12%;
+        width: 20%;
         height: 35px;
-        margin-top: 10px;
-        margin-bottom: 10px;
+        margin-top: 30px;
+        margin-bottom: -10px;
         margin-left: 167px;
         display: flex;
         flex-direction: row;
@@ -59,7 +59,7 @@
             background: linear-gradient(#31333b,#282a30);
             text-decoration: none;
             color: whitesmoke;
-            font-size: 16px;
+            font-size: 18px;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             border: solid transparent 2px;
             border-top: solid #31333b 2px;
@@ -69,6 +69,7 @@
             padding-left: 10px;
             padding-right: 10px;
             cursor: pointer;
+            
         }
 
         .contents .commands > li > a {
@@ -97,6 +98,7 @@
         margin: auto;
         width: 90%;
         margin-top: 40px;
+        margin-bottom: 40px;
         border: solid rgb(211, 211, 211) 2px;
         border-collapse: collapse;
     }
@@ -108,17 +110,28 @@
             font-size: 22px;
             font-weight: 400;
         }
+        .contents .table #editBtn, #deleteBtn, #removeBtn, #featureBtn {
+            border: solid 2px white;
+            border-radius: 4px;
+            background: #343a4a;
+            cursor: pointer;
+            margin-inline: 5px;
+        }
+            .contents .table #editBtn:hover, .contents .table #deleteBtn:hover {
+                background: #3c4355;
+            }
 
-    .contents tbody tr > td {
-        color: rgb(231, 231, 231);
-        font-size: 18px;
-        text-align: center;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
+            .contents tbody tr > td {
+                color: rgb(231, 231, 231);
+                font-size: 18px;
+                text-align: center;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            }
 
     .contents tbody > tr {
         background-color: #31333b;
         border-top: solid white 2px;
+        height: 40px;
     }
 
     .contents #insertForm {

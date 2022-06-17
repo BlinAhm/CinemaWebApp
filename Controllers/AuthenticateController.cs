@@ -1,8 +1,12 @@
 ﻿using CinemaApp.Auth;
+using CinemaApp.Database;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.Net.Http.Headers;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -16,16 +20,57 @@ namespace CinemaApp.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IConfiguration _configuration;
+        private readonly CinemaDbContext _context;
 
         public AuthenticateController(
             UserManager<ApplicationUser> userManager,
             RoleManager<IdentityRole> roleManager,
-            IConfiguration configuration)
+            IConfiguration configuration,
+            CinemaDbContext context)
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _configuration = configuration;
+            _context = context;
         }
+
+        [HttpGet]
+        [Route("GetAll")]
+        public List<ApplicationUser> GetUsers()
+        {
+            return _userManager.Users.ToList();
+        }
+
+        [HttpPost]
+        [Route("GetByEmail")]
+        public ApplicationUser GetUser([FromForm] string email)
+        {
+            var user = _userManager.FindByEmailAsync(email);
+            return user.Result;
+        }
+
+        [Authorize]
+        [HttpDelete]
+        [Route("DeleteUser/{email}")]
+        public async Task<IActionResult> Delete(string email)
+        {
+            await _userManager.DeleteAsync(GetUser(email));
+            var user = await _userManager.FindByEmailAsync(email);
+            if (user != null)
+            {
+                return StatusCode(500, new Response { Status = "Error", Message = "Unable to delete user!" });
+            }
+
+            var adminEmail = HttpContext.User.Claims.Where(x => x.Type == ClaimTypes.Email).FirstOrDefault();
+            _context.Activities.Add(new Models.Activity()
+            {
+                Act = $"Admin {adminEmail} deleted user: {email}",
+                Date = DateTime.Parse(DateTime.Now.ToString())
+            });
+            _context.SaveChanges();
+            return StatusCode(200, new Response { Status = "Success", Message = "User deleted successfully!" });
+        }
+
         [AllowAnonymous]
         [HttpPost]
         [Route("login")]
@@ -39,7 +84,7 @@ namespace CinemaApp.Controllers
                 var authClaims = new List<Claim>
                 {
                     new Claim(ClaimTypes.Name, user.FirstName),
-                    new Claim(ClaimTypes.Name, user.LastName),
+                    new Claim("lastName", user.LastName),
                     new Claim(ClaimTypes.Email, user.Email),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 };
@@ -51,6 +96,16 @@ namespace CinemaApp.Controllers
 
                 var token = GetToken(authClaims);
 
+                _context.Activities.Add(new Models.Activity()
+                {
+                    Act = $"New login from: {user.Email}",
+                    Date = DateTime.Parse(DateTime.Now.ToString())
+                });
+                _context.SaveChanges();
+                /*var cookieOptions = new CookieOptions { Domain = "localhost", MaxAge = new TimeSpan(3,0,0),  IsEssential = true, SameSite = Microsoft.AspNetCore.Http.SameSiteMode.Strict};
+                HttpContext.Response.Cookies.Append("JWTtoken", new JwtSecurityTokenHandler().WriteToken(token),cookieOptions);
+                HttpContext.Response.Cookies.Append("JWTExpiration", token.ValidTo.ToString("yyyy-MM-ddTHH:mm"),cookieOptions);*/
+                
                 return Ok(new
                 {
                     token = new JwtSecurityTokenHandler().WriteToken(token),
@@ -80,6 +135,12 @@ namespace CinemaApp.Controllers
             if (!result.Succeeded)
                 return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User creation failed! Please check user details and try again." });
 
+            _context.Activities.Add(new Models.Activity()
+            {
+                Act = $"New user registration: {user.Email}",
+                Date = DateTime.Parse(DateTime.Now.ToString())
+            });
+            _context.SaveChanges();
             return Ok(new Response { Status = "Success", Message = "User created successfully!" });
         }
 
@@ -98,7 +159,7 @@ namespace CinemaApp.Controllers
                 LastName = model.LastName,
                 Email = model.Email,
                 SecurityStamp = Guid.NewGuid().ToString()
-                 
+
             };
             var result = await _userManager.CreateAsync(user, model.Password);
             if (!result.Succeeded)
@@ -117,7 +178,62 @@ namespace CinemaApp.Controllers
             {
                 await _userManager.AddToRoleAsync(user, UserRoles.User);
             }
+
+            _context.Activities.Add(new Models.Activity()
+            {
+                Act = $"New admin registration: {user.Email}",
+                Date = DateTime.Parse(DateTime.Now.ToString())
+            });
+            _context.SaveChanges();
             return Ok(new Response { Status = "Success", Message = "User created successfully!" });
+        }
+
+        [HttpPost]
+        [Route("CreateUser")]
+        public async Task<IActionResult> CreateUser([FromForm] RegisterModel model)
+        {
+            var userExists = await _userManager.FindByEmailAsync(model.Email);
+            if (userExists != null)
+                return StatusCode(StatusCodes.Status400BadRequest, new Response { Status = "Error", Message = "User already exists!" });
+
+            ApplicationUser user = new()
+            {
+                UserName = model.Email,
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                Email = model.Email,
+                SecurityStamp = Guid.NewGuid().ToString()
+            };
+            var result = await _userManager.CreateAsync(user, model.Password);
+            if (!result.Succeeded)
+                return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User creation failed! Please check user details and try again." });
+
+            _context.Activities.Add(new Models.Activity()
+            {
+                Act = $"Admin created a new user: {user.Email}",
+                Date = DateTime.Parse(DateTime.Now.ToString())
+            });
+            _context.SaveChanges();
+            return Ok(new Response { Status = "Success", Message = "User created successfully!" });
+        }
+
+        [HttpPost]
+        [Route("EditUser")]
+        public async Task<IActionResult> EditUser([FromForm] EditModel model)
+        {
+            var user = await _userManager.FindByEmailAsync(model.FirstEmail);
+
+            user.FirstName = model.FirstName;
+            user.LastName = model.LastName;
+            user.Email = model.Email;
+
+            var result = await _userManager.UpdateAsync(user);
+            if (!result.Succeeded)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User update failed!" });
+            }
+
+            return Ok(new Response { Status = "Success", Message = "User edit successful!" });
         }
 
         private JwtSecurityToken GetToken(List<Claim> authClaims)
