@@ -14,7 +14,7 @@
     }
 .featured .banner-body img{
     height: 100%;
-    width: 10%;
+    width: 14%;
     margin-inline: 15px;
 }
     .featured .banner-body .banner-details {
@@ -29,7 +29,7 @@
         font-size: 22px;
         margin: 15px;
         color: #fff;
-        max-width: 30%;
+        min-width: 25%;
     }
         .featured .banner-body .banner-details h4 {
             margin: 15px;

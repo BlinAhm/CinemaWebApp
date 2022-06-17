@@ -98,6 +98,7 @@
         margin: auto;
         width: 90%;
         margin-top: 40px;
+        margin-bottom: 40px;
         border: solid rgb(211, 211, 211) 2px;
         border-collapse: collapse;
     }
@@ -115,7 +116,6 @@
             background: #343a4a;
             cursor: pointer;
             margin-inline: 5px;
-            padding-inline: -5px;
         }
             .contents .table #editBtn:hover, .contents .table #deleteBtn:hover {
                 background: #3c4355;

@@ -16,6 +16,11 @@ const DashMovie = () => {
             e.preventDefault();
             $('#insertForm').css('display', 'block');
         });
+        $('[name="insert"]').on('click', (e) => {
+            $(this).off();
+            e.preventDefault();
+            addMovie();
+        });
 
         $('.close').on('click', () => {
             $('#insertForm').css('display', 'none');
@@ -44,8 +49,8 @@ const DashMovie = () => {
                     <tbody>
                         {featured?.map((key) => (
                             key.movies.map((movie) => (
-                                <tr key={key.id}>
-                                    <td style={{ "width": "5%" }}><div onClick={() => { removeFeatured(key.id) }} id="removeBtn">Remove</div></td>
+                                <tr key={movie.id}>
+                                    <td style={{ "width": "5%" }}><div onClick={() => { removeFeatured(movie.id) }} id="removeBtn">Remove</div></td>
                                     <td style={{ "width": "20%" }}>{movie.title}</td>
                                     <td style={{ "width": "25%" }} >{movie.description}</td>
                                     <td style={{ "width": "20%" }}>{movie.category}</td>
@@ -69,19 +74,25 @@ const DashMovie = () => {
                             <th></th>
                         </tr>
                     </thead>
-                    <tbody>{response?.map((key) => (
+                    <tbody className="movie-tbody">{response?.map((key) => (
                         <tr key={key.id}>
                             <td><div id="featureBtn" onClick={() => { addFeatured(key.id) }}>Feature</div></td>
-                            <td style={{ "width": "25%", "wordWrap": "anywhere" }}>{key.imageLink}</td>
-                            <td>{key.title}</td>
-                            <td>{key.description}</td>
-                            <td>{key.category}</td>
-                            <td>{key.actors.map((actor) => (
+
+                            <td style={{ "width": "20%", "wordWrap": "anywhere" }}>{key.imageLink}</td>
+                            <td style={{ "width": "20%" }}>{key.title}</td>
+                            <td style={{ "width": "25%" }}>{key.description}</td>
+                            <td style={{ "width": "15%" }}>{key.category}</td>
+                            <td style={{ "width": "10%" }}>{key.actors.map((actor) => (
                                 <span key={actor.id}>{`${actor.firstName} ${actor.lastName}`}<br /></span>
                             ))}</td>
                             <td>{key.rating}</td>
-                            <td><div id="editBtn">Edit</div></td>
-                            <td><div id="deleteBtn">Delete</div></td>
+                            <td>
+                                <div id="editBtnM">Edit</div>
+                                <div id="deleteBtn">Delete</div>
+                            </td>
+                            <td><div style={
+                                { "marginRight": "10px", "paddingBlock": "10px", "paddingInline": "5px" }
+                            } id="castBtn">Edit Cast</div></td>
                         </tr>)) ?? ""}
                     </tbody>
                 </table>
@@ -111,7 +122,7 @@ const DashMovie = () => {
                     </div>
                     <div>
                         <p>Category:</p>
-                        <input className="userInputs" type="text" name="title" />
+                        <input className="userInputs" type="text" name="category" />
                     </div>
                     <div>
                         <p>Rating:</p>
@@ -168,6 +179,22 @@ function addFeatured(id) {
     });
 }
 
+function addMovie() {
+    var values = $('.insertForm').serialize();
+
+    $.ajax({
+        type: "POST",
+        url: "https://localhost:7197/api/Movie/Add",
+        data: values,
+        success: function () {
+            window.location.href = "https://localhost:44465/dashboard/movies";
+        },
+        error: function (jqXHR) {
+            alert(jqXHR.responseText);
+        }
+    });
+}
+
 function removeFeatured(id) {
     $.ajax({
         type: "DELETE",
@@ -176,7 +203,7 @@ function removeFeatured(id) {
             window.location.href = "https://localhost:44465/dashboard/movies";
         },
         error: function (jqXHR) {
-            alert(jqXHR.status);
+            alert(jqXHR.responseText);
         }
     });
 }

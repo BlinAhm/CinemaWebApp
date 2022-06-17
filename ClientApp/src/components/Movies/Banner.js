@@ -1,14 +1,16 @@
 ﻿import './Banner.css';
 
-const Banner = () => {
+const Banner = (props) => {
     return (
         <a href="movies/#" className="banner-body">
-            <img src="https://upload.wikimedia.org/wikipedia/en/0/0d/Avengers_Endgame_poster.jpg" alt="img" />
+            <img src={props.imageLink} alt="img" />
             <div className="banner-details">
-                <h3>Avengers: Endgame</h3>
-                <p>"After half of all life is snapped away by Thanos, the Avengers are left scattered and divided. Now with a way to reverse the damage, the Avengers and their allies must assemble once more and learn to put differences aside in order to work together and set things right."</p>
-                <h4>Cast: Test Test Test Test Test Test</h4>
-                <h4>Rating: 8.6/10</h4>
+                <h3>{props.title}</h3>
+                <p style={{ "width": "45%"}}>{props.description}</p>
+                <h4>Category: <br />
+                    <span style={{"fontWeight":"400","lineHeight":"2"}}>{props.category}</span>
+                </h4>
+                <h4 style={{ "marginRight": "30px"}}>Rating: {props.rating}/10</h4>
             </div>
         </a>
     );

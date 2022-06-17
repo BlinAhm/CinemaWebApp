@@ -73,3 +73,18 @@
 #removeBtn{
     margin-block: 5px;
 }
+.movie-tbody #editBtnM, .movie-tbody #deleteBtn, .movie-tbody #castBtn {
+    border: solid 2px white;
+    border-radius: 4px;
+    background: #343a4a;
+    cursor: pointer;
+    margin-inline: 5px;
+}
+    .movie-tbody #editBtnM:hover, .movie-tbody #deleteBtn:hover, .movie-tbody #castBtn:hover {
+        background: #3c4355;
+    }
+.movie-tbody #editBtnM, .movie-tbody #deleteBtn {
+    margin: 8px;
+    padding-block: 2px;
+    padding-inline: 2px;
+}

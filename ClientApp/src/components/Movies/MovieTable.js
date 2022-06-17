@@ -23,16 +23,16 @@ const MovieTable = () => {
             </thead>
             <tbody>{response?.map((key) => (
                 <tr key={key.id}>
-                    <td id="photo"><img style={{"height":"300px"}} alt="img" src={key.imageLink} /></td>
-                    <td id="title">{key.title}</td>
-                    <td id="description">{key.description}</td>
-                    <td id="category">{key.category}</td>
-                    <td id="cast">
+                    <td id="photo"><img style={{"height":"330px","width":"235px"}} alt="img" src={key.imageLink} /></td>
+                    <td style={{ "width": "15%","padding-right":"20px" }} id="title">{key.title}</td>
+                    <td style={{ "width": "30%" }} id="description">{key.description}</td>
+                    <td style={{ "width": "15%","fontSize":"22px","fontWeight":"500" }} id="category">{key.category}</td>
+                    <td style={{ "width": "15%" }} id="cast">
                         {key.actors.map((actor) => (
                             <span key={actor.id}>{`${actor.firstName} ${actor.lastName}`}<br /></span>
                         ))}
                     </td>
-                    <td id="rating">{key.rating}/10</td>
+                    <td style={{ "width": "15%","paddingRight":"30px" }} id="rating">{key.rating}/10</td>
                 </tr>)) ?? ""}
             </tbody>
         </table>
