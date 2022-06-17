@@ -29,7 +29,7 @@ const MovieTable = () => {
                     <td id="category">{key.category}</td>
                     <td id="cast">
                         {key.actors.map((actor) => (
-                        <span>{`${actor.firstName} ${actor.lastName}`}<br /></span>
+                            <span key={actor.id}>{`${actor.firstName} ${actor.lastName}`}<br /></span>
                         ))}
                     </td>
                     <td id="rating">{key.rating}/10</td>

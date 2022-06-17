@@ -5,9 +5,11 @@ import './DashMovie.css';
 
 const DashMovie = () => {
     const [response, setResponse] = useState([]);
+    const [featured, setFeatured] = useState([]);
 
     useEffect(() => {
         displayMovies();
+        displayFeatured();
 
         $('#insertBtn').on('click', (e) => {
             $(this).off();
@@ -29,8 +31,34 @@ const DashMovie = () => {
                     <li><button id="insertBtn">Insert</button></li>
                 </ul>
                 <table className="table">
+                    <caption id="caption-featured">Featured movies:</caption>
+                    <thead id="thead-movie">
+                        <tr>
+                            <th></th>
+                            <th>Title</th>
+                            <th>Description</th>
+                            <th>Category</th>
+                            <th>Rating</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {featured?.map((key) => (
+                            key.movies.map((movie) => (
+                                <tr key={key.id}>
+                                    <td style={{ "width": "5%" }}><div onClick={() => { removeFeatured(key.id) }} id="removeBtn">Remove</div></td>
+                                    <td style={{ "width": "20%" }}>{movie.title}</td>
+                                    <td style={{ "width": "25%" }} >{movie.description}</td>
+                                    <td style={{ "width": "20%" }}>{movie.category}</td>
+                                    <td style={{ "width": "20%" }}>{movie.rating}</td>
+                                </tr>
+                            ))
+                        )) ?? ""}
+                    </tbody>
+                </table>
+                <table className="table">
                     <thead>
                         <tr>
+                            <th></th>
                             <th>Poster Link</th>
                             <th>Title</th>
                             <th>Description</th>
@@ -43,12 +71,13 @@ const DashMovie = () => {
                     </thead>
                     <tbody>{response?.map((key) => (
                         <tr key={key.id}>
-                            <td style={{"width": "25%",}}>{key.imageLink}</td>
+                            <td><div id="featureBtn" onClick={() => { addFeatured(key.id) }}>Feature</div></td>
+                            <td style={{ "width": "25%", "wordWrap": "anywhere" }}>{key.imageLink}</td>
                             <td>{key.title}</td>
                             <td>{key.description}</td>
                             <td>{key.category}</td>
                             <td>{key.actors.map((actor) => (
-                                <span key={actor.id}>{`${actor.firstName} ${actor.lastName}`}<br/></span>
+                                <span key={actor.id}>{`${actor.firstName} ${actor.lastName}`}<br /></span>
                             ))}</td>
                             <td>{key.rating}</td>
                             <td><div id="editBtn">Edit</div></td>
@@ -109,6 +138,47 @@ const DashMovie = () => {
             }
         });
     }
+
+    function displayFeatured() {
+        $.ajax({
+            type: "GET",
+            url: "https://localhost:7197/api/Movie/GetFeatured",
+            success: function (data) {
+                if (featured !== data) {
+                    setFeatured(data);
+                }
+            },
+            error: function (jqXHR) {
+                alert(jqXHR.status);
+            }
+        });
+    }
+}
+
+function addFeatured(id) {
+    $.ajax({
+        type: "GET",
+        url: "https://localhost:7197/api/Movie/AddFeatured/" + id,
+        success: function () {
+            window.location.href = "https://localhost:44465/dashboard/movies";
+        },
+        error: function (jqXHR) {
+            alert(jqXHR.status);
+        }
+    });
+}
+
+function removeFeatured(id) {
+    $.ajax({
+        type: "DELETE",
+        url: "https://localhost:7197/api/Movie/RemoveFeatured/" + id,
+        success: function () {
+            window.location.href = "https://localhost:44465/dashboard/movies";
+        },
+        error: function (jqXHR) {
+            alert(jqXHR.status);
+        }
+    });
 }
 
 export default DashMovie;

@@ -8,6 +8,10 @@
     border-radius: 10px;
     margin-bottom: 20px;
 }
+    .featured .banner-body:hover {
+        transition: ease-in .09s;
+        background: linear-gradient(to right, #080808,#131313,#181818,#232323,#181818);
+    }
 .featured .banner-body img{
     height: 100%;
     width: 10%;

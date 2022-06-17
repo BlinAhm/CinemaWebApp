@@ -12,7 +12,8 @@ namespace CinemaApp.Database
 
         public DbSet<Activity> Activities { get; set; }
         public DbSet<Movie> Movies { get; set; }
-        public DbSet<ComingSoon> SoonMovies { get; set; }
+        public DbSet<ComingSoon> ComingSoonMovies { get; set; }
+        public DbSet<FeaturedMovies> FeaturedMovies { get; set; }
         public DbSet<Actor> Actors { get; set; }
         public DbSet<Dictionary<string, object>> ActorMovie => Set<Dictionary<string, object>>("ActorMovie");
 
@@ -21,6 +22,7 @@ namespace CinemaApp.Database
             modelBuilder.Entity<Activity>().ToTable("Activity");
             modelBuilder.Entity<Movie>().ToTable("Movie");
             modelBuilder.Entity<ComingSoon>().ToTable("ComingSoonMovies");
+            modelBuilder.Entity<FeaturedMovies>().ToTable("FeaturedMovies");
             modelBuilder.Entity<Actor>().ToTable("Actor");
             modelBuilder.Entity<Movie>()
                 .HasMany(a => a.Actors)

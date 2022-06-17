@@ -109,7 +109,7 @@
             font-size: 22px;
             font-weight: 400;
         }
-        .contents .table #editBtn, #deleteBtn{
+        .contents .table #editBtn, #deleteBtn, #removeBtn, #featureBtn {
             border: solid 2px white;
             border-radius: 4px;
             background: #343a4a;
@@ -117,13 +117,16 @@
             margin-inline: 5px;
             padding-inline: -5px;
         }
+            .contents .table #editBtn:hover, .contents .table #deleteBtn:hover {
+                background: #3c4355;
+            }
 
-    .contents tbody tr > td {
-        color: rgb(231, 231, 231);
-        font-size: 18px;
-        text-align: center;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
+            .contents tbody tr > td {
+                color: rgb(231, 231, 231);
+                font-size: 18px;
+                text-align: center;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            }
 
     .contents tbody > tr {
         background-color: #31333b;

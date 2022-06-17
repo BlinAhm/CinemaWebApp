@@ -1,10 +1,10 @@
 ﻿import './MovieCard.css';
 
-const MovieCard = () => {
+const MovieCard = (props) => {
     return (
         <a href="movies/#" className="movie-card">
-            <img src="https://play-lh.googleusercontent.com/Odv1QnJMznTD_SRuatFVgE6b2Lgt_BGb8TUBMjsNl-gJi3bnxLXgnusGXWHkFGihsJdTde9ucIhNwMPHbkAF" alt="img" />
-            <h4>Spider-Man: No Way Home</h4>
+            <img src={props.imageLink} alt="img" />
+            <h4>{props.title}</h4>
         </a>
     );
 }

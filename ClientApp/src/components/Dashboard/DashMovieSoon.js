@@ -48,12 +48,12 @@ const DashMovie = () => {
                     </thead>
                     <tbody>{response?.map((key) => (
                         <tr key={key.id}>
-                            <td style={{"width": "5%"}}>{key.imageLink}</td>
-                            <td style={{ "width": "25%" }}>{key.title}</td>
-                            <td style={{ "width": "35%"}}>{key.description}</td>
-                            <td style={{ "width": "25%"}}>{key.category}</td>
-                            <td style={{ "width": "6%" }} ><div id="editBtn">Edit</div></td>
-                            <td style={{ "width": "12%" }} onClick={() => { delMovie(key.id) }}><div id="deleteBtn">Delete</div></td>
+                            <td style={{"width": "25%", "word-wrap":"anywhere"}}>{key.imageLink}</td>
+                            <td style={{ "width": "20%" }}>{key.title}</td>
+                            <td style={{ "width": "30%"}}>{key.description}</td>
+                            <td style={{ "width": "15%"}}>{key.category}</td>
+                            <td style={{ "width": "5%" }} ><div id="editBtn">Edit</div></td>
+                            <td style={{ "width": "5%" }} onClick={() => { delMovie(key.id) }}><div id="deleteBtn">Delete</div></td>
                         </tr>)) ?? ""}
                     </tbody>
                 </table>
@@ -83,7 +83,7 @@ const DashMovie = () => {
                     </div>
                     <div>
                         <p>Category:</p>
-                        <input className="userInputs" type="text" name="title" />
+                        <input className="userInputs" type="text" name="category" />
                     </div>
 
                     <input className="save" type="submit" name="insert" value="Save" />
@@ -118,7 +118,7 @@ function addMovie() {
             window.location.href = "https://localhost:44465/dashboard/coming-soon";
         },
         error: function (error) {
-            console.log(error.status);
+            console.log(error.responseText);
         }
     });
 }

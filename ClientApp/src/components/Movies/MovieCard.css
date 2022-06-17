@@ -5,6 +5,11 @@
     border: #151515 solid 4px;
     border-radius: 10px;
 }
+    .movies-main .soon-body .movie-card:hover {
+        transition: ease-in .09s;
+        background: #222222;
+        border: #222222 solid 4px;
+    }
 
     .movies-main .soon-body .movie-card img {
         height: 80%;
