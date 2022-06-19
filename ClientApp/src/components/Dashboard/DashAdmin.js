@@ -7,7 +7,7 @@ const DashAdmin = () => {
     const [activity, setActivity] = useState([]);
 
     useEffect(() => {
-        displayAdmins();
+        /*displayAdmins();*/
         displayActivities();
 
         $('[name="insert"]').on('click', (e) => {
