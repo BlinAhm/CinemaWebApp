@@ -1,4 +1,3 @@
-using CinemaApp.DAL;
 using CinemaApp.Auth;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -14,9 +13,6 @@ ConfigurationManager configuration = builder.Configuration;
 // Add services to the container.
 
 builder.Services.AddControllersWithViews();
-builder.Services.AddSingleton<CinemaApp.DAL.DbContext>();
-builder.Services.AddTransient<User>();
-builder.Services.AddTransient<Admin>();
 builder.Services.AddControllers().AddNewtonsoftJson(options =>
 {
     options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;

@@ -44,9 +44,10 @@ namespace CinemaApp.Controllers
         {
             var movie = await _context.Movies.FindAsync(id);
             _context.Movies.Remove(movie);
+            await _context.SaveChangesAsync();
+
             if (await _context.Movies.FindAsync(id) == null)
             {
-                await _context.SaveChangesAsync();
                 return StatusCode(200, new Response { Status = "Success", Message = "Movie deleted!" });
             }
             return StatusCode(500, new Response { Status = "Error", Message = "Unable to delete movie!" });
@@ -57,7 +58,8 @@ namespace CinemaApp.Controllers
         public async Task<IActionResult> AddFeatured(int id)
         {
             var featured = await _context.FeaturedMovies.FindAsync(1);
-            if (featured.Movies.Count == 2)
+            var size = GetFeatured().First().Movies.Count;
+            if (size == 2)
             {
                 return StatusCode(400, "Featured list is full! Remove a featured movie to insert.");
             }
@@ -96,6 +98,130 @@ namespace CinemaApp.Controllers
         public List<FeaturedMovies> GetFeatured()
         {
             return _context.FeaturedMovies.Include("Movies").ToList();
+        }
+
+        [Route("GetAllActors")]
+        [HttpGet]
+        public List<Actor> GetActors()
+        {
+            return _context.Actors.ToList();
+        }
+
+        [Route("GetCast/{id}")]
+        [HttpGet]
+        public List<Actor> GetCast(int id)
+        {
+            var movie = _context.Movies.Include("Actors").Where(x => x.Id == id);
+
+            return movie.First().Actors;
+        }
+
+        [Route("FindById/{id}")]
+        [HttpGet]
+        public async Task<Movie> FindById(int id)
+        {
+            return await _context.Movies.FindAsync(id);
+        }
+
+        [Route("Update")]
+        [HttpPost]
+        public async Task<IActionResult> UpdateMovie([FromForm] UpdateMovie model)
+        {
+            var movie = await _context.Movies.FindAsync(model.mId);
+
+            movie.ImageLink = model.ImageLink;
+            movie.Title = model.Title;
+            movie.Description = model.Description;
+            movie.Category = model.Category;
+            movie.Rating = model.Rating;
+
+            await _context.SaveChangesAsync();
+
+            return Ok("Movie updated successfully!");
+        }
+
+        [Route("UpdateCast")]
+        [HttpPost]
+        public async Task<IActionResult> UpdateCast([FromForm] UpdateCast model)
+        {
+            var act = _context.Actors.ToList();
+
+            //checks if actors already exist and creates new actors if they do not exist
+            Actor? act1;
+            Actor? act2;
+            Actor? act3;
+
+            if(model.A1Id == 0)
+            {
+                act1 = new Actor{ FirstName = model.Actor1.Split(' ')[0], LastName = model.Actor1.Split(' ')[1] };
+                await _context.Actors.AddAsync(act1);
+                await _context.SaveChangesAsync();        
+            }
+            else if (model.A1Id == -1)
+            {
+                act1 = null;
+            }
+            else
+            {
+                act1 = act.Where(x => x.Id == model.A1Id).First();
+            }
+
+            if (model.A2Id == 0)
+            {
+                act2 = new Actor { FirstName = model.Actor2.Split(' ')[0], LastName = model.Actor2.Split(' ')[1] };
+                await _context.Actors.AddAsync(act2);
+                await _context.SaveChangesAsync();
+            }
+            else if (model.A2Id == -1)
+            {
+                act2 = null;
+            }
+            else
+            {
+                act2 = act.Where(x => x.Id == model.A2Id).First();
+            }
+
+            if (model.A3Id == 0)
+            {
+                act3 = new Actor { FirstName = model.Actor3.Split(' ')[0], LastName = model.Actor3.Split(' ')[1] };
+                await _context.Actors.AddAsync(act3);
+                await _context.SaveChangesAsync();
+            }
+            else if (model.A3Id == -1)
+            {
+                act3 = null;
+            }
+            else
+            {
+                act3 = act.Where(x => x.Id == model.A3Id).First();
+            }
+
+            var movie = _context.Movies.Include("Actors").Where(x => x.Id == model.mId);
+            movie.First().Actors.Clear();
+
+            if(act1 != null)
+                movie.First().Actors.Add(act1);
+            if (act2 != null)
+                movie.First().Actors.Add(act2);
+            if (act3 != null)
+                movie.First().Actors.Add(act3);
+
+            await _context.SaveChangesAsync();
+            return Ok();
+
+
+        }
+        //delete
+        [Route("Test/{id}")]
+        [HttpGet]
+        public async Task<List<Actor>> Test(int id)
+        {
+            var movie = _context.Movies.Include("Actors").Where(x => x.Id == id);
+            var actors = movie.First().Actors;
+
+            actors.Clear();
+
+            return actors;
         }
 
         [Route("GetComingSoon")]

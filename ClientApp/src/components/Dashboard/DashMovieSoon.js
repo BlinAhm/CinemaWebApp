@@ -48,7 +48,7 @@ const DashMovie = () => {
                     </thead>
                     <tbody>{response?.map((key) => (
                         <tr key={key.id}>
-                            <td style={{"width": "25%", "word-wrap":"anywhere"}}>{key.imageLink}</td>
+                            <td style={{"width": "25%", "wordWrap":"anywhere"}}>{key.imageLink}</td>
                             <td style={{ "width": "20%" }}>{key.title}</td>
                             <td style={{ "width": "30%"}}>{key.description}</td>
                             <td style={{ "width": "15%"}}>{key.category}</td>
