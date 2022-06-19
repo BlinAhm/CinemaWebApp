@@ -79,7 +79,11 @@
     box-shadow: 2px 2px 10px black;
     cursor: pointer;
 }
-
+    .LoginForm .loginSubmit:hover {
+        background-color: #780000;
+        transition: 0.5;
+        font-size: 20px;
+    }
 .LoginForm label {
     color: crimson;
     margin: -25px;
