@@ -1,0 +1,24 @@
+﻿* {
+    margin:0px;
+    padding:0px;
+}
+.aboutus-details {
+    font-size: 18px;
+    font-weight: 400;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding-left:150px;
+    padding-right:150px;
+    background-color:#ffd0aa;
+    color:#a12f2f;
+}
+h2 {
+    padding-top:40px;
+}
+    h2:hover {
+        font-size:28px;
+        transition:0.5s;
+    }
+p{
+    padding-bottom:40px;
+    padding-top:30px;
+ }

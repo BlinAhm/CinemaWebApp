@@ -43,6 +43,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\components\Homepage\About-us.js" />
+    <None Remove="ClientApp\src\components\Homepage\AboutUs.js" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="ClientApp\src\img\" />
   </ItemGroup>
 
