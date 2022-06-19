@@ -19,11 +19,18 @@ const DashContact = () => {
                     </thead>
                     <tbody>
                         <tr>
-                            <td class="id">1</td>
-                            <td class="fullN">2</td>
-                            <td class="email">3</td>
-                            <td class="title">4</td>
-                            <td class="messageBox">5</td>
+                            <td class="id">2</td>
+                            <td class="fullN">Test test</td>
+                            <td class="email">t@gmail.com</td>
+                            <td class="title">Testing Contact</td>
+                            <td class="messageBox">Testing ContactTesting ContactTesting ContactTesting ContactTesting Contact</td>
+                        </tr>
+                        <tr>
+                            <td class="id">3</td>
+                            <td class="fullN">Contacter</td>
+                            <td class="email">c@gmail.com</td>
+                            <td class="title">Contact title</td>
+                            <td class="messageBox">aaaaaaaaaaaasdsadjbhsdajklfhkjsdhkjserj</td>
                         </tr>
                     </tbody>
                 </table>

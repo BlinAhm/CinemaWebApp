@@ -1,7 +1,4 @@
-﻿* {
-    margin:0px;
-    padding:0px;
-}
+﻿
 .aboutus-details {
     font-size: 18px;
     font-weight: 400;
@@ -11,16 +8,20 @@
     background-color: #ffd0aa;
     color: #9a0000;
     background-image: linear-gradient(#ffbcbc,#ff7d7d);
+    margin: auto;
 }
-h2 {
-    padding-top:40px;
-}
-    h2:hover {
-        font-size:28px;
-        transition:0.5s;
+
+    .aboutus-details h2 {
+        padding-top: 40px;
     }
-p{
-    font-weight:bold;
-    padding-bottom:40px;
-    padding-top:30px;
- }
+
+        .aboutus-details h2:hover {
+            font-size: 28px;
+            transition: 0.5s;
+        }
+
+    .aboutus-details p {
+        font-weight: bold;
+        padding-bottom: 40px;
+        padding-top: 30px;
+    }
