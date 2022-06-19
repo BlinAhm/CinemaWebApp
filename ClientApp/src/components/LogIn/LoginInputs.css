@@ -46,7 +46,7 @@
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-    margin-top: -20px;
+    margin-top:-20px;
 }
 
 .LoginForm .check {
@@ -81,7 +81,7 @@
 }
     .LoginForm .loginSubmit:hover {
         background-color: #780000;
-        transition: 0.5;
+        transition: 0.5s;
         font-size: 20px;
     }
 .LoginForm label {

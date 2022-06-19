@@ -6,10 +6,11 @@
     font-size: 18px;
     font-weight: 400;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    padding-left:150px;
-    padding-right:150px;
-    background-color:#ffd0aa;
-    color:#a12f2f;
+    padding-left: 150px;
+    padding-right: 150px;
+    background-color: #ffd0aa;
+    color: #9a0000;
+    background-image: linear-gradient(#ffbcbc,#ff7d7d);
 }
 h2 {
     padding-top:40px;
@@ -19,6 +20,7 @@ h2 {
         transition:0.5s;
     }
 p{
+    font-weight:bold;
     padding-bottom:40px;
     padding-top:30px;
  }

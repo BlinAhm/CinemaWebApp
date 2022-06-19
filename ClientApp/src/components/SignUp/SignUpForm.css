@@ -36,7 +36,7 @@
 }
 .SignupForm .signupSubmit:hover{
     background-color:#780000;
-    transition:0.5;
+    transition:0.5s;
     font-size:20px;
 }
 .SignupForm #link-btn2 {
@@ -57,10 +57,9 @@
     font-size: 18px;
     font-weight: 400;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin-top: -60px;
-    padding: 0;
+    margin-top:10px;
     margin-bottom: 20px;
 }
 .SignupForm a:hover{
-    color:black;
+    color:whitesmoke;
 }
