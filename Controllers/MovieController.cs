@@ -16,6 +16,20 @@ namespace CinemaApp.Controllers
             _context = context;
         }
 
+        [Route("GetById/{id}")]
+        [HttpGet]
+        public Movie GetMovie(int id)
+        {
+            return _context.Movies.Include("Actors").Where(x=>x.Id == id).First();
+        }
+
+        [Route("GetByIdSoon/{id}")]
+        [HttpGet]
+        public ComingSoon GetMovieSoon(int id)
+        {
+            return _context.ComingSoonMovies.Where(x => x.Id == id).First();
+        }
+
         [Route("GetAll")]
         [HttpGet]
         public List<Movie> GetMovies()

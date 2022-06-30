@@ -17,7 +17,7 @@ const Featured = () => {
             <div className="featured-holder">
                 {response?.map((key) => (
                     key.movies.map((movie) => (
-                        <Banner key={movie.id} category={movie.category} imageLink={movie.imageLink} title={movie.title} description={movie.description} rating={movie.rating} />
+                        <Banner key={movie.id} movieId={movie.id} category={movie.category} imageLink={movie.imageLink} title={movie.title} description={movie.description} rating={movie.rating} />
                     ))
                 )) ?? ""}
             </div>

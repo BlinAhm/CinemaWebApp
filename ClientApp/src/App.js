@@ -11,6 +11,7 @@ import ContactUs from './pages/ContactUs';
 import LogIn from './pages/LogIn';
 import SignUp from './pages/SignUp';
 import Dashboard from './pages/Dashboard';
+import MoviePage from './pages/MoviePage';
 
 function App() {
     return (
@@ -19,6 +20,7 @@ function App() {
             <Routes>
                 <Route path='/home' element={<Homepage />} />
                 <Route path='/movies' element={<Movies />} />
+                <Route path='/movies/details/' element={<MoviePage />} />
                 <Route path='/schedules' element={<Schedule />} />
                 <Route path='/about-us' element={<AboutUs />} />
                 <Route path='/contact-us' element={<ContactUs />} />

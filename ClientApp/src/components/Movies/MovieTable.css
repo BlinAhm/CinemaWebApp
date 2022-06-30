@@ -16,6 +16,7 @@
         background: linear-gradient(to right,#151515,#202020,#202020,#191919);
         height: 200px;
         border-bottom: solid lightgray 4px;
+        cursor: pointer;
     }
     .movies-main .list-body .movie-table #description {
         width: 35%;

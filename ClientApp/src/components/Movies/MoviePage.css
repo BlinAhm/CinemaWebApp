@@ -1,0 +1,94 @@
+﻿.movie-page-main {
+    padding: 5%;
+    display: flex;
+    background-image: linear-gradient(135deg, transparent 0%, transparent 6%,rgba(0,0,0, 0.04) 6%, rgba(0,0,0, 0.04) 22%,transparent 22%, transparent 100%),linear-gradient(45deg, transparent 0%, transparent 20%,rgba(0,0,0, 0.04) 20%, rgba(0,0,0, 0.04) 47%,transparent 47%, transparent 100%),linear-gradient(135deg, transparent 0%, transparent 24%,rgba(0,0,0, 0.04) 24%, rgba(0,0,0, 0.04) 62%,transparent 62%, transparent 100%),linear-gradient(45deg, transparent 0%, transparent 73%,rgba(0,0,0, 0.04) 73%, rgba(0,0,0, 0.04) 75%,transparent 75%, transparent 100%),linear-gradient(90deg, rgb(207,207,207),rgb(207,207,207));
+    justify-content: space-evenly;
+}
+
+    .movie-page-main img {
+        height: 500px;
+        border-radius: 6px;
+        box-shadow: #000 1px 1px 5px;
+    }
+
+    .movie-page-main .movie-details {
+        width: 80%;
+        min-height: 500px;
+        margin-left: 5%;
+        height: 20%;
+        background: linear-gradient(to right, #202020,#202020,#202020,#202020);
+        border-radius: 10px 10px 8px 8px;
+        display: flex;
+        flex-direction: column;
+    }
+
+        .movie-page-main .movie-details h2 {
+            color: #fff;
+            font-size: 32px;
+            float: left;
+            margin-left: 10%;
+            font-weight: 500;
+        }
+
+        .movie-page-main .movie-details .title {
+            height: 20%;
+        }
+
+        .movie-page-main .movie-details .details {
+            height: 80%;
+            display: flex;
+            flex-direction: column;
+            align-items: baseline;
+        }
+
+        .movie-page-main .movie-details .checked {
+            color: #dbc541;
+            margin-right: 10px;
+        }
+
+        .movie-page-main .movie-details .rating {
+            color: #fff;
+            text-align: left;
+            margin-left: 10%;
+            font-size: 18px;
+            font-weight: 500;
+            width: 90%;
+        }
+
+            .movie-page-main .movie-details .rating .category {
+                margin-left: 10%;
+                font-size: 20px;
+            }
+
+        .movie-page-main .movie-details .details .description {
+            margin-inline: 10%;
+            font-size: 20px;
+            color: #fff;
+            text-align: justify;
+        }
+
+        .movie-page-main .movie-details .details .cast {
+            margin-inline: 10%;
+            font-size: 16px;
+            color: #fff;
+            text-align: justify;
+        }
+        .movie-page-main .movie-details .details .actors {
+            font-size: 18px;
+        }
+        .movie-page-main .movie-details .buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-inline: 11%;
+            margin-top: 1%;
+        }
+            .movie-page-main .movie-details .buttons .trailer, .movie-page-main .movie-details .buttons .buy {
+                width: 120px;
+                height: 50px;
+                background: crimson;
+                cursor: pointer;
+                border-radius: 4px;
+                text-align: center;
+                line-height: 48px;
+                color: #fff;
+            }

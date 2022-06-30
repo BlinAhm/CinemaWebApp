@@ -15,7 +15,7 @@ const ComingSoon = () => {
             <h2>Coming Soon!</h2>
             <div className="card-holder">
                 {response?.map((key) => (
-                    <MovieCard key={key.id} imageLink={key.imageLink} title={key.title}/>
+                    <MovieCard key={key.id} movieId={key.id} imageLink={key.imageLink} title={key.title}/>
                 ))}
             </div>
         </div>
