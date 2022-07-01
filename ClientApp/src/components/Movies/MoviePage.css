@@ -32,6 +32,9 @@
 
         .movie-page-main .movie-details .title {
             height: 20%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .movie-page-main .movie-details .details {
@@ -72,23 +75,64 @@
             font-size: 16px;
             color: #fff;
             text-align: justify;
+            margin-top: 0;
         }
+        .movie-page-main .movie-details .details .director {
+            margin-inline: 10%;
+            font-size: 16px;
+            color: #fff;
+            text-align: justify;
+            margin-top: -1%;
+        }
+
         .movie-page-main .movie-details .details .actors {
             font-size: 18px;
         }
+
         .movie-page-main .movie-details .buttons {
             display: flex;
             justify-content: space-between;
             margin-inline: 11%;
             margin-top: 1%;
         }
+
             .movie-page-main .movie-details .buttons .trailer, .movie-page-main .movie-details .buttons .buy {
                 width: 120px;
                 height: 50px;
-                background: crimson;
                 cursor: pointer;
                 border-radius: 4px;
                 text-align: center;
                 line-height: 48px;
                 color: #fff;
+                font-weight: 500;
+            }
+
+            .movie-page-main .movie-details .buttons .trailer {
+                background: linear-gradient(to right, #db1731,#A31F30);
+            }
+
+                .movie-page-main .movie-details .buttons .trailer:hover {
+                    background: linear-gradient(to right, #8a0a1c,#6f0614);
+                }
+
+            .movie-page-main .movie-details .buttons .buy {
+                background: linear-gradient(to right, #37ad05,#026702);
+            }
+
+                .movie-page-main .movie-details .buttons .buy:hover {
+                    background: linear-gradient(to right, #2e8908,#035b03);
+                }
+
+        .movie-page-main .movie-details .title .watchlist {
+            color: #fff;
+            cursor: pointer;
+            margin-right: 10%;
+        }
+
+            .movie-page-main .movie-details .title .watchlist .fa-plus-circle {
+                color: crimson;
+            }
+
+            .movie-page-main .movie-details .title .watchlist:hover {
+                color: #cfcfcf;
             }
