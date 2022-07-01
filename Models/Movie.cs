@@ -9,6 +9,8 @@
         public string Description { get; set; }
         public virtual List<Actor> Actors { get; set; }
         public float Rating { get; set; }
+        public Director? Director { get; set; }
+        public string TrailerID { get; set; }
 
         public Movie()
         {

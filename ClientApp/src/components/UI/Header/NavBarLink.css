@@ -24,6 +24,7 @@
 .nav-bar-link:hover {
     transition: 0.5s;
     background: linear-gradient(to right, #D7263D,#A31F30);
+    color: #fff;
 }
 .login:hover {
     transition: 0.5s;

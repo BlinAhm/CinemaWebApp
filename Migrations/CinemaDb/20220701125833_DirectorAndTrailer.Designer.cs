@@ -4,6 +4,7 @@ using CinemaApp.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CinemaApp.Migrations.CinemaDb
 {
     [DbContext(typeof(CinemaDbContext))]
-    partial class CinemaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220701125833_DirectorAndTrailer")]
+    partial class DirectorAndTrailer
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -102,34 +104,9 @@ namespace CinemaApp.Migrations.CinemaDb
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("TrailerID")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
                     b.ToTable("ComingSoonMovies", (string)null);
-                });
-
-            modelBuilder.Entity("CinemaApp.Models.Director", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Director");
                 });
 
             modelBuilder.Entity("CinemaApp.Models.FeaturedMovies", b =>
@@ -161,9 +138,6 @@ namespace CinemaApp.Migrations.CinemaDb
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("DirectorId")
-                        .HasColumnType("int");
-
                     b.Property<int?>("FeaturedMoviesId")
                         .HasColumnType("int");
 
@@ -183,8 +157,6 @@ namespace CinemaApp.Migrations.CinemaDb
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("DirectorId");
 
                     b.HasIndex("FeaturedMoviesId");
 
@@ -208,15 +180,9 @@ namespace CinemaApp.Migrations.CinemaDb
 
             modelBuilder.Entity("CinemaApp.Models.Movie", b =>
                 {
-                    b.HasOne("CinemaApp.Models.Director", "Director")
-                        .WithMany()
-                        .HasForeignKey("DirectorId");
-
                     b.HasOne("CinemaApp.Models.FeaturedMovies", null)
                         .WithMany("Movies")
                         .HasForeignKey("FeaturedMoviesId");
-
-                    b.Navigation("Director");
                 });
 
             modelBuilder.Entity("CinemaApp.Models.FeaturedMovies", b =>
