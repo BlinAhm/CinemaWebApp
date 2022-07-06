@@ -45,6 +45,7 @@
   <ItemGroup>
     <None Remove="ClientApp\src\components\Homepage\About-us.js" />
     <None Remove="ClientApp\src\components\Homepage\AboutUs.js" />
+    <None Remove="Controllers\Contactus.js" />
   </ItemGroup>
 
   <ItemGroup>

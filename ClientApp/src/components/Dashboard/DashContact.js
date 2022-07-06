@@ -1,6 +1,14 @@
+import { useEffect, useState} from 'react';
 import './DashContact.css';
+import $ from 'jquery';
+
 
 const DashContact = () => {
+    const [response, setResponse] = useState([]);
+    useEffect(() => {
+        getContact();
+        
+    });
     return (
         <div id="contact">
             <form class="form">
@@ -10,7 +18,6 @@ const DashContact = () => {
                 <table class="table">
                     <thead>
                         <tr>
-                            <th class="id">Id</th>
                             <th class="fullN">Full name</th>
                             <th class="email">Email</th>
                             <th class="title">Title</th>
@@ -18,25 +25,36 @@ const DashContact = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td class="id">2</td>
-                            <td class="fullN">Test test</td>
-                            <td class="email">t@gmail.com</td>
-                            <td class="title">Testing Contact</td>
-                            <td class="messageBox">Testing ContactTesting ContactTesting ContactTesting ContactTesting Contact</td>
-                        </tr>
-                        <tr>
-                            <td class="id">3</td>
-                            <td class="fullN">Contacter</td>
-                            <td class="email">c@gmail.com</td>
-                            <td class="title">Contact title</td>
-                            <td class="messageBox">aaaaaaaaaaaasdsadjbhsdajklfhkjsdhkjserj</td>
-                        </tr>
+                        {
+                            response?.map((key) => (
+                                <tr key={key.id }>
+                                    <td class="fullN">{key.name}</td>
+                                    <td class="email">{key.email}</td>
+                                    <td class="title">{key.title}</td>
+                                    <td class="messageBox">{key.message}</td>
+                                </tr>
+                                ))}
+
                     </tbody>
                 </table>
             </form>
         </div>
     );
+
+    function getContact() {
+        $.ajax({
+            type: "GET",
+            url: "https://localhost:7197/api/Contact/getAll",
+            success: function (data) {
+                if (response !== data) {
+                    setResponse(data);
+                }
+            },
+            error: function (jqXHR) {
+                alert(jqXHR.status);
+            }
+        });
+    }
 }
 
 export default DashContact;
