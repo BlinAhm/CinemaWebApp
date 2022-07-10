@@ -1,5 +1,6 @@
 import $ from 'jquery';
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import '../components/Movies/MoviePage.css';
 
 const MoviePage = () => {
@@ -60,7 +61,7 @@ const MoviePage = () => {
                     </div>
                     <div className="buttons">
                         <div className="trailer" onClick={showTrailer}>Watch Trailer</div>
-                        <div className="buy">Buy Ticket</div>
+                        <Link to={"/movies/seating/?id=" + response.id}><div className="buy">Buy Ticket</div></Link>
                     </div>
                     <div className="video">
                         <iframe height="400" width="650"
@@ -71,7 +72,7 @@ const MoviePage = () => {
             </div>
         );
     }
-    
+
 
     function getMovieData() {
         var id = getUrlParameter('id');
