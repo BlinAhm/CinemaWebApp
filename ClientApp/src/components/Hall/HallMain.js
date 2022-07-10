@@ -36,9 +36,6 @@ const HallMain = () => {
 
                 <div className="seat-list">
                     {showRows()}
-
-
-
                 </div>
             </div>
 
@@ -104,10 +101,12 @@ const HallMain = () => {
         var arr = [];
         var i = 0;
 
+        //Filter through seats array: A1,A2... and gets the letters for each seat row 
         seats?.filter((seat) => { if (seat.endsWith('1')) { return seat; } }).map((value) => {
             arr[i++] = value.charAt(0);
         })
 
+        //With the letters of every row creates numbered seats from seats array and pushes the rows to final
         const final = [];
         for (let item of arr) {
             final.push(<div className="seat-row"><span className="letter">{item}</span>{seats?.filter((seat) => { if (seat.startsWith(item)) { return seat; } }).map((item) => (<div className="free-seat">{item}</div>))}</div>);
