@@ -10,6 +10,11 @@
     align-items: center;*/
 }
 
+    .hall-background .hall-main .available-seats > div {
+        display: flex;
+        flex-direction: row;
+    }
+
     .hall-background .hall-main .available-seats h2 {
         font-size: 20px;
         font-weight: 500;
@@ -28,6 +33,7 @@
         justify-content: space-around;
         align-items: center;
     }
+
 
         .hall-background .hall-main .available-seats .seat-list .seat-row {
             margin: auto;
@@ -52,16 +58,53 @@
         }
 
             .hall-background .hall-main .available-seats .seat-list .free-seat:hover {
-                background: linear-gradient(to right, #246b06,#297608,#369b0c);
+                background: linear-gradient(to right, #246b06,#297608,#369b0c) !important;
                 transition: ease-in 0.3s;
             }
-            .hall-background .hall-main .available-seats .seat-list .letter {
-                color: #fff;
-                font-size: 24px;
-                font-weight: 500;
-                text-align: center;
-                margin-right: 2%;
-                margin-top: 2%;
-                margin-left: -5%;
-                width: 40px;
+
+        .hall-background .hall-main .available-seats .seat-list .vip-seat {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(to right, #8c18f2, #a755fc, #8320b7,#9d2cca);
+            border: solid 2px #fff;
+            color: #000;
+            font-weight: 500;
+            border-radius: 5px;
+            text-align: center;
+            line-height: 300%;
+            margin: 10px;
+            cursor: pointer;
+            transition: ease-out 0.3s;
+        }
+
+            .hall-background .hall-main .available-seats .seat-list .vip-seat:hover {
+                background: linear-gradient(to right, #00ffff, #00c1ff, #0a9ece,#0d99c6) !important;
+                transition: ease-in 0.3s;
             }
+
+        .hall-background .hall-main .available-seats .seat-list .letter {
+            color: #fff;
+            font-size: 24px;
+            font-weight: 500;
+            text-align: center;
+            margin-right: 2%;
+            margin-top: 2%;
+            margin-left: -5%;
+            width: 40px;
+        }
+
+    .hall-background .hall-main .available-seats .dates-div {
+        display: flex;
+        flex-direction: row;
+        justify-content: left;
+        width: 5%;
+        margin-inline: 2%;
+        margin-top: 1%;
+        margin-right: -8%;
+    }
+
+        .hall-background .hall-main .available-seats .dates-div .dates {
+            width: max-content;
+            font-size: 16px;
+            height: 30px
+        }

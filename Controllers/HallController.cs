@@ -35,9 +35,9 @@ namespace CinemaApp.Controllers
         {
             var hall = _context.Halls.Where(x => x.Id == id).First();
             int seats = hall.Seats;
-            int vip = hall.VIPseats;
+            
 
-            int[] allSeats = new int[] { seats, vip };
+            int[] allSeats = new int[] { seats};
             return allSeats;
         }
 
@@ -46,6 +46,21 @@ namespace CinemaApp.Controllers
         public List<Bookings> GetBookings(int hallId, int movieId, DateTime date)
         {
             return _context.HallMovies.Include("Bookings").Where(x => x.HallId == hallId && x.MovieId == movieId && x.Date == date).First().Bookings.ToList();
+        }
+
+        [Route("GetVipSeats/{hallId}&{movieId}&{date}")]
+        [HttpGet]
+        public string[] VipSeats(int hallId, int movieId, DateTime date)
+        {
+            var seats = _context.HallMovies.Include("VipSeats").Where(x => x.HallId == hallId && x.MovieId == movieId && x.Date == date).First().VipSeats.First().Seats;
+            return seats.Split('-');
+        }
+
+        [Route("GetDatesForMovie/{hallId}&{movieId}")]
+        [HttpGet]
+        public List<DateTime> GetDates(int hallId, int movieId)
+        {
+            return _context.HallMovies.Where(x => x.HallId == hallId && x.MovieId == movieId).Select(x => x.Date).ToList();
         }
     }
 }

@@ -1,19 +1,20 @@
-﻿import './HallControlls.css';
+﻿import $ from 'jquery';
+import './HallControlls.css';
 
 const HallControlls = () => {
     return (
         <div className="controlls">
             <div>
-                <label>Nr. of tickets: </label>
-                <input type="number" min={1} max={10} />
+                <label>Normal tickets: <span id="ticketNr">10</span></label>
             </div>
             <div>
-                <label>VIP Tickets </label>
-                <input type="checkbox" />
+                <label>VIP Tickets: <span id="ticketNr">10</span></label>
             </div>
             <label>Price: €</label>
         </div>
     );
+
+
 }
 
 export default HallControlls;

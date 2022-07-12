@@ -22,7 +22,7 @@
         font-weight: 500;
     }
 
-        .hall-background .controlls div:first-child {
+        .hall-background .controlls div:nth-child(1) {
             margin-left: 18%;
             display: flex;
             flex-direction: row;
@@ -37,7 +37,7 @@
             flex-direction: row;
             align-items: center;
             justify-content: space-between;
-            width: 6%;
+            width: 10%;
         }
 
         .hall-background .controlls input {

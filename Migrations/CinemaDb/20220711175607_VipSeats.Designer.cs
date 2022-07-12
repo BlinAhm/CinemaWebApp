@@ -4,6 +4,7 @@ using CinemaApp.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CinemaApp.Migrations.CinemaDb
 {
     [DbContext(typeof(CinemaDbContext))]
-    partial class CinemaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220711175607_VipSeats")]
+    partial class VipSeats
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -185,6 +187,9 @@ namespace CinemaApp.Migrations.CinemaDb
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Seats")
+                        .HasColumnType("int");
+
+                    b.Property<int>("VIPseats")
                         .HasColumnType("int");
 
                     b.HasKey("Id");

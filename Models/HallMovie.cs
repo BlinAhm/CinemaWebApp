@@ -5,6 +5,7 @@
         public DateTime Date { get; set; }
 
         public List<Bookings> Bookings { get; set; }
+        public List<VipSeats> VipSeats { get; set; }
         public int HallId { get; set; }
         public Hall Hall { get; set; }
 
