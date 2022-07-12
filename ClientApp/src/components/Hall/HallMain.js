@@ -7,7 +7,6 @@ import './HallControlls.css';
 const HallMain = () => {
     const [response, setResponse] = useState([]);
     const [seatsNr, setSeatsNr] = useState([]);
-    const [reservedSeats, setReservedSeats] = useState([]);
     const [seats, setSeats] = useState([]);
     const [vipSeats, setVipSeats] = useState([]);
     const [dates, setDates] = useState([]);
@@ -17,8 +16,10 @@ const HallMain = () => {
 
         $('#dateBox').change(function() {
             getVipSeats(this.value);
-            $('.vip-seat').removeClass('vip-seat').addClass('free-seat');
-            /*$(".free-seat").css("background","linear-gradient(to right, #297d06,#2c8706,#3aa90c)");*/
+            getBookedSeats(this.value);
+            $('.vip-seat').removeClass('vip-seat').removeClass('reserved-seat').addClass('free-seat');
+            $('.reserved-seat').removeClass('vip-seat').removeClass('reserved-seat').addClass('free-seat');
+            $('.free-seat').removeAttr('disabled');
         });
 
     }, []);
@@ -47,8 +48,10 @@ const HallMain = () => {
                             {dates?.map((key, index) => (
                                 <option key={index}>{key}</option>
                             ))}
-
                         </select>
+                        <div id="free-example" className="free-seat">Available</div>
+                        <div id="vip-example" className="vip-seat">VIP</div>
+                        <div id="reserved-example" className="reserved-seat">Booked</div>
                     </div>
                     <div className="seat-list">
                         {showRows()}
@@ -80,9 +83,14 @@ const HallMain = () => {
     }
 
     function displaySeats(id) {
+        $('#dateBox').css("display", "block");
+        $('#free-example').css("display", "block");
+        $('#vip-example').css("display", "block");
+        $('#reserved-example').css("display", "block");
         $('.hall-div').css({ "width": "45%", "background": "linear-gradient(to right, #606060, #606060, #808080, #909090)" });
         $('#hall' + id).css({ "width": "80%", "background": "linear-gradient(to right, #510912, #8e1b2a, #D7263D)" });
         $('.vip-seat').removeClass('vip-seat').addClass('free-seat');
+        $('.reserved-seat').removeClass('reserved-seat').addClass('free-seat');
         $('#hallId').val(id);
 
         setDate();
@@ -146,7 +154,8 @@ const HallMain = () => {
                 if (vipSeats !== data) {
                     setVipSeats(data);
                     data.forEach(function (item) {
-                        $('#' + item).removeClass('free-seat').addClass('vip-seat');
+                        $('#' + item).removeClass('free-seat').removeClass('reserved-seat').addClass('vip-seat');
+                        $('#' + item).removeAttr('disabled');
                     })
                 }
             },
@@ -156,6 +165,30 @@ const HallMain = () => {
         });
     }
 
+    function getBookedSeats(date) {
+        var id = getUrlParameter("id");
+        var hallId = $('#hallId').val();
+        var dateFinal = date.split(" ")[0] + "T" + date.split(" ")[1] + ":00";
+
+        $.ajax({
+            type: "GET",
+            url: "https://localhost:7197/api/Hall/GetBooking/" + hallId + "&" + id + "&" + dateFinal,
+            success: function (data) {
+                if (vipSeats !== data) {
+                    setVipSeats(data);
+                    data.forEach(function (item) {
+                        $('#' + item.seatId).removeClass('free-seat').removeClass('vip-seat').addClass('reserved-seat');
+                        $('#' + item.seatId).attr('disabled', 'disabled');
+                        $('#' + item.seatId).css('cursor', 'normal');
+
+                    })
+                }
+            },
+            error: function (jqXHR) {
+                alert(jqXHR.status);
+            }
+        });
+    }
 
     function setDate() {
         var id = getUrlParameter('id');
@@ -176,6 +209,7 @@ const HallMain = () => {
                     })
                     setDates(final);
                     getVipSeats(final[0]);
+                    getBookedSeats(final[0]);
                 }
             },
             error: function (jqXHR) {
