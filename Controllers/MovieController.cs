@@ -20,7 +20,7 @@ namespace CinemaApp.Controllers
         [HttpGet]
         public Movie GetMovie(int id)
         {
-            return _context.Movies.Include("Actors").Where(x=>x.Id == id).First();
+            return _context.Movies.Include("Director").Include("Actors").Where(x=>x.Id == id).First();
         }
 
         [Route("GetByIdSoon/{id}")]
@@ -132,9 +132,16 @@ namespace CinemaApp.Controllers
 
         [Route("FindById/{id}")]
         [HttpGet]
-        public async Task<Movie> FindById(int id)
+        public Movie FindById(int id)
         {
-            return await _context.Movies.FindAsync(id);
+            return _context.Movies.Include("Director").Where(x => x.Id == id).First();
+        }
+
+        [Route("FindByIdCSoon/{id}")]
+        [HttpGet]
+        public async Task<ComingSoon> FindByIdComingSoon(int id)
+        {
+            return await _context.ComingSoonMovies.FindAsync(id);
         }
 
         [Route("Update")]
@@ -148,6 +155,9 @@ namespace CinemaApp.Controllers
             movie.Description = model.Description;
             movie.Category = model.Category;
             movie.Rating = model.Rating;
+            movie.Director = new Director { FirstName = model.Director.Split(" ")[0], LastName = model.Director.Split(" ")[1] };
+
+            movie.TrailerID = model.TrailerID;
 
             await _context.SaveChangesAsync();
 
@@ -167,7 +177,8 @@ namespace CinemaApp.Controllers
 
             if(model.A1Id == 0)
             {
-                act1 = new Actor{ FirstName = model.Actor1.Split(' ')[0], LastName = model.Actor1.Split(' ')[1] };
+                var actorName1 = model.Actor1.Split(' ');
+                act1 = new Actor { FirstName = actorName1[0], LastName = (actorName1.Length > 1 ? actorName1[1] : "") };
                 await _context.Actors.AddAsync(act1);
                 await _context.SaveChangesAsync();        
             }
@@ -182,7 +193,8 @@ namespace CinemaApp.Controllers
 
             if (model.A2Id == 0)
             {
-                act2 = new Actor { FirstName = model.Actor2.Split(' ')[0], LastName = model.Actor2.Split(' ')[1] };
+                var actorName2 = model.Actor2.Split(' ');
+                act2 = new Actor { FirstName = actorName2[0], LastName = (actorName2.Length > 1 ? actorName2[1] : "") };
                 await _context.Actors.AddAsync(act2);
                 await _context.SaveChangesAsync();
             }
@@ -197,7 +209,8 @@ namespace CinemaApp.Controllers
 
             if (model.A3Id == 0)
             {
-                act3 = new Actor { FirstName = model.Actor3.Split(' ')[0], LastName = model.Actor3.Split(' ')[1] };
+                var actorName3 = model.Actor3.Split(' ');
+                act3 = new Actor { FirstName = actorName3[0], LastName = (actorName3.Length > 1 ? actorName3[1] : "") };
                 await _context.Actors.AddAsync(act3);
                 await _context.SaveChangesAsync();
             }
@@ -225,18 +238,6 @@ namespace CinemaApp.Controllers
 
 
         }
-        //delete
-        [Route("Test/{id}")]
-        [HttpGet]
-        public async Task<List<Actor>> Test(int id)
-        {
-            var movie = _context.Movies.Include("Actors").Where(x => x.Id == id);
-            var actors = movie.First().Actors;
-
-            actors.Clear();
-
-            return actors;
-        }
 
         [Route("GetComingSoon")]
         [HttpGet]
@@ -258,6 +259,23 @@ namespace CinemaApp.Controllers
             }
 
             return StatusCode(200, new Response { Status = "Success", Message = "Movie added successfully!" });
+        }
+
+        [Route("UpdateComingSoon")]
+        [HttpPost]
+        public async Task<IActionResult> UpdateComingSoon([FromForm] UpdateMovieSoon model)
+        {
+            var movie = await _context.ComingSoonMovies.FindAsync(model.mId);
+
+            movie.ImageLink = model.ImageLink;
+            movie.Title = model.Title;
+            movie.Description = model.Description;
+            movie.Category = model.Category;
+            movie.TrailerID = model.TrailerID;
+
+            await _context.SaveChangesAsync();
+
+            return Ok("Movie updated successfully!");
         }
 
         [Route("DeleteComingSoon/{id}")]

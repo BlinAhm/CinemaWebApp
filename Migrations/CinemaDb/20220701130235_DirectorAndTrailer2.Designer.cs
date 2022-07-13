@@ -4,6 +4,7 @@ using CinemaApp.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CinemaApp.Migrations.CinemaDb
 {
     [DbContext(typeof(CinemaDbContext))]
-    partial class CinemaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220701130235_DirectorAndTrailer2")]
+    partial class DirectorAndTrailer2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -78,30 +80,6 @@ namespace CinemaApp.Migrations.CinemaDb
                     b.ToTable("Actor", (string)null);
                 });
 
-            modelBuilder.Entity("CinemaApp.Models.Bookings", b =>
-                {
-                    b.Property<string>("SeatId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime?>("HallMovieDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("HallMovieHallId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("HallMovieMovieId")
-                        .HasColumnType("int");
-
-                    b.HasKey("SeatId", "UserId");
-
-                    b.HasIndex("HallMovieHallId", "HallMovieMovieId", "HallMovieDate");
-
-                    b.ToTable("Bookings", (string)null);
-                });
-
             modelBuilder.Entity("CinemaApp.Models.ComingSoon", b =>
                 {
                     b.Property<int>("Id")
@@ -123,10 +101,6 @@ namespace CinemaApp.Migrations.CinemaDb
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TrailerID")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -169,47 +143,6 @@ namespace CinemaApp.Migrations.CinemaDb
                     b.ToTable("FeaturedMovies", (string)null);
                 });
 
-            modelBuilder.Entity("CinemaApp.Models.Hall", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<bool>("Is3D")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Seats")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Hall", (string)null);
-                });
-
-            modelBuilder.Entity("CinemaApp.Models.HallMovie", b =>
-                {
-                    b.Property<int>("HallId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MovieId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("HallId", "MovieId", "Date");
-
-                    b.HasIndex("MovieId");
-
-                    b.ToTable("HallMovies");
-                });
-
             modelBuilder.Entity("CinemaApp.Models.Movie", b =>
                 {
                     b.Property<int>("Id")
@@ -236,12 +169,6 @@ namespace CinemaApp.Migrations.CinemaDb
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("Length")
-                        .HasColumnType("int");
-
-                    b.Property<double>("Price")
-                        .HasColumnType("float");
-
                     b.Property<float>("Rating")
                         .HasColumnType("real");
 
@@ -262,34 +189,6 @@ namespace CinemaApp.Migrations.CinemaDb
                     b.ToTable("Movie", (string)null);
                 });
 
-            modelBuilder.Entity("CinemaApp.Models.VipSeats", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<DateTime?>("HallMovieDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("HallMovieHallId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("HallMovieMovieId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Seats")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("HallMovieHallId", "HallMovieMovieId", "HallMovieDate");
-
-                    b.ToTable("VipSeats");
-                });
-
             modelBuilder.Entity("ActorMovie", b =>
                 {
                     b.HasOne("CinemaApp.Models.Actor", null)
@@ -305,32 +204,6 @@ namespace CinemaApp.Migrations.CinemaDb
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("CinemaApp.Models.Bookings", b =>
-                {
-                    b.HasOne("CinemaApp.Models.HallMovie", null)
-                        .WithMany("Bookings")
-                        .HasForeignKey("HallMovieHallId", "HallMovieMovieId", "HallMovieDate");
-                });
-
-            modelBuilder.Entity("CinemaApp.Models.HallMovie", b =>
-                {
-                    b.HasOne("CinemaApp.Models.Hall", "Hall")
-                        .WithMany("HallMovies")
-                        .HasForeignKey("HallId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("CinemaApp.Models.Movie", "Movie")
-                        .WithMany("HallMovies")
-                        .HasForeignKey("MovieId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Hall");
-
-                    b.Navigation("Movie");
-                });
-
             modelBuilder.Entity("CinemaApp.Models.Movie", b =>
                 {
                     b.HasOne("CinemaApp.Models.Director", "Director")
@@ -344,33 +217,9 @@ namespace CinemaApp.Migrations.CinemaDb
                     b.Navigation("Director");
                 });
 
-            modelBuilder.Entity("CinemaApp.Models.VipSeats", b =>
-                {
-                    b.HasOne("CinemaApp.Models.HallMovie", null)
-                        .WithMany("VipSeats")
-                        .HasForeignKey("HallMovieHallId", "HallMovieMovieId", "HallMovieDate");
-                });
-
             modelBuilder.Entity("CinemaApp.Models.FeaturedMovies", b =>
                 {
                     b.Navigation("Movies");
-                });
-
-            modelBuilder.Entity("CinemaApp.Models.Hall", b =>
-                {
-                    b.Navigation("HallMovies");
-                });
-
-            modelBuilder.Entity("CinemaApp.Models.HallMovie", b =>
-                {
-                    b.Navigation("Bookings");
-
-                    b.Navigation("VipSeats");
-                });
-
-            modelBuilder.Entity("CinemaApp.Models.Movie", b =>
-                {
-                    b.Navigation("HallMovies");
                 });
 #pragma warning restore 612, 618
         }

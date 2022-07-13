@@ -7,6 +7,8 @@
         public string Category { get; set; }
         public string Description { get; set; }
         public float Rating { get; set; }
+        public string Director { get; set; }
+        public string TrailerID { get; set; }
         public int mId { get; set; }
     }
 }

@@ -4,6 +4,7 @@ using CinemaApp.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CinemaApp.Migrations.CinemaDb
 {
     [DbContext(typeof(CinemaDbContext))]
-    partial class CinemaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220709190607_DbSetHallMovies")]
+    partial class DbSetHallMovies
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -187,6 +189,9 @@ namespace CinemaApp.Migrations.CinemaDb
                     b.Property<int>("Seats")
                         .HasColumnType("int");
 
+                    b.Property<int>("VIPseats")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.ToTable("Hall", (string)null);
@@ -239,9 +244,6 @@ namespace CinemaApp.Migrations.CinemaDb
                     b.Property<int?>("Length")
                         .HasColumnType("int");
 
-                    b.Property<double>("Price")
-                        .HasColumnType("float");
-
                     b.Property<float>("Rating")
                         .HasColumnType("real");
 
@@ -260,34 +262,6 @@ namespace CinemaApp.Migrations.CinemaDb
                     b.HasIndex("FeaturedMoviesId");
 
                     b.ToTable("Movie", (string)null);
-                });
-
-            modelBuilder.Entity("CinemaApp.Models.VipSeats", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<DateTime?>("HallMovieDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("HallMovieHallId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("HallMovieMovieId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Seats")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("HallMovieHallId", "HallMovieMovieId", "HallMovieDate");
-
-                    b.ToTable("VipSeats");
                 });
 
             modelBuilder.Entity("ActorMovie", b =>
@@ -344,13 +318,6 @@ namespace CinemaApp.Migrations.CinemaDb
                     b.Navigation("Director");
                 });
 
-            modelBuilder.Entity("CinemaApp.Models.VipSeats", b =>
-                {
-                    b.HasOne("CinemaApp.Models.HallMovie", null)
-                        .WithMany("VipSeats")
-                        .HasForeignKey("HallMovieHallId", "HallMovieMovieId", "HallMovieDate");
-                });
-
             modelBuilder.Entity("CinemaApp.Models.FeaturedMovies", b =>
                 {
                     b.Navigation("Movies");
@@ -364,8 +331,6 @@ namespace CinemaApp.Migrations.CinemaDb
             modelBuilder.Entity("CinemaApp.Models.HallMovie", b =>
                 {
                     b.Navigation("Bookings");
-
-                    b.Navigation("VipSeats");
                 });
 
             modelBuilder.Entity("CinemaApp.Models.Movie", b =>

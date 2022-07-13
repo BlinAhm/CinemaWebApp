@@ -5,6 +5,7 @@ import PageHeader from './components/UI/Header/PageHeader';
 import PageFooter from './components/UI/Footer/PageFooter';
 import Homepage from './pages/Homepage';
 import Movies from './pages/Movies';
+import Hall from './pages/Hall';
 import Schedule from './pages/Schedule';
 import AboutUs from './pages/AboutUs';
 import ContactUs from './pages/ContactUs';
@@ -21,6 +22,7 @@ function App() {
                 <Route path='/home' element={<Homepage />} />
                 <Route path='/movies' element={<Movies />} />
                 <Route path='/movies/details/' element={<MoviePage />} />
+                <Route path='/movies/seating/' element={<Hall />} />
                 <Route path='/schedules' element={<Schedule />} />
                 <Route path='/about-us' element={<AboutUs />} />
                 <Route path='/contact-us' element={<ContactUs />} />

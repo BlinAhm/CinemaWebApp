@@ -1,0 +1,188 @@
+﻿.hall-background .hall-main .available-seats {
+    background: linear-gradient(to right, #050505,#101010,#151515,#202020,#151515);
+    width: 86%;
+    margin-inline: 2%;
+    padding-bottom: 4%;
+    border-radius: 8px 8px 4px 4px;
+    margin-bottom: 1%;
+    /*    display: flex;
+    flex-direction: column;
+    align-items: center;*/
+}
+
+    .hall-background .hall-main .available-seats > div {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .hall-background .hall-main .available-seats h2 {
+        font-size: 20px;
+        font-weight: 500;
+        background: #D7263D;
+        color: #fff;
+        border-radius: 8px 8px 0px 0px;
+        margin-top: 0;
+        padding-block: 0.5%;
+    }
+
+    .hall-background .hall-main .available-seats .seat-list {
+        display: flex;
+        width: 50%;
+        margin: auto;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+
+        .hall-background .hall-main .available-seats .seat-list .seat-row {
+            margin: auto;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .hall-background .hall-main .available-seats .seat-list .free-seat {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(to right, #acacac, #c3c3c3, #dddddd);
+            border: solid 2px #000;
+            color: #000;
+            font-weight: 500;
+            border-radius: 5px;
+            text-align: center;
+            line-height: 300%;
+            margin: 10px;
+            cursor: pointer;
+            transition: ease-out 0.3s;
+        }
+
+            .hall-background .hall-main .available-seats .seat-list .free-seat:hover {
+                background: linear-gradient(to right, #70131f,#8b222f,#D7263D) !important;
+                border: solid 2px #fff;
+                transition: ease-in 0.2s;
+            }
+
+        .hall-background .hall-main .available-seats .seat-list .vip-seat {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(to right, #f29718, #f2a418, #f2b818);
+            border: solid 2px #000;
+            color: #000;
+            font-weight: 500;
+            border-radius: 5px;
+            text-align: center;
+            line-height: 300%;
+            margin: 10px;
+            cursor: pointer;
+            transition: ease-out 0.3s;
+        }
+
+            .hall-background .hall-main .available-seats .seat-list .vip-seat:hover {
+                background: linear-gradient(to right, #f79f23, #f7ac25, #ffc116) !important;
+                border: solid 2px #fff;
+                transition: ease-in 0.2s;
+            }
+
+        .hall-background .hall-main .available-seats .seat-list .reserved-seat {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(to right, #70131f,#8b222f,#D7263D);
+            border: solid 2px #000;
+            color: #000;
+            font-weight: 500;
+            border-radius: 5px;
+            text-align: center;
+            line-height: 300%;
+            margin: 10px;
+            cursor: default;
+            transition: ease-out 0.3s;
+        }
+
+            .hall-background .hall-main .available-seats .seat-list .reserved-seat:hover {
+                background: linear-gradient(to right, #70131f,#8b222f,#D7263D) !important;
+                border: solid 2px #000;
+                transition: ease-in 0.2s;
+            }
+
+        .hall-background .hall-main .available-seats .seat-list .letter {
+            color: #fff;
+            font-size: 24px;
+            font-weight: 500;
+            text-align: center;
+            margin-right: 2%;
+            margin-top: 2%;
+            margin-left: -5%;
+            width: 40px;
+        }
+
+    .hall-background .hall-main .available-seats .dates-div {
+        display: flex;
+        flex-direction: column;
+        justify-content: left;
+        width: 5%;
+        margin-inline: 2%;
+        margin-top: 1%;
+        margin-right: -8%;
+    }
+
+        .hall-background .hall-main .available-seats .dates-div .dates {
+            width: max-content;
+            font-size: 16px;
+            font-weight: 400;
+            color: #fff;
+            padding: 4px;
+            border-radius: 5px 5px 0px 0px;
+            background: linear-gradient(to right, rgb(81, 9, 18), rgb(126, 23, 36), rgb(167, 31, 49));
+            background-color: rgb(96, 96, 96);
+            height: 34px;
+            display: none;
+        }
+
+        .hall-background .hall-main .available-seats .dates-div div {
+            width: 75px;
+            height: 50px;
+            border: solid 2px #000;
+            color: #000;
+            font-weight: 500;
+            border-radius: 5px;
+            text-align: center;
+            line-height: 300%;
+            margin: 10px;
+            margin-top: 50%;
+            cursor: default;
+            transition: ease-out 0.3s;
+            display: none;
+        }
+
+        .hall-background .hall-main .available-seats .dates-div #free-example {
+            background: linear-gradient(to right, #acacac, #c3c3c3, #dddddd);
+            border: solid 1px #000;
+        }
+
+        .hall-background .hall-main .available-seats .dates-div #vip-example {
+            background: linear-gradient(to right, #f29718, #f2a418, #f2b818);
+            border: solid 1px #000;
+        }
+
+        .hall-background .hall-main .available-seats .dates-div #reserved-example {
+            background: linear-gradient(to right, #70131f,#8b222f,#D7263D);
+            border: solid 1px #000;
+        }
+
+    .hall-background .hall-main .available-seats .seat-list .selected-seat {
+        transition: ease-in-out 0.3s;
+        background: linear-gradient(to right, #1e719b,#1e889b,#1e9b9b) !important;
+        border: solid 2px #fff !important;
+    }
+
+        .hall-background .hall-main .available-seats .seat-list .selected-seat:hover {
+            transition: ease-in-out 0.3s;
+            background: linear-gradient(to right, #1e719b,#1e889b,#1e9b9b) !important;
+            border: solid 2px #fff !important;
+        }
+
+    .hall-background .hall-main .available-seats .seat-list .vip-seat.selected-seat {
+        color: yellow;
+        font-weight: 400;
+    }

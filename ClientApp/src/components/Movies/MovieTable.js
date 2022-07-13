@@ -12,6 +12,7 @@ const MovieTable = () => {
     return (
         <table className="movie-table">
             <thead>
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
                 <tr>
                     <th></th>
                     <th>Title</th>
@@ -25,14 +26,14 @@ const MovieTable = () => {
                 <tr onClick={() => { toMovie(key.id) }} key={key.id}>
                     <td id="photo"><img style={{ "height": "330px", "width": "235px" }} alt="img" src={key.imageLink} /></td>
                     <td style={{ "width": "15%", "paddingRight": "20px" }} id="title">{key.title}</td>
-                    <td style={{ "width": "30%" }} id="description">{key.description}</td>
+                    <td style={{ "width": "25%", "textAlign": "justify" }} id="description">{key.description}</td>
                     <td style={{ "width": "15%", "fontSize": "22px", "fontWeight": "500" }} id="category">{key.category}</td>
                     <td style={{ "width": "15%" }} id="cast">
                         {key.actors.map((actor) => (
                             <span key={actor.id}>{`${actor.firstName} ${actor.lastName}`}<br /></span>
                         ))}
                     </td>
-                    <td style={{ "width": "15%", "paddingRight": "30px" }} id="rating">{key.rating}/10</td>
+                    <td style={{ "width": "20%", "paddingRight": "30px" }} id="rating">{key.rating}/10 <span style={{ "color":"#dbc541"}} className="fa fa-star checked"/></td>
                 </tr>)) ?? ""}
             </tbody>
         </table>
