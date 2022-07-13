@@ -10,16 +10,24 @@ const HallMain = () => {
     const [seats, setSeats] = useState([]);
     const [vipSeats, setVipSeats] = useState([]);
     const [dates, setDates] = useState([]);
+    const [price, setPrice] = useState([]);
+    var total = 0.0;
+    var seatsClicked = 0;
+    var vipTickets = 0;
+    var normalTickets = 0;
 
     useEffect(() => {
         displayHalls();
+        getPrice();
 
-        $('#dateBox').change(function() {
+        $('#dateBox').change(function () {
             getVipSeats(this.value);
             getBookedSeats(this.value);
-            $('.vip-seat').removeClass('vip-seat').removeClass('reserved-seat').addClass('free-seat');
-            $('.reserved-seat').removeClass('vip-seat').removeClass('reserved-seat').addClass('free-seat');
+            $('.vip-seat').removeClass().addClass('free-seat');
+            $('.reserved-seat').removeClass().addClass('free-seat');
+            $('.free-seat').removeClass().addClass('free-seat');
             $('.free-seat').removeAttr('disabled');
+            resetTickets();
         });
 
     }, []);
@@ -64,7 +72,21 @@ const HallMain = () => {
         </div>
     );
 
-
+    function getPrice() {
+        var id = getUrlParameter("id");
+        $.ajax({
+            type: "GET",
+            url: "https://localhost:7197/api/Movie/GetById/" + id,
+            success: function (data) {
+                if (price !== data) {
+                    setPrice(data.price);
+                }
+            },
+            error: function (jqXHR) {
+                alert(jqXHR.status);
+            }
+        });
+    }
 
     function displayHalls() {
         var id = getUrlParameter("id");
@@ -89,9 +111,11 @@ const HallMain = () => {
         $('#reserved-example').css("display", "block");
         $('.hall-div').css({ "width": "45%", "background": "linear-gradient(to right, #606060, #606060, #808080, #909090)" });
         $('#hall' + id).css({ "width": "80%", "background": "linear-gradient(to right, #510912, #8e1b2a, #D7263D)" });
-        $('.vip-seat').removeClass('vip-seat').addClass('free-seat');
-        $('.reserved-seat').removeClass('reserved-seat').addClass('free-seat');
+        $('.vip-seat').removeClass().addClass('free-seat');
+        $('.reserved-seat').removeClass().addClass('free-seat');
+        $('.free-seat').removeClass().addClass('free-seat');
         $('#hallId').val(id);
+        resetTickets();
 
         setDate();
 
@@ -125,6 +149,47 @@ const HallMain = () => {
         return array;
     }
 
+    function click(name) {
+        var clName = $('#' + name).attr("class");
+
+        if (clName === "free-seat") {
+            normalTickets++;
+            total += price;
+        } else if (clName === "vip-seat") {
+            vipTickets++;
+            total += (price + 2.0);
+        }
+        if (clName === "free-seat selected-seat") {
+            normalTickets--;
+            total -= price;
+        } else if (clName === "vip-seat selected-seat") {
+            vipTickets--;
+            total -= (price + 2.0);
+        }
+
+        if (clName === "free-seat" || clName === "vip-seat") {
+            $('#' + name).addClass("selected-seat");
+            seatsClicked++;
+        }
+        if (clName === "free-seat selected-seat" || clName === "vip-seat selected-seat") {
+            $('#' + name).removeClass("selected-seat");
+            seatsClicked--;
+        }
+        $('#ticketNr').text(normalTickets);
+        $('#vipTicketNr').text(vipTickets);
+        $('#total').text(total);
+    }
+
+    function resetTickets() {
+        seatsClicked = 0;
+        vipTickets = 0;
+        normalTickets = 0;
+        total = 0;
+        $('#ticketNr').text(normalTickets);
+        $('#vipTicketNr').text(vipTickets);
+        $('#total').text(total);
+    }
+
     function showRows() {
         var arr = [];
         var i = 0;
@@ -137,7 +202,7 @@ const HallMain = () => {
         //With the letters of every row creates numbered seats from seats array and pushes the rows to final
         const final = [];
         for (let item of arr) {
-            final.push(<div key={item} className="seat-row"><span className="letter">{item}</span>{seats?.filter((seat) => { if (seat.startsWith(item)) { return seat; } }).map((item) => (<div key={item} id={item} className="free-seat">{item}</div>))}</div>);
+            final.push(<div key={item} className="seat-row"><span className="letter">{item}</span>{seats?.filter((seat) => { if (seat.startsWith(item)) { return seat; } }).map((item) => (<div key={item} onClick={() => { click(item) }} id={item} className="free-seat">{item}</div>))}</div>);
         }
         return final;
     }

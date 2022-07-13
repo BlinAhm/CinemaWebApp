@@ -154,15 +154,35 @@
             transition: ease-out 0.3s;
             display: none;
         }
+
         .hall-background .hall-main .available-seats .dates-div #free-example {
             background: linear-gradient(to right, #acacac, #c3c3c3, #dddddd);
             border: solid 1px #000;
         }
+
         .hall-background .hall-main .available-seats .dates-div #vip-example {
             background: linear-gradient(to right, #f29718, #f2a418, #f2b818);
             border: solid 1px #000;
         }
+
         .hall-background .hall-main .available-seats .dates-div #reserved-example {
             background: linear-gradient(to right, #70131f,#8b222f,#D7263D);
             border: solid 1px #000;
         }
+
+    .hall-background .hall-main .available-seats .seat-list .selected-seat {
+        transition: ease-in-out 0.3s;
+        background: linear-gradient(to right, #1e719b,#1e889b,#1e9b9b) !important;
+        border: solid 2px #fff !important;
+    }
+
+        .hall-background .hall-main .available-seats .seat-list .selected-seat:hover {
+            transition: ease-in-out 0.3s;
+            background: linear-gradient(to right, #1e719b,#1e889b,#1e9b9b) !important;
+            border: solid 2px #fff !important;
+        }
+
+    .hall-background .hall-main .available-seats .seat-list .vip-seat.selected-seat {
+        color: yellow;
+        font-weight: 400;
+    }

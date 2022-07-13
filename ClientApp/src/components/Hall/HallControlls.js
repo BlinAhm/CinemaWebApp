@@ -5,12 +5,12 @@ const HallControlls = () => {
     return (
         <div className="controlls">
             <div>
-                <label>Normal tickets: <span id="ticketNr">10</span></label>
+                <label>Normal tickets: <span id="ticketNr">0</span></label>
             </div>
             <div>
-                <label>VIP Tickets: <span id="ticketNr">10</span></label>
+                <label>VIP Tickets: <span id="vipTicketNr">0</span></label>
             </div>
-            <label>Price: €</label>
+            <label>Total: <span id="total">0</span> &euro;</label>
         </div>
     );
 

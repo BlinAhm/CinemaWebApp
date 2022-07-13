@@ -52,12 +52,13 @@ const MoviePage = () => {
                         <div className="watchlist">Add to Watchlist <i className="fa fa-plus-circle" aria-hidden="true"></i></div>
                     </div>
                     <div className="details">
-                        <p className="rating"><span className="fa fa-star checked"></span> {response.rating} <span className="category">{response.category}</span></p>
+                        <p className="rating"><span className="fa fa-star checked"></span> {response.rating} <span className="category">{response.category}</span><span className="duration">Duration: {response.length} min</span></p>
                         <p className="description">{response.description}</p>
                         <p className="cast">Cast: {response.actors?.map((actor) => (
                             <span key={actor.id} className="actors">{actor.firstName + " " + actor.lastName + (response.actors[response.actors.length - 1].id !== actor.id ? ", " : " ")}</span>
                         ))}</p>
                         <p className="director">Director: <span className="actors">{response.director?.firstName + " " + response.director?.lastName}</span></p>
+                        <p className="price">Ticket price: {response.price?.toFixed(2)} &euro;</p>
                     </div>
                     <div className="buttons">
                         <div className="trailer" onClick={showTrailer}>Watch Trailer</div>

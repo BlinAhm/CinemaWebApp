@@ -13,7 +13,7 @@
 
     .movie-page-main .movie-details {
         width: 80%;
-        min-height: 500px;
+        min-height: 520px;
         margin-left: 5%;
         height: 20%;
         background: linear-gradient(to right, #202020,#202020,#202020,#202020);
@@ -48,11 +48,19 @@
             color: #dbc541;
             margin-right: 10px;
         }
-
+        .movie-page-main .movie-details .price {
+            color: #fff;
+            text-align: left;
+            margin-inline: 10%;
+            margin-top: 0;
+            font-size: 18px;
+            font-weight: 400;
+            width: 90%;
+        }
         .movie-page-main .movie-details .rating {
             color: #fff;
             text-align: left;
-            margin-left: 10%;
+            margin-inline: 10%;
             font-size: 18px;
             font-weight: 500;
             width: 90%;
@@ -61,6 +69,12 @@
             .movie-page-main .movie-details .rating .category {
                 margin-left: 10%;
                 font-size: 20px;
+            }
+            .movie-page-main .movie-details .rating .duration {
+                float: right;
+                margin-right: 11%;
+                font-size: 18px;
+                font-weight: 400;
             }
 
             .movie-page-main .movie-details .rating .categoryS {
