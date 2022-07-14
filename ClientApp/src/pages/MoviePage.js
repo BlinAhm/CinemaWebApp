@@ -13,6 +13,7 @@ const MoviePage = () => {
         } else {
             getMovieData();
         }
+        // eslint-disable-next-line
     }, []);
 
     if (type === "csoon") {
@@ -34,7 +35,7 @@ const MoviePage = () => {
                         <div className="coming-soon">Coming Soon!</div>
                     </div>
                     <div className="video">
-                        <iframe height="400" width="650"
+                        <iframe title="trailer" height="400" width="650"
                             src={"https://www.youtube.com/embed/" + response.trailerID} >
                         </iframe>
                     </div>
@@ -52,7 +53,7 @@ const MoviePage = () => {
                         <div className="watchlist">Add to Watchlist <i className="fa fa-plus-circle" aria-hidden="true"></i></div>
                     </div>
                     <div className="details">
-                        <p className="rating"><span className="fa fa-star checked"></span> {response.rating} <span className="category">{response.category}</span><span className="duration">Duration: {response.length} min</span></p>
+                        <p className="rating"><span className="fa fa-star checked"></span> {response.rating} <span className="category">{response.category}</span><span className="duration">Duration: {response.duration} min</span></p>
                         <p className="description">{response.description}</p>
                         <p className="cast">Cast: {response.actors?.map((actor) => (
                             <span key={actor.id} className="actors">{actor.firstName + " " + actor.lastName + (response.actors[response.actors.length - 1].id !== actor.id ? ", " : " ")}</span>
@@ -65,7 +66,7 @@ const MoviePage = () => {
                         <Link to={"/movies/seating/?id=" + response.id}><div className="buy">Buy Ticket</div></Link>
                     </div>
                     <div className="video">
-                        <iframe height="400" width="650"
+                        <iframe title="trailer" height="400" width="650"
                             src={"https://www.youtube.com/embed/" + response.trailerID} >
                         </iframe>
                     </div>

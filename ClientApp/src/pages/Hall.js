@@ -1,4 +1,4 @@
-﻿import HallControlls from "../components/Hall/HallControlls";
+import HallControlls from "../components/Hall/HallControlls";
 import HallMain from "../components/Hall/HallMain";
 
 const Hall = () => {

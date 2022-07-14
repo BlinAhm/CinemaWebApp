@@ -1,4 +1,4 @@
-﻿import './MovieTable.css';
+import './MovieTable.css';
 import { useEffect, useState } from "react";
 import $ from 'jquery';
 
@@ -7,12 +7,12 @@ const MovieTable = () => {
 
     useEffect(() => {
         displayMovies();
+        // eslint-disable-next-line
     }, []);
 
     return (
         <table className="movie-table">
             <thead>
-                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
                 <tr>
                     <th></th>
                     <th>Title</th>

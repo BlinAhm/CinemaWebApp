@@ -1,6 +1,7 @@
 ﻿using CinemaApp.Auth;
 using CinemaApp.Database;
 using CinemaApp.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -38,6 +39,7 @@ namespace CinemaApp.Controllers
         }
 
         [Route("Add")]
+        [Authorize(Roles = UserRoles.Admin)]
         [HttpPost]
         public async Task<IActionResult> AddMovie([FromForm] Movie movie)
         {
@@ -53,6 +55,7 @@ namespace CinemaApp.Controllers
         }
 
         [Route("Delete/{id}")]
+        [Authorize(Roles = UserRoles.Admin)]
         [HttpDelete]
         public async Task<IActionResult> DeleteMovie(int id)
         {
@@ -68,6 +71,7 @@ namespace CinemaApp.Controllers
         }
 
         [Route("AddFeatured/{id}")]
+        [Authorize(Roles = UserRoles.Admin)]
         [HttpGet]
         public async Task<IActionResult> AddFeatured(int id)
         {
@@ -88,6 +92,7 @@ namespace CinemaApp.Controllers
         }
 
         [Route("RemoveFeatured/{id}")]
+        [Authorize(Roles = UserRoles.Admin)]
         [HttpDelete]
         public async Task<IActionResult> RemoveFeatured(int id)
         {
@@ -145,6 +150,7 @@ namespace CinemaApp.Controllers
         }
 
         [Route("Update")]
+        [Authorize(Roles = UserRoles.Admin)]
         [HttpPost]
         public async Task<IActionResult> UpdateMovie([FromForm] UpdateMovie model)
         {
@@ -156,6 +162,8 @@ namespace CinemaApp.Controllers
             movie.Category = model.Category;
             movie.Rating = model.Rating;
             movie.Director = new Director { FirstName = model.Director.Split(" ")[0], LastName = model.Director.Split(" ")[1] };
+            movie.Duration = model.Duration;
+            movie.Price = model.Price;
 
             movie.TrailerID = model.TrailerID;
 
@@ -165,6 +173,7 @@ namespace CinemaApp.Controllers
         }
 
         [Route("UpdateCast")]
+        [Authorize(Roles = UserRoles.Admin)]
         [HttpPost]
         public async Task<IActionResult> UpdateCast([FromForm] UpdateCast model)
         {
@@ -247,6 +256,7 @@ namespace CinemaApp.Controllers
         }
 
         [Route("AddComingSoon")]
+        [Authorize(Roles = UserRoles.Admin)]
         [HttpPost]
         public async Task<IActionResult> AddComingSoon([FromForm] ComingSoon movie)
         {
@@ -262,6 +272,7 @@ namespace CinemaApp.Controllers
         }
 
         [Route("UpdateComingSoon")]
+        [Authorize(Roles = UserRoles.Admin)]
         [HttpPost]
         public async Task<IActionResult> UpdateComingSoon([FromForm] UpdateMovieSoon model)
         {
@@ -279,6 +290,7 @@ namespace CinemaApp.Controllers
         }
 
         [Route("DeleteComingSoon/{id}")]
+        [Authorize(Roles = UserRoles.Admin)]
         [HttpDelete]
         public async Task<IActionResult> DeleteComingSoon(int id)
         {

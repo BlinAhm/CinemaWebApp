@@ -9,6 +9,8 @@
         public float Rating { get; set; }
         public string Director { get; set; }
         public string TrailerID { get; set; }
+        public int Duration { get; set; }
+        public double Price { get; set; }
         public int mId { get; set; }
     }
 }

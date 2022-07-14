@@ -1,4 +1,4 @@
-﻿import './ComingSoon.css';
+import './ComingSoon.css';
 import MovieCard from './MovieCard';
 import { useEffect, useState } from "react";
 import $ from 'jquery';
@@ -8,6 +8,7 @@ const ComingSoon = () => {
 
     useEffect(() => {
         displayComingSoon();
+        // eslint-disable-next-line
     }, []);
 
     return (
