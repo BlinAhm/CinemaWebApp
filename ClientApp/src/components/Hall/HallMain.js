@@ -80,8 +80,23 @@ const HallMain = () => {
         var dateFinal = date.split(" ")[0] + "T" + date.split(" ")[1] + ":00";
         var userId = localStorage.getItem('userId');
         var seats = selectedSeats;
+        var token = localStorage.getItem('token');
 
-        console.log("movie: " + movieId + ", hall: " + hallId + ", date: " + dateFinal + ", user: " + userId + ", seats: " + seats);
+        var values = "movieId="+movieId+"&hallId="+hallId+"&date="+dateFinal+"&seats="+seats+"&userId="+userId;
+
+        $.ajax({
+            type: "POST",
+            url: "https://localhost:7197/api/Booking/Add",
+            data: values,
+            headers: { "Authorization": "Bearer " + token },
+            success: function (data) {
+                alert(data.text);
+                window.location.href = "https://localhost:44465/home";
+            },
+            error: function (jqXHR) {
+                alert(jqXHR.responseText);
+            }
+        });
     }
 
     function getPrice() {

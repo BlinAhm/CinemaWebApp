@@ -33,6 +33,9 @@ function App() {
                 <Route path='/dashboard/contact-us' element={<Dashboard id="contact-us" />} />
                 <Route path='/dashboard/movies' element={<Dashboard id="movies" />} />
                 <Route path='/dashboard/coming-soon' element={<Dashboard id="coming-soon" />} />
+                <Route path='/dashboard/halls' element={<Dashboard id="halls" />} />
+                <Route path='/dashboard/vip-seats' element={<Dashboard id="vip-seats" />} />
+                <Route path='/dashboard/bookings' element={<Dashboard id="bookings" />} />
                 <Route path='/dashboard/' element={<Dashboard />} />
                 <Route
                     path="*"

@@ -5,6 +5,9 @@ import DashUsers from '../components/Dashboard/DashUsers';
 import DashNav from '../components/UI/Header/DashNav';
 import DashMovie from '../components/Dashboard/DashMovie';
 import DashMovieSoon from '../components/Dashboard/DashMovieSoon';
+import DashHalls from '../components/Dashboard/DashHalls';
+import DashBookings from '../components/Dashboard/DashBookings';
+import DashVipSeats from '../components/Dashboard/DashVipSeats';
 
 const Dashboard = (props) => {
     if (!localStorage.getItem('login').includes("Admin")){
@@ -44,6 +47,27 @@ const Dashboard = (props) => {
             <div className="dashnav-background">
                 <DashNav />
                 <DashMovieSoon />
+            </div>
+        );
+    } else if (props.id === "halls") {
+        return (
+            <div className="dashnav-background">
+                <DashNav />
+                <DashHalls />
+            </div>
+        );
+    }else if (props.id === "vip-seats") {
+        return (
+            <div className="dashnav-background">
+                <DashNav />
+                <DashVipSeats />
+            </div>
+        );
+    } else if (props.id === "bookings") {
+        return (
+            <div className="dashnav-background">
+                <DashNav />
+                <DashBookings />
             </div>
         );
     } else {

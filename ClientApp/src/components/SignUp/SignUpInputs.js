@@ -17,7 +17,7 @@ const SignUpInputs = () => {
                     url: 'https://localhost:7197/api/Authenticate/register',
                     data: values,
                     success: function() {
-                        window.location.href = "https://localhost:44465/home";
+                        window.location.href = "https://localhost:44465/log-in";
                     },
                     error: function (error) {
                         var json = JSON.parse(error.responseText);

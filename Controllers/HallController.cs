@@ -17,7 +17,14 @@ namespace CinemaApp.Controllers
 
         [Route("GetAll")]
         [HttpGet]
-        public HallMovie GetHalls()
+        public List<Hall> GetHalls()
+        {
+            return _context.Halls.Include("HallMovies").ToList();
+        }
+
+        [Route("GetAllHM")]
+        [HttpGet]
+        public HallMovie GetHallM()
         {
             return _context.Halls.Include("HallMovies").First().HallMovies.First();
         }

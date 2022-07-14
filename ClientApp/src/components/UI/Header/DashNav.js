@@ -8,6 +8,8 @@ const DashNav = () => {
             <DashNavLink link="users" value="Users"></DashNavLink>
             <DashNavLink link="contact-us" value="Contact"></DashNavLink>
             <DashNavLink link="movies" value="Movies"></DashNavLink>
+            <DashNavLink link="halls" value="Halls"></DashNavLink>
+            <DashNavLink link="bookings" value="Bookings"></DashNavLink>
         </ul>
     );
 }
