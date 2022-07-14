@@ -19,16 +19,19 @@ const Modal = ({ setOpenModal }) => {
                     <div className="container">
                         <div className="left">
                             <div>
-                                <p>Image link:</p>
-                                <input className="userInputs" type="text" name="imageLink" />
+                                <p>Name:</p>
+                                <input className="userInputs" type="text" name="name" />
                             </div>
                             <div>
-                                <p>Title:</p>
-                                <input className="userInputs" type="text" name="title" />
+                                <p>No. Seats:</p>
+                                <input className="userInputs" type="text" name="seats" />
                             </div>
                             <div>
-                                <p>Duration:</p>
-                                <input className="userInputs" type="text" name="duration" />
+                                <p>Is 3D:</p>
+                                <select name="is3D">
+                                    <option value={true}>True</option>
+                                    <option value={false}>False</option>
+                                </select>
                             </div>
                         </div>
                         <div className="right">

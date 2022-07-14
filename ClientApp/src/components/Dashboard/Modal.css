@@ -13,3 +13,46 @@
     background-color: rgb(0,0,0);
     background-color: rgba(0,0,0,0.4);
 }
+    .modalBackground .modalContainer {
+        display: flex;
+        flex-direction: column;
+        width: 50%;
+        margin: auto;
+        background: #31333b;
+        border-radius: 10px;
+        border: solid 3px #fff;
+    }
+    .modalBackground .modalContainer .titleCloseBtn {
+        display: flex;
+        width: 50%;
+        margin: auto;
+        justify-content: end;
+        padding-top: 2%;
+    }
+        .modalBackground .modalContainer .title {
+            font-weight: 400;
+            font-size: 18px;
+            color: #fff;
+        }
+    .modalBackground .modalContainer .container {
+        display: flex;
+        justify-content: space-around;
+        width: 80%;
+        margin: auto;
+        text-align: left;
+    }
+    .modalBackground .modalContainer .container .userInputs {
+        width: 180px;
+        height: 24px;
+        border-radius: 5px; 
+    }
+        .modalBackground .modalContainer .container p {
+            color: #fff;
+            font-size: 16px;
+            font-weight: 400;
+        }
+    .modalBackground .modalContainer .footer {
+        display: flex;
+        margin: auto;
+        padding-block: 5%;
+    }
