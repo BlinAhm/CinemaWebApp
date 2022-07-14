@@ -186,3 +186,23 @@
         color: yellow;
         font-weight: 400;
     }
+
+    .hall-background .hall-main .available-seats .checkout {
+        width: 100px;
+        height: 50px;
+        margin-right: 10%;
+        margin-left: -18%;
+        margin-top: 1%;
+        background: linear-gradient(to right, rgb(81, 9, 18), rgb(126, 23, 36), rgb(167, 31, 49));
+        line-height: 300%;
+        border: solid 1px #000;
+        border-radius: 5px;
+        color: #fff;
+        cursor: pointer;
+        transition: ease-out 0.3s;
+        display: none;
+    }
+        .hall-background .hall-main .available-seats .checkout:hover {
+            border: solid 1px #fff;
+            transition: ease-in 0.3s;
+        }

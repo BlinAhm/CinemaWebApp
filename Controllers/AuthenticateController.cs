@@ -110,6 +110,7 @@ namespace CinemaApp.Controllers
                 return Ok(new
                 {
                     admin = userRoles.ToArray(),
+                    userId = user.Id,
                     user = new[] { user.FirstName, user.LastName, user.Email },
                     token = new JwtSecurityTokenHandler().WriteToken(token),
                     expiration = token.ValidTo

@@ -6,12 +6,14 @@ import '../components/Movies/MoviePage.css';
 const MoviePage = () => {
     const [response, setResponse] = useState([]);
     const type = getUrlParameter('type');
+    const [link,setLink] = useState([]);
 
     useEffect(() => {
         if (type === "csoon") {
             getMovieDataCSoon();
         } else {
             getMovieData();
+            checkLogIn();
         }
         // eslint-disable-next-line
     }, []);
@@ -63,7 +65,7 @@ const MoviePage = () => {
                     </div>
                     <div className="buttons">
                         <div className="trailer" onClick={showTrailer}>Watch Trailer</div>
-                        <Link to={"/movies/seating/?id=" + response.id}><div className="buy">Buy Ticket</div></Link>
+                        <Link to={link}><div className="buy">Buy Ticket</div></Link>
                     </div>
                     <div className="video">
                         <iframe title="trailer" height="400" width="650"
@@ -75,6 +77,16 @@ const MoviePage = () => {
         );
     }
 
+    function checkLogIn() {
+        var id = getUrlParameter('id');
+
+        if (localStorage.getItem('login') !== null) {
+            setLink("/movies/seating/?id=" + id);
+        }
+        else {
+            setLink("/log-in");
+        }
+    }
 
     function getMovieData() {
         var id = getUrlParameter('id');

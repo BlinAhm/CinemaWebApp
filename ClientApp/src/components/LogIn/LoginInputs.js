@@ -39,6 +39,7 @@ function LogIn() {
         data: values,
         success: function (data) {
             localStorage.setItem('user', data.user);
+            localStorage.setItem('userId', data.userId);
             localStorage.setItem('login', data.admin);
             localStorage.setItem('token', data.token);
             window.location.href = "https://localhost:44465/home";

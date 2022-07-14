@@ -11,6 +11,7 @@ const HallMain = () => {
     const [vipSeats, setVipSeats] = useState([]);
     const [dates, setDates] = useState([]);
     const [price, setPrice] = useState([]);
+    var selectedSeats = "";
     var total = 0.0;
     var vipTickets = 0;
     var normalTickets = 0;
@@ -63,6 +64,7 @@ const HallMain = () => {
                     <div className="seat-list">
                         {showRows()}
                     </div>
+                    <div onClick={checkOut} className="checkout">Checkout</div>
                 </div>
 
             </div>
@@ -70,6 +72,17 @@ const HallMain = () => {
 
         </div>
     );
+
+    function checkOut() {
+        var movieId = getUrlParameter("id");
+        var hallId = $('#hallId').val();
+        var date = $('#dateBox :selected').text();
+        var dateFinal = date.split(" ")[0] + "T" + date.split(" ")[1] + ":00";
+        var userId = localStorage.getItem('userId');
+        var seats = selectedSeats;
+
+        console.log("movie: " + movieId + ", hall: " + hallId + ", date: " + dateFinal + ", user: " + userId + ", seats: " + seats);
+    }
 
     function getPrice() {
         var id = getUrlParameter("id");
@@ -108,6 +121,7 @@ const HallMain = () => {
         $('#free-example').css("display", "block");
         $('#vip-example').css("display", "block");
         $('#reserved-example').css("display", "block");
+        $('.checkout').css("display", "block");
         $('.hall-div').css({ "width": "45%", "background": "linear-gradient(to right, #606060, #606060, #808080, #909090)" });
         $('#hall' + id).css({ "width": "80%", "background": "linear-gradient(to right, #510912, #8e1b2a, #D7263D)" });
         $('.vip-seat').removeClass().addClass('free-seat');
@@ -149,6 +163,22 @@ const HallMain = () => {
     }
 
     function click(name) {
+
+        if (selectedSeats === "") {
+            selectedSeats += name;
+        } else if (selectedSeats.includes(name)) {
+            if (selectedSeats.includes("-" + name)) {
+                selectedSeats = selectedSeats.replace("-" + name, "");
+            } else {
+                selectedSeats = selectedSeats.replace(name, "");
+            }
+            if (selectedSeats.startsWith("-")) {
+                selectedSeats = selectedSeats.substr(1);
+            }
+        } else {
+            selectedSeats += ("-" + name);
+        }
+
         var clName = $('#' + name).attr("class");
 
         if (clName === "free-seat") {
