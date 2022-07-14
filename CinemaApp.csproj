@@ -33,18 +33,37 @@
 
   <ItemGroup>
     <!-- Don't publish the SPA source files, but do show them in the project files list -->
+    <Compile Remove="ClientApp\src\NewFolder\**" />
     <Compile Remove="ClientApp\src\pages\NewFolder\**" />
     <Content Remove="$(SpaRoot)**" />
+    <Content Remove="ClientApp\src\NewFolder\**" />
     <Content Remove="ClientApp\src\pages\NewFolder\**" />
+    <EmbeddedResource Remove="ClientApp\src\NewFolder\**" />
     <EmbeddedResource Remove="ClientApp\src\pages\NewFolder\**" />
     <None Remove="$(SpaRoot)**" />
+    <None Remove="ClientApp\src\NewFolder\**" />
     <None Remove="ClientApp\src\pages\NewFolder\**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Remove="ClientApp\src\NewFolder\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="ClientApp\src\components\Homepage\About-us.js" />
     <None Remove="ClientApp\src\components\Homepage\AboutUs.js" />
+    <None Remove="ClientApp\src\components\Homepage\Club.js" />
+    <None Remove="ClientApp\src\components\Homepage\ComingSoon.css" />
+    <None Remove="ClientApp\src\components\Homepage\ComingSoon.js" />
+    <None Remove="ClientApp\src\components\Homepage\Footer.css" />
+    <None Remove="ClientApp\src\components\Homepage\Footer.js" />
+    <None Remove="ClientApp\src\img\Slider1.jpeg" />
+    <None Remove="ClientApp\src\img\Slider2.jpg" />
+    <None Remove="ClientApp\src\img\Slider3.jpg" />
+    <None Remove="ClientApp\src\img\Slider4.jpg" />
+    <None Remove="ClientApp\src\img\Slider5.jpg" />
+    <None Remove="ClientApp\src\pages\about-us2.jpg" />
     <None Remove="Controllers\Contactus.js" />
   </ItemGroup>
 

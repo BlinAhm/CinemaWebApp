@@ -6,6 +6,7 @@ const Homepage = () => {
         <div className="main">
             <Video />
             <Faq />
+
         </div>
     );
 }
