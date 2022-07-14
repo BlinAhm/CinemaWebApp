@@ -9,7 +9,7 @@
 }
     .contact-head .contact-main {
         position: sticky;
-        width: 70%;
+        width: 90%;
         height: 500px;
         display: flex;
         flex-direction: row;

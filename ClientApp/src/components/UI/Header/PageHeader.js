@@ -11,8 +11,10 @@ const PageHeader = () => {
 }
 
 function checkAdmin() {
-    if (localStorage.getItem('login').split(',')[0] === "Admin") {
-        window.location.href = "https://localhost:44465/dashboard";
+    if (localStorage.getItem('login') !== null) {
+        if (localStorage.getItem('login').includes("Admin")){
+            window.location.href = "https://localhost:44465/dashboard";
+        }
     }
 }
 

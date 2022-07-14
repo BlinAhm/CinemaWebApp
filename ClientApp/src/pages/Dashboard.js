@@ -7,7 +7,7 @@ import DashMovie from '../components/Dashboard/DashMovie';
 import DashMovieSoon from '../components/Dashboard/DashMovieSoon';
 
 const Dashboard = (props) => {
-    if (localStorage.getItem('login').split(',')[0] !== "Admin") {
+    if (!localStorage.getItem('login').includes("Admin")){
         window.location.href = "https://localhost:44465/home";
         return <div></div>;
     }
