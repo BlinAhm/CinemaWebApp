@@ -4,7 +4,7 @@
     {
         public int Id { get; set; }
         
-        public List<Movie> Movies { get; set; }
+        public List<Movie>? Movies { get; set; }
 
         public FeaturedMovies()
         {
