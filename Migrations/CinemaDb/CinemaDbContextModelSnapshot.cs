@@ -78,6 +78,30 @@ namespace CinemaApp.Migrations.CinemaDb
                     b.ToTable("Actor", (string)null);
                 });
 
+            modelBuilder.Entity("CinemaApp.Models.Bookings", b =>
+                {
+                    b.Property<string>("SeatId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("HallMovieDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("HallMovieHallId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("HallMovieMovieId")
+                        .HasColumnType("int");
+
+                    b.HasKey("SeatId", "UserId");
+
+                    b.HasIndex("HallMovieHallId", "HallMovieMovieId", "HallMovieDate");
+
+                    b.ToTable("Bookings", (string)null);
+                });
+
             modelBuilder.Entity("CinemaApp.Models.ComingSoon", b =>
                 {
                     b.Property<int>("Id")
@@ -102,20 +126,25 @@ namespace CinemaApp.Migrations.CinemaDb
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("TrailerID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.ToTable("ComingSoonMovies", (string)null);
                 });
 
+
             modelBuilder.Entity("CinemaApp.Models.ContactUs", b =>
-                {
+            {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Email")
+                    
+                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -132,8 +161,29 @@ namespace CinemaApp.Migrations.CinemaDb
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
                     b.ToTable("ContactUs", (string)null);
+              });
+
+
+            modelBuilder.Entity("CinemaApp.Models.Director", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Director");
                 });
 
             modelBuilder.Entity("CinemaApp.Models.FeaturedMovies", b =>
@@ -147,6 +197,47 @@ namespace CinemaApp.Migrations.CinemaDb
                     b.HasKey("Id");
 
                     b.ToTable("FeaturedMovies", (string)null);
+                });
+
+            modelBuilder.Entity("CinemaApp.Models.Hall", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<bool>("Is3D")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Seats")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Hall", (string)null);
+                });
+
+            modelBuilder.Entity("CinemaApp.Models.HallMovie", b =>
+                {
+                    b.Property<int>("HallId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MovieId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("HallId", "MovieId", "Date");
+
+                    b.HasIndex("MovieId");
+
+                    b.ToTable("HallMovies");
                 });
 
             modelBuilder.Entity("CinemaApp.Models.Movie", b =>
@@ -165,12 +256,21 @@ namespace CinemaApp.Migrations.CinemaDb
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("DirectorId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Duration")
+                        .HasColumnType("int");
+
                     b.Property<int?>("FeaturedMoviesId")
                         .HasColumnType("int");
 
                     b.Property<string>("ImageLink")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
 
                     b.Property<float>("Rating")
                         .HasColumnType("real");
@@ -179,11 +279,45 @@ namespace CinemaApp.Migrations.CinemaDb
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("TrailerID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("DirectorId");
 
                     b.HasIndex("FeaturedMoviesId");
 
                     b.ToTable("Movie", (string)null);
+                });
+
+            modelBuilder.Entity("CinemaApp.Models.VipSeats", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime?>("HallMovieDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("HallMovieHallId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("HallMovieMovieId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Seats")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("HallMovieHallId", "HallMovieMovieId", "HallMovieDate");
+
+                    b.ToTable("VipSeats");
                 });
 
             modelBuilder.Entity("ActorMovie", b =>
@@ -201,16 +335,72 @@ namespace CinemaApp.Migrations.CinemaDb
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("CinemaApp.Models.Bookings", b =>
+                {
+                    b.HasOne("CinemaApp.Models.HallMovie", null)
+                        .WithMany("Bookings")
+                        .HasForeignKey("HallMovieHallId", "HallMovieMovieId", "HallMovieDate");
+                });
+
+            modelBuilder.Entity("CinemaApp.Models.HallMovie", b =>
+                {
+                    b.HasOne("CinemaApp.Models.Hall", "Hall")
+                        .WithMany("HallMovies")
+                        .HasForeignKey("HallId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CinemaApp.Models.Movie", "Movie")
+                        .WithMany("HallMovies")
+                        .HasForeignKey("MovieId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Hall");
+
+                    b.Navigation("Movie");
+                });
+
             modelBuilder.Entity("CinemaApp.Models.Movie", b =>
                 {
+                    b.HasOne("CinemaApp.Models.Director", "Director")
+                        .WithMany()
+                        .HasForeignKey("DirectorId");
+
                     b.HasOne("CinemaApp.Models.FeaturedMovies", null)
                         .WithMany("Movies")
                         .HasForeignKey("FeaturedMoviesId");
+
+                    b.Navigation("Director");
+                });
+
+            modelBuilder.Entity("CinemaApp.Models.VipSeats", b =>
+                {
+                    b.HasOne("CinemaApp.Models.HallMovie", null)
+                        .WithMany("VipSeats")
+                        .HasForeignKey("HallMovieHallId", "HallMovieMovieId", "HallMovieDate");
                 });
 
             modelBuilder.Entity("CinemaApp.Models.FeaturedMovies", b =>
                 {
                     b.Navigation("Movies");
+                });
+
+            modelBuilder.Entity("CinemaApp.Models.Hall", b =>
+                {
+                    b.Navigation("HallMovies");
+                });
+
+            modelBuilder.Entity("CinemaApp.Models.HallMovie", b =>
+                {
+                    b.Navigation("Bookings");
+
+                    b.Navigation("VipSeats");
+                });
+
+            modelBuilder.Entity("CinemaApp.Models.Movie", b =>
+                {
+                    b.Navigation("HallMovies");
                 });
 #pragma warning restore 612, 618
         }

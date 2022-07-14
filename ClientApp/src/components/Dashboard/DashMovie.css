@@ -20,8 +20,8 @@
     display: none;
     position: fixed;
     z-index: 1;
-    padding-top: 7%;
-    padding-left: 33%;
+    padding-top: 8%;
+    padding-left: 26%;
     left: 0;
     top: 0;
     width: 100%;
@@ -30,10 +30,22 @@
     background-color: rgb(0,0,0);
     background-color: rgba(0,0,0,0.4);
 }
-
-    .contents #insertForm .insertForm, .contents #castForm .castForm {
+    .contents #castForm .castForm {
         position: sticky;
-        width: 500px;
+        width: 700px;
+        height: 550px;
+        background: #31333b;
+        border: 3px solid #fff;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+        border-radius: 10px;
+    }
+
+    .contents #insertForm .insertForm {
+        position: sticky;
+        width: 800px;
         height: 700px;
         background: #31333b;
         border: 3px solid #fff;
@@ -44,43 +56,82 @@
         border-radius: 10px;
     }
 
-    .contents #castForm .update {
-        color: whitesmoke;
-        font-size: 18px;
-        font-weight: 200;
-        text-align: center;
-        height: 44px;
-        width: 340px;
-        border: solid transparent 1px;
-        background: #D7263D;
-        border-radius: 10px;
-        margin-top: 30px;
-        margin-bottom: 30px;
-        cursor: pointer;
-    }
+        .contents #insertForm .insertForm .container, .contents #updateForm .updateForm .container {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-top: 4%;
+            margin-bottom: 2%;
+            width: 90%;
+        }
 
-    .contents #castForm .updateInputs {
-        padding-top: 7px;
-        padding-bottom: 7px;
-        padding-left: 10px;
-        padding-right: 10px;
-        height: 20px;
-        width: 300px;
-        border: solid transparent 1px;
-        background: #bfc0c4;
-        border-radius: 10px;
-        color: black;
-        font-size: 16px;
-        font-weight: 200;
-    }
+            .contents #insertForm .insertForm .container .userInputs, .contents #updateForm .updateForm .container .updateInputs {
+                margin-bottom: 4%;
+            }
+
+
+            .contents #updateForm .updateForm .container div {
+                margin-top: -20px;
+                display: flex;
+                flex-direction: column;
+            }
+
+.contents #updateForm .updateForm #movieId {
+    height: 0;
+}
+
+.contents #castForm .update {
+    color: whitesmoke;
+    font-size: 18px;
+    font-weight: 200;
+    text-align: center;
+    height: 44px;
+    width: 340px;
+    border: solid transparent 1px;
+    background: #D7263D;
+    border-radius: 10px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    cursor: pointer;
+}
+
+.contents #updateForm .updateForm .updatem {
+    color: whitesmoke;
+    font-size: 18px;
+    font-weight: 200;
+    text-align: center;
+    height: 44px;
+    width: 340px;
+    border: solid transparent 1px;
+    background: #D7263D;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    cursor: pointer;
+}
+
+.contents #castForm .updateInputs {
+    padding-top: 7px;
+    padding-bottom: 7px;
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 20px;
+    width: 300px;
+    border: solid transparent 1px;
+    background: #bfc0c4;
+    border-radius: 10px;
+    color: black;
+    font-size: 16px;
+    font-weight: 200;
+}
 
 .contents #updateForm {
     transition: 0.5s;
     display: none;
     position: fixed;
     z-index: 1;
-    padding-top: 9%;
-    padding-left: 33%;
+    padding-top: 11%;
+    padding-left: 26%;
     left: 0;
     top: 0;
     width: 100%;
@@ -92,7 +143,7 @@
 
     .contents #updateForm .updateForm {
         position: sticky;
-        width: 500px;
+        width: 800px;
         height: 700px;
         background: #31333b;
         border: 3px solid #fff;

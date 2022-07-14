@@ -134,7 +134,7 @@ const DashUsers = () => {
                         <p>Email:</p>
                         <input id="updateEmail" className="updateInputs" type="email" name="email" />
                     </div>
-                    <input id="firstEmail" className="updateInputs" type="email" disabled name="firstEmail" style={{"display":"none"}} />
+                    <input id="firstEmail" className="updateInputs" type="email" disabled name="firstEmail" style={{ "display": "none" }} />
 
                     <input id="update" className="update" type="submit" name="update" value="Update" />
                 </form>
@@ -187,10 +187,13 @@ function inputsNotEmpty() {
 
 function addUser() {
     var values = $('.insertForm').serialize();
+    var token = localStorage.getItem('token');
+
     $.ajax({
         method: 'POST',
         url: 'https://localhost:7197/api/Authenticate/CreateUser',
         data: values,
+        headers: { "Authorization": "Bearer " + token },
         success: function () {
             window.location.href = "https://localhost:44465/dashboard/users";
         },
@@ -202,11 +205,13 @@ function addUser() {
 
 function edit(email) {
     var send = "email=" + email;
+    var token = localStorage.getItem('token');
 
     $.ajax({
         type: "POST",
         url: "https://localhost:7197/api/Authenticate/GetByEmail",
         data: send,
+        headers: { "Authorization": "Bearer " + token },
         success: function (data) {
             $('#updateForm').css('display', 'block');
 
@@ -224,11 +229,13 @@ function update() {
     var emailFirst = $('#firstEmail').val();
     var values = $('.updateForm').serialize();
     var send = values + "&firstEmail=" + emailFirst;
+    var token = localStorage.getItem('token');
 
     $.ajax({
         type: "POST",
         url: "https://localhost:7197/api/Authenticate/EditUser",
         data: send,
+        headers: { "Authorization": "Bearer " + token },
         success: function () {
             window.location.href = "https://localhost:44465/dashboard/users";
         },
@@ -238,11 +245,13 @@ function update() {
     });
 }
 
-function delUser(email){
-    
+function delUser(email) {
+    var token = localStorage.getItem('token');
+
     $.ajax({
         type: "DELETE",
-        url: "https://localhost:7197/api/Authenticate/DeleteUser/"+email,
+        url: "https://localhost:7197/api/Authenticate/DeleteUser/" + email,
+        headers: { "Authorization": "Bearer " + token },
         success: function () {
             window.location.href = "https://localhost:44465/dashboard/users";
         },

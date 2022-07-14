@@ -1,0 +1,39 @@
+﻿.hall-background .hall-main .available-halls {
+    background: linear-gradient(to right, #050505,#070707, #090909,#090909);
+    width: 15%;
+    /*padding-top: 5%;*/
+    padding-bottom: 13%;
+    margin-left: 0.7%;
+    border-radius: 8px 8px 4px 4px;
+    margin-bottom: 1%;
+}
+
+    .hall-background .hall-main .available-halls h2 {
+        font-size: 20px;
+        font-weight: 500;
+        background: #D7263D;
+        color: #fff;
+        border-radius: 8px 8px 0px 0px;
+        margin-top: 0;
+        padding-block: 3%;
+    }
+
+    .hall-background .hall-main .available-halls .hall-list .hall-div {
+        color: #fff;
+        font-size: 18px;
+        font-weight: 400;
+        cursor: pointer;
+        margin-block: 7%;
+        padding-block: 2%;
+        background: linear-gradient(to right, #606060, #606060, #808080, #909090);
+        width: 45%;
+        border-radius: 0px 5px 5px 0px;
+        transition: ease-out 0.2s;
+        border-left: solid 6px crimson;
+    }
+        .hall-background .hall-main .available-halls .hall-list .hall-div:hover {
+            transition: ease-in 0.25s;
+            width: 80% !important;
+            background: linear-gradient(to right, #510912, #8e1b2a, #D7263D) !important;
+            border-left: solid 6px crimson;
+        }

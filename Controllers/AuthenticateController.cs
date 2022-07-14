@@ -42,6 +42,7 @@ namespace CinemaApp.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = UserRoles.Admin)]
         [Route("GetByEmail")]
         public ApplicationUser GetUser([FromForm] string email)
         {
@@ -105,9 +106,11 @@ namespace CinemaApp.Controllers
                 /*var cookieOptions = new CookieOptions { Domain = "localhost", MaxAge = new TimeSpan(3,0,0),  IsEssential = true, SameSite = Microsoft.AspNetCore.Http.SameSiteMode.Strict};
                 HttpContext.Response.Cookies.Append("JWTtoken", new JwtSecurityTokenHandler().WriteToken(token),cookieOptions);
                 HttpContext.Response.Cookies.Append("JWTExpiration", token.ValidTo.ToString("yyyy-MM-ddTHH:mm"),cookieOptions);*/
-                
+
                 return Ok(new
                 {
+                    admin = userRoles.ToArray(),
+                    user = new[] { user.FirstName, user.LastName, user.Email },
                     token = new JwtSecurityTokenHandler().WriteToken(token),
                     expiration = token.ValidTo
                 });
@@ -116,6 +119,7 @@ namespace CinemaApp.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         [Route("register")]
         public async Task<IActionResult> Register([FromForm] RegisterModel model)
         {
@@ -145,6 +149,7 @@ namespace CinemaApp.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         [Route("register-admin")]
         public async Task<IActionResult> RegisterAdmin([FromForm] RegisterModel model)
         {
@@ -189,6 +194,7 @@ namespace CinemaApp.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = UserRoles.Admin)]
         [Route("CreateUser")]
         public async Task<IActionResult> CreateUser([FromForm] RegisterModel model)
         {
@@ -218,6 +224,7 @@ namespace CinemaApp.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = UserRoles.Admin)]
         [Route("EditUser")]
         public async Task<IActionResult> EditUser([FromForm] EditModel model)
         {

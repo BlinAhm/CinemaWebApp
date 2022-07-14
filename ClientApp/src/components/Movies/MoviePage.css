@@ -13,7 +13,7 @@
 
     .movie-page-main .movie-details {
         width: 80%;
-        min-height: 500px;
+        min-height: 520px;
         margin-left: 5%;
         height: 20%;
         background: linear-gradient(to right, #202020,#202020,#202020,#202020);
@@ -48,11 +48,19 @@
             color: #dbc541;
             margin-right: 10px;
         }
-
+        .movie-page-main .movie-details .price {
+            color: #fff;
+            text-align: left;
+            margin-inline: 10%;
+            margin-top: 0;
+            font-size: 18px;
+            font-weight: 400;
+            width: 90%;
+        }
         .movie-page-main .movie-details .rating {
             color: #fff;
             text-align: left;
-            margin-left: 10%;
+            margin-inline: 10%;
             font-size: 18px;
             font-weight: 500;
             width: 90%;
@@ -60,6 +68,16 @@
 
             .movie-page-main .movie-details .rating .category {
                 margin-left: 10%;
+                font-size: 20px;
+            }
+            .movie-page-main .movie-details .rating .duration {
+                float: right;
+                margin-right: 11%;
+                font-size: 18px;
+                font-weight: 400;
+            }
+
+            .movie-page-main .movie-details .rating .categoryS {
                 font-size: 20px;
             }
 
@@ -77,6 +95,7 @@
             text-align: justify;
             margin-top: 0;
         }
+
         .movie-page-main .movie-details .details .director {
             margin-inline: 10%;
             font-size: 16px;
@@ -107,6 +126,18 @@
                 font-weight: 500;
             }
 
+            .movie-page-main .movie-details .buttons .coming-soon {
+                width: 120px;
+                height: 50px;
+                cursor: pointer;
+                border-radius: 4px;
+                text-align: center;
+                line-height: 48px;
+                color: #000;
+                font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+                font-weight: 600;
+            }
+
             .movie-page-main .movie-details .buttons .trailer {
                 background: linear-gradient(to right, #db1731,#A31F30);
             }
@@ -123,6 +154,14 @@
                     background: linear-gradient(to right, #2e8908,#035b03);
                 }
 
+            .movie-page-main .movie-details .buttons .coming-soon {
+                background: linear-gradient(to right, #dbc541,#b7a012);
+            }
+
+                .movie-page-main .movie-details .buttons .coming-soon:hover {
+                    background: linear-gradient(to right, #c4ae2a,#e98914);
+                }
+
         .movie-page-main .movie-details .title .watchlist {
             color: #fff;
             cursor: pointer;
@@ -133,6 +172,7 @@
                 color: crimson;
             }
 
-            .movie-page-main .movie-details .title .watchlist:hover {
-                color: #cfcfcf;
-            }
+        .movie-page-main .movie-details .video {
+            margin-block: 5%;
+            display: none;
+        }

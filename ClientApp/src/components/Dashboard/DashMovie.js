@@ -1,4 +1,4 @@
-﻿import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import $ from 'jquery';
 import DashNavLink from '../UI/Header/DashNavLink';
 import './DashMovie.css';
@@ -16,7 +16,7 @@ const DashMovie = () => {
         $('#select1').change(() => {
             var select = $('#select1');
             var option = $('#newA');
-            
+
             console.log(select.find(":selected").val());
 
             if (select.find(":selected").val() === option.val()) {
@@ -79,7 +79,7 @@ const DashMovie = () => {
             $('#editForm').css('display', 'none');
             $('#castForm').css('display', 'none');
         });
-
+        //eslint-disable-next-line
     }, []);
 
     return (
@@ -156,33 +156,54 @@ const DashMovie = () => {
                 <form className="insertForm" method="POST">
                     <span className="close">x</span>
                     <p id="headP">Insert movie:</p>
-                    <div>
-                        <p>Image link:</p>
-                        <input className="userInputs" type="text" name="imageLink" />
+                    <div className="container">
+                        <div className="left">
+                            <div>
+                                <p>Image link:</p>
+                                <input className="userInputs" type="text" name="imageLink" />
+                            </div>
+                            <div>
+                                <p>Title:</p>
+                                <input className="userInputs" type="text" name="title" />
+                            </div>
+                            <div>
+                                <p>Description:</p>
+                                <textarea style={
+                                    {
+                                        "width": "300px",
+                                        "height": "150px",
+                                        "resize": "none"
+                                    }
+                                } className="userInputs" type="email" name="description" />
+                            </div>
+                            <div>
+                                <p>Duration:</p>
+                                <input className="userInputs" type="text" name="duration" />
+                            </div>
+                        </div>
+                        <div className="right">
+                            <div>
+                                <p>Category:</p>
+                                <input className="userInputs" type="text" name="category" />
+                            </div>
+                            <div>
+                                <p>Rating:</p>
+                                <input className="userInputs" type="number" step="0.01" min="0" max="10" name="rating" />
+                            </div>
+                            <div>
+                                <p>Director:</p>
+                                <input className="userInputs" type="text" name="director" />
+                            </div>
+                            <div>
+                                <p>Trailer id:</p>
+                                <input className="userInputs" type="text" name="trailerId" />
+                            </div>
+                            <div>
+                                <p>Ticket price:</p>
+                                <input className="userInputs" type="text" name="price" />
+                            </div>
+                        </div>
                     </div>
-                    <div>
-                        <p>Title:</p>
-                        <input className="userInputs" type="text" name="title" />
-                    </div>
-                    <div>
-                        <p>Description:</p>
-                        <textarea style={
-                            {
-                                "width": "300px",
-                                "height": "150px",
-                                "resize": "none"
-                            }
-                        } className="userInputs" type="email" name="description" />
-                    </div>
-                    <div>
-                        <p>Category:</p>
-                        <input className="userInputs" type="text" name="category" />
-                    </div>
-                    <div>
-                        <p>Rating:</p>
-                        <input className="userInputs" type="number" step="0.01" min="0" max="10" name="rating" />
-                    </div>
-
                     <input className="save" type="submit" name="insert" value="Save" />
                 </form>
             </div>
@@ -192,36 +213,57 @@ const DashMovie = () => {
 
                     <span className="close">x</span>
                     <p id="headP">Edit movie:</p>
+                    <div className="container">
+                        <div className="left">
+                            <div>
+                                <p>Image Link:</p>
+                                <input id="updateLink" className="updateInputs" type="text" name="imageLink" />
+                            </div>
+                            <div>
+                                <p>Title:</p>
+                                <input id="updateTitle" className="updateInputs" type="text" name="title" />
+                            </div>
+                            <div>
+                                <p>Description:</p>
+                                <textarea style={
+                                    {
+                                        "width": "300px",
+                                        "height": "150px",
+                                        "resize": "none"
+                                    }
+                                } id="updateDescription" className="updateInputs" type="email" name="description" />
+                            </div>
+                            <div>
+                                <p>Duration:</p>
+                                <input id="updateDuration" className="updateInputs" type="text" name="duration" />
+                            </div>
+                        </div>
+                        <div className="right">
+                            <div>
+                                <p>Category:</p>
+                                <input id="updateCategory" className="updateInputs" type="text" name="category" />
+                            </div>
+                            <div>
+                                <p>Rating:</p>
+                                <input id="updateRating" className="updateInputs" type="text" name="rating" />
+                            </div>
+                            <div>
+                                <p>Director:</p>
+                                <input id="updateDirector" className="updateInputs" type="text" name="director" />
+                            </div>
+                            <div>
+                                <p>Trailer id:</p>
+                                <input id="updateTrailer" className="updateInputs" type="text" name="trailerID" />
+                            </div>
+                            <div>
+                                <p>Ticket price:</p>
+                                <input id="updatePrice" className="updateInputs" type="text" name="price" />
+                            </div>
+                        </div>
+                    </div>
+                    <input id="movieId" disabled name="mId" style={{ "display": "none" }} />
 
-                    <div>
-                        <p>Image Link:</p>
-                        <input id="updateLink" className="updateInputs" type="text" name="imageLink" />
-                    </div>
-                    <div>
-                        <p>Title:</p>
-                        <input id="updateTitle" className="updateInputs" type="text" name="title" />
-                    </div>
-                    <div>
-                        <p>Description:</p>
-                        <textarea style={
-                            {
-                                "width": "300px",
-                                "height": "150px",
-                                "resize": "none"
-                            }
-                        } id="updateDescription" className="updateInputs" type="email" name="description" />
-                    </div>
-                    <div>
-                        <p>Category:</p>
-                        <input id="updateCategory" className="updateInputs" type="text" name="category" />
-                    </div>
-                    <div>
-                        <p>Rating:</p>
-                        <input id="updateRating" className="updateInputs" type="text" name="rating" />
-                    </div>
-                    <input id="movieId" className="updateInputs" disabled name="mId" style={{ "display": "none" }} />
-
-                    <input id="update" className="update" type="submit" name="update" value="Update" />
+                    <input id="update" className="updatem" type="submit" name="update" value="Update" />
                 </form>
             </div>
 
@@ -280,9 +322,12 @@ const DashMovie = () => {
     );
 
     function displayMovies() {
+        var token = localStorage.getItem('token');
+
         $.ajax({
             type: "GET",
             url: "https://localhost:7197/api/Movie/GetAll",
+            headers: { "Authorization": "Bearer " + token },
             success: function (data) {
                 if (response !== data) {
                     setResponse(data);
@@ -295,9 +340,12 @@ const DashMovie = () => {
     }
 
     function displayFeatured() {
+        var token = localStorage.getItem('token');
+
         $.ajax({
             type: "GET",
             url: "https://localhost:7197/api/Movie/GetFeatured",
+            headers: { "Authorization": "Bearer " + token },
             success: function (data) {
                 if (featured !== data) {
                     setFeatured(data);
@@ -310,9 +358,12 @@ const DashMovie = () => {
     }
 
     function getActors() {
+        var token = localStorage.getItem('token');
+
         $.ajax({
             type: "GET",
             url: "https://localhost:7197/api/Movie/GetAllActors",
+            headers: { "Authorization": "Bearer " + token },
             success: function (data) {
                 if (cast !== data) {
                     setCast(data);
@@ -328,9 +379,12 @@ const DashMovie = () => {
 
 
 function editMovie(id) {
+    var token = localStorage.getItem('token');
+
     $.ajax({
         type: "GET",
         url: "https://localhost:7197/api/Movie/FindById/" + id,
+        headers: { "Authorization": "Bearer " + token },
         success: function (data) {
             $('#updateForm').css('display', 'block');
 
@@ -339,6 +393,10 @@ function editMovie(id) {
             $('#updateDescription').val(data.description);
             $('#updateCategory').val(data.category);
             $('#updateRating').val(data.rating);
+            $('#updateDirector').val(data.director?.firstName + " " + data.director?.lastName);
+            $('#updateTrailer').val(data.trailerID);
+            $('#updateDuration').val(data.duration);
+            $('#updatePrice').val(data.price);
             $('#movieId').val(data.id);
         },
         error: function (jqXHR) {
@@ -348,7 +406,7 @@ function editMovie(id) {
 }
 
 function editCast(id) {
-    
+
     $('#movieIdCast').val(id);
     $('[name="actor1"]').val("Name Surname");
     $('[name="actor2"]').val("Name Surname");
@@ -360,11 +418,13 @@ function updateMovie() {
     var id = $('[name="mId"]').val();
     var values = $('.updateForm').serialize();
     var send = values + "&mId=" + id;
+    var token = localStorage.getItem('token');
 
     $.ajax({
         type: "POST",
         url: "https://localhost:7197/api/Movie/Update",
         data: send,
+        headers: { "Authorization": "Bearer " + token },
         success: function () {
             window.location.href = "https://localhost:44465/dashboard/movies";
         },
@@ -378,11 +438,13 @@ function updateCast() {
     var id = $('#movieIdCast').val();
     var values = $('.castForm').serialize();
     var send = values + "&mId=" + id;
+    var token = localStorage.getItem('token');
 
     $.ajax({
         type: "POST",
         url: "https://localhost:7197/api/Movie/UpdateCast",
         data: send,
+        headers: { "Authorization": "Bearer " + token },
         success: function () {
             window.location.href = "https://localhost:44465/dashboard/movies";
         },
@@ -393,9 +455,12 @@ function updateCast() {
 }
 
 function addFeatured(id) {
+    var token = localStorage.getItem('token');
+
     $.ajax({
         type: "GET",
         url: "https://localhost:7197/api/Movie/AddFeatured/" + id,
+        headers: { "Authorization": "Bearer " + token },
         success: function () {
             window.location.href = "https://localhost:44465/dashboard/movies";
         },
@@ -407,11 +472,13 @@ function addFeatured(id) {
 
 function addMovie() {
     var values = $('.insertForm').serialize();
+    var token = localStorage.getItem('token');
 
     $.ajax({
         type: "POST",
         url: "https://localhost:7197/api/Movie/Add",
         data: values,
+        headers: { "Authorization": "Bearer " + token },
         success: function () {
             window.location.href = "https://localhost:44465/dashboard/movies";
         },
@@ -422,9 +489,12 @@ function addMovie() {
 }
 
 function removeFeatured(id) {
+    var token = localStorage.getItem('token');
+
     $.ajax({
         type: "DELETE",
         url: "https://localhost:7197/api/Movie/RemoveFeatured/" + id,
+        headers: { "Authorization": "Bearer " + token },
         success: function () {
             window.location.href = "https://localhost:44465/dashboard/movies";
         },
@@ -435,9 +505,12 @@ function removeFeatured(id) {
 }
 
 function deleteMovie(id) {
+    var token = localStorage.getItem('token');
+
     $.ajax({
         type: "DELETE",
         url: "https://localhost:7197/api/Movie/Delete/" + id,
+        headers: { "Authorization": "Bearer " + token },
         success: function () {
             window.location.href = "https://localhost:44465/dashboard/movies";
         },
