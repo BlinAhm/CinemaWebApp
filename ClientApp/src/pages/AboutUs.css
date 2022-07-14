@@ -1,14 +1,14 @@
-﻿
+﻿*{
+    margin-top:0px;
+}
 .aboutus-details {
     font-size: 18px;
     font-weight: 400;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    padding-left: 150px;
-    padding-right: 150px;
-    background-color: #ffd0aa;
+    padding-left: 35px;
+    padding-right:35px;
+    background-color: #ffe0e0;
     color: #9a0000;
-    background-image: linear-gradient(#ffbcbc,#ff7d7d);
-    margin: auto;
 }
 
     .aboutus-details h2 {
@@ -24,4 +24,12 @@
         font-weight: bold;
         padding-bottom: 40px;
         padding-top: 30px;
+
     }
+    img{
+    float:left;
+    height:300px;
+    position:relative;
+    border-radius:10px;
+    padding-left:2px;
+}

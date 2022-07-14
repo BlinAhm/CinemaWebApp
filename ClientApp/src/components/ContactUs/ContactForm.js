@@ -11,6 +11,7 @@ const ContactForm = () => {
                 <ContactTitle />
                 <ContactInputs />
 
+
             </div>
 
             <ContactMap />
