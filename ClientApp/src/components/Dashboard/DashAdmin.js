@@ -79,7 +79,7 @@ const DashAdmin = () => {
                             <th>Date</th>
                         </tr>
                     </thead>
-                    <tbody>{activity?.map((acts) =>(
+                    <tbody>{activity?.map((acts) => (
                         <tr key={acts.id}>
                             <td>{acts.id}</td>
                             <td className="act">{acts.act}</td>
@@ -119,11 +119,13 @@ const DashAdmin = () => {
 
         </div>
     );
-
+    //eslint-disable-next-line
     function displayAdmins() {
+        var token = localStorage.getItem('token');
         $.ajax({
             type: "GET",
             url: "https://localhost:7197/Admin/GetAll",
+            headers: { "Authorization": "Bearer " + token },
             success: function (data) {
                 if (response !== data) {
                     setResponse(data);
@@ -135,9 +137,12 @@ const DashAdmin = () => {
         });
     }
     function displayActivities() {
+        var token = localStorage.getItem('token');
+
         $.ajax({
             type: "GET",
             url: "https://localhost:7197/api/Activity/GetAll",
+            headers: { "Authorization": "Bearer " + token },
             success: function (data) {
                 if (activity !== data) {
                     setActivity(data);
@@ -151,11 +156,14 @@ const DashAdmin = () => {
 }
 
 function addAdmin() {
+    var token = localStorage.getItem('token');
     var id = $('.insertForm').serialize();
+
     $.ajax({
         type: "POST",
         url: "https://localhost:7197/Admin/Add",
         data: id,
+        headers: { "Authorization": "Bearer " + token },
         success: function () {
             window.location.href = "https://localhost:44465/dashboard/admin";
         },
@@ -167,9 +175,12 @@ function addAdmin() {
 
 function removeAdmin() {
     var id = $('.deleteId').val();
+    var token = localStorage.getItem('token');
+
     $.ajax({
         type: "GET",
         url: "https://localhost:7197/Admin/Remove/" + id,
+        headers: { "Authorization": "Bearer " + token },
         success: function () {
             window.location.href = "https://localhost:44465/dashboard/admin";
         },

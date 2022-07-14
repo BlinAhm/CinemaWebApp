@@ -1,4 +1,4 @@
-﻿import './Featured.css';
+import './Featured.css';
 import Banner from './Banner.js';
 import { useEffect, useState } from "react";
 import $ from 'jquery';
@@ -8,7 +8,7 @@ const Featured = () => {
 
     useEffect(() => {
         displayFeatured();
-
+        // eslint-disable-next-line
     }, []);
 
     return (

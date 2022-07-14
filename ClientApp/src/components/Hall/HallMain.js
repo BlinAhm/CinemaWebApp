@@ -1,4 +1,4 @@
-﻿import { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import $ from 'jquery';
 import './AvailableHalls.css';
 import './AvailableSeats.css';
@@ -12,7 +12,6 @@ const HallMain = () => {
     const [dates, setDates] = useState([]);
     const [price, setPrice] = useState([]);
     var total = 0.0;
-    var seatsClicked = 0;
     var vipTickets = 0;
     var normalTickets = 0;
 
@@ -29,7 +28,7 @@ const HallMain = () => {
             $('.free-seat').removeAttr('disabled');
             resetTickets();
         });
-
+        //eslint-disable-next-line
     }, []);
 
     return (
@@ -169,11 +168,9 @@ const HallMain = () => {
 
         if (clName === "free-seat" || clName === "vip-seat") {
             $('#' + name).addClass("selected-seat");
-            seatsClicked++;
         }
         if (clName === "free-seat selected-seat" || clName === "vip-seat selected-seat") {
             $('#' + name).removeClass("selected-seat");
-            seatsClicked--;
         }
         $('#ticketNr').text(normalTickets);
         $('#vipTicketNr').text(vipTickets);
@@ -181,7 +178,6 @@ const HallMain = () => {
     }
 
     function resetTickets() {
-        seatsClicked = 0;
         vipTickets = 0;
         normalTickets = 0;
         total = 0;
@@ -194,7 +190,8 @@ const HallMain = () => {
         var arr = [];
         var i = 0;
 
-        //Filter through seats array: A1,A2... and gets the letters for each seat row 
+        //Filter through seats array: A1,A2... and gets the letters for each seat row
+        //eslint-disable-next-line
         seats?.filter((seat) => { if (seat.endsWith('1')) { return seat; } }).map((value) => {
             arr[i++] = value.charAt(0);
         })
@@ -202,6 +199,7 @@ const HallMain = () => {
         //With the letters of every row creates numbered seats from seats array and pushes the rows to final
         const final = [];
         for (let item of arr) {
+            //eslint-disable-next-line
             final.push(<div key={item} className="seat-row"><span className="letter">{item}</span>{seats?.filter((seat) => { if (seat.startsWith(item)) { return seat; } }).map((item) => (<div key={item} onClick={() => { click(item) }} id={item} className="free-seat">{item}</div>))}</div>);
         }
         return final;

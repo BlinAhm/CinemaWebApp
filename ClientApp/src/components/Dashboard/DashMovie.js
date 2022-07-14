@@ -1,4 +1,4 @@
-﻿import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import $ from 'jquery';
 import DashNavLink from '../UI/Header/DashNavLink';
 import './DashMovie.css';
@@ -79,7 +79,7 @@ const DashMovie = () => {
             $('#editForm').css('display', 'none');
             $('#castForm').css('display', 'none');
         });
-
+        //eslint-disable-next-line
     }, []);
 
     return (
@@ -176,6 +176,10 @@ const DashMovie = () => {
                                     }
                                 } className="userInputs" type="email" name="description" />
                             </div>
+                            <div>
+                                <p>Duration:</p>
+                                <input className="userInputs" type="text" name="duration" />
+                            </div>
                         </div>
                         <div className="right">
                             <div>
@@ -192,7 +196,11 @@ const DashMovie = () => {
                             </div>
                             <div>
                                 <p>Trailer id:</p>
-                                <input className="userInputs" type="text" name="trailer" />
+                                <input className="userInputs" type="text" name="trailerId" />
+                            </div>
+                            <div>
+                                <p>Ticket price:</p>
+                                <input className="userInputs" type="text" name="price" />
                             </div>
                         </div>
                     </div>
@@ -225,6 +233,10 @@ const DashMovie = () => {
                                     }
                                 } id="updateDescription" className="updateInputs" type="email" name="description" />
                             </div>
+                            <div>
+                                <p>Duration:</p>
+                                <input id="updateDuration" className="updateInputs" type="text" name="duration" />
+                            </div>
                         </div>
                         <div className="right">
                             <div>
@@ -242,6 +254,10 @@ const DashMovie = () => {
                             <div>
                                 <p>Trailer id:</p>
                                 <input id="updateTrailer" className="updateInputs" type="text" name="trailerID" />
+                            </div>
+                            <div>
+                                <p>Ticket price:</p>
+                                <input id="updatePrice" className="updateInputs" type="text" name="price" />
                             </div>
                         </div>
                     </div>
@@ -306,9 +322,12 @@ const DashMovie = () => {
     );
 
     function displayMovies() {
+        var token = localStorage.getItem('token');
+
         $.ajax({
             type: "GET",
             url: "https://localhost:7197/api/Movie/GetAll",
+            headers: { "Authorization": "Bearer " + token },
             success: function (data) {
                 if (response !== data) {
                     setResponse(data);
@@ -321,9 +340,12 @@ const DashMovie = () => {
     }
 
     function displayFeatured() {
+        var token = localStorage.getItem('token');
+
         $.ajax({
             type: "GET",
             url: "https://localhost:7197/api/Movie/GetFeatured",
+            headers: { "Authorization": "Bearer " + token },
             success: function (data) {
                 if (featured !== data) {
                     setFeatured(data);
@@ -336,9 +358,12 @@ const DashMovie = () => {
     }
 
     function getActors() {
+        var token = localStorage.getItem('token');
+
         $.ajax({
             type: "GET",
             url: "https://localhost:7197/api/Movie/GetAllActors",
+            headers: { "Authorization": "Bearer " + token },
             success: function (data) {
                 if (cast !== data) {
                     setCast(data);
@@ -354,9 +379,12 @@ const DashMovie = () => {
 
 
 function editMovie(id) {
+    var token = localStorage.getItem('token');
+
     $.ajax({
         type: "GET",
         url: "https://localhost:7197/api/Movie/FindById/" + id,
+        headers: { "Authorization": "Bearer " + token },
         success: function (data) {
             $('#updateForm').css('display', 'block');
 
@@ -367,6 +395,8 @@ function editMovie(id) {
             $('#updateRating').val(data.rating);
             $('#updateDirector').val(data.director?.firstName + " " + data.director?.lastName);
             $('#updateTrailer').val(data.trailerID);
+            $('#updateDuration').val(data.duration);
+            $('#updatePrice').val(data.price);
             $('#movieId').val(data.id);
         },
         error: function (jqXHR) {
@@ -388,11 +418,13 @@ function updateMovie() {
     var id = $('[name="mId"]').val();
     var values = $('.updateForm').serialize();
     var send = values + "&mId=" + id;
+    var token = localStorage.getItem('token');
 
     $.ajax({
         type: "POST",
         url: "https://localhost:7197/api/Movie/Update",
         data: send,
+        headers: { "Authorization": "Bearer " + token },
         success: function () {
             window.location.href = "https://localhost:44465/dashboard/movies";
         },
@@ -406,11 +438,13 @@ function updateCast() {
     var id = $('#movieIdCast').val();
     var values = $('.castForm').serialize();
     var send = values + "&mId=" + id;
+    var token = localStorage.getItem('token');
 
     $.ajax({
         type: "POST",
         url: "https://localhost:7197/api/Movie/UpdateCast",
         data: send,
+        headers: { "Authorization": "Bearer " + token },
         success: function () {
             window.location.href = "https://localhost:44465/dashboard/movies";
         },
@@ -421,9 +455,12 @@ function updateCast() {
 }
 
 function addFeatured(id) {
+    var token = localStorage.getItem('token');
+
     $.ajax({
         type: "GET",
         url: "https://localhost:7197/api/Movie/AddFeatured/" + id,
+        headers: { "Authorization": "Bearer " + token },
         success: function () {
             window.location.href = "https://localhost:44465/dashboard/movies";
         },
@@ -435,11 +472,13 @@ function addFeatured(id) {
 
 function addMovie() {
     var values = $('.insertForm').serialize();
+    var token = localStorage.getItem('token');
 
     $.ajax({
         type: "POST",
         url: "https://localhost:7197/api/Movie/Add",
         data: values,
+        headers: { "Authorization": "Bearer " + token },
         success: function () {
             window.location.href = "https://localhost:44465/dashboard/movies";
         },
@@ -450,9 +489,12 @@ function addMovie() {
 }
 
 function removeFeatured(id) {
+    var token = localStorage.getItem('token');
+
     $.ajax({
         type: "DELETE",
         url: "https://localhost:7197/api/Movie/RemoveFeatured/" + id,
+        headers: { "Authorization": "Bearer " + token },
         success: function () {
             window.location.href = "https://localhost:44465/dashboard/movies";
         },
@@ -463,9 +505,12 @@ function removeFeatured(id) {
 }
 
 function deleteMovie(id) {
+    var token = localStorage.getItem('token');
+
     $.ajax({
         type: "DELETE",
         url: "https://localhost:7197/api/Movie/Delete/" + id,
+        headers: { "Authorization": "Bearer " + token },
         success: function () {
             window.location.href = "https://localhost:44465/dashboard/movies";
         },

@@ -1,4 +1,4 @@
-﻿import './MovieCard.css';
+import './MovieCard.css';
 import { Link } from 'react-router-dom';
 
 const MovieCard = (props) => {

@@ -37,7 +37,10 @@ function LogIn() {
         method: 'POST',
         url: 'https://localhost:7197/api/Authenticate/login',
         data: values,
-        success: function () {
+        success: function (data) {
+            localStorage.setItem('user', data.user);
+            localStorage.setItem('login', data.admin);
+            localStorage.setItem('token', data.token);
             window.location.href = "https://localhost:44465/home";
         },
         error: function (error) {

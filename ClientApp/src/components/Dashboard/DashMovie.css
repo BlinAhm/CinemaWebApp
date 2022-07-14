@@ -20,7 +20,7 @@
     display: none;
     position: fixed;
     z-index: 1;
-    padding-top: 11%;
+    padding-top: 8%;
     padding-left: 26%;
     left: 0;
     top: 0;
@@ -30,11 +30,23 @@
     background-color: rgb(0,0,0);
     background-color: rgba(0,0,0,0.4);
 }
+    .contents #castForm .castForm {
+        position: sticky;
+        width: 700px;
+        height: 550px;
+        background: #31333b;
+        border: 3px solid #fff;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+        border-radius: 10px;
+    }
 
-    .contents #insertForm .insertForm, .contents #castForm .castForm {
+    .contents #insertForm .insertForm {
         position: sticky;
         width: 800px;
-        height: 550px;
+        height: 700px;
         background: #31333b;
         border: 3px solid #fff;
         display: flex;
@@ -51,7 +63,6 @@
             align-items: baseline;
             margin-top: 4%;
             margin-bottom: 2%;
-            height: 350px;
             width: 90%;
         }
 
@@ -133,7 +144,7 @@
     .contents #updateForm .updateForm {
         position: sticky;
         width: 800px;
-        height: 550px;
+        height: 700px;
         background: #31333b;
         border: 3px solid #fff;
         display: flex;

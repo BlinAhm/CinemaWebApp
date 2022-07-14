@@ -1,4 +1,3 @@
-﻿import $ from 'jquery';
 import './HallControlls.css';
 
 const HallControlls = () => {

@@ -1,4 +1,4 @@
-﻿import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import $ from 'jquery';
 import DashNavLink from '../UI/Header/DashNavLink';
 import './DashMovie.css';
@@ -33,6 +33,7 @@ const DashMovie = () => {
             $('#insertForm').css('display', 'none');
             $('#updateForm').css('display', 'none');
         });
+        //eslint-disable-next-line
     }, []);
 
     return (
@@ -152,9 +153,12 @@ const DashMovie = () => {
     );
 
     function displayMovies() {
+        var token = localStorage.getItem('token');
+
         $.ajax({
             type: "GET",
             url: "https://localhost:7197/api/Movie/GetComingSoon",
+            headers: { "Authorization": "Bearer " + token },
             success: function (data) {
                 if (response !== data) {
                     setResponse(data);
@@ -169,10 +173,13 @@ const DashMovie = () => {
 
 function addMovie() {
     var values = $('.insertForm').serialize();
+    var token = localStorage.getItem('token');
+
     $.ajax({
         method: 'POST',
         url: 'https://localhost:7197/api/Movie/AddComingSoon',
         data: values,
+        headers: { "Authorization": "Bearer " + token },
         success: function () {
             window.location.href = "https://localhost:44465/dashboard/coming-soon";
         },
@@ -183,9 +190,12 @@ function addMovie() {
 }
 
 function delMovie(id) {
+    var token = localStorage.getItem('token');
+
     $.ajax({
         type: "DELETE",
         url: "https://localhost:7197/api/Movie/DeleteComingSoon/" + id,
+        headers: { "Authorization": "Bearer " + token },
         success: function () {
             window.location.href = "https://localhost:44465/dashboard/coming-soon";
         },
@@ -196,9 +206,12 @@ function delMovie(id) {
 }
 
 function editMovie(id) {
+    var token = localStorage.getItem('token');
+
     $.ajax({
         type: "GET",
         url: "https://localhost:7197/api/Movie/FindByIdCSoon/" + id,
+        headers: { "Authorization": "Bearer " + token },
         success: function (data) {
             $('#updateForm').css('display', 'block');
 
@@ -216,6 +229,8 @@ function editMovie(id) {
 }
 
 function updateMovie() {
+    var token = localStorage.getItem('token');
+
     var id = $('[name="mId"]').val();
     var values = $('.updateForm').serialize();
     var send = values + "&mId=" + id;
@@ -224,6 +239,7 @@ function updateMovie() {
         type: "POST",
         url: "https://localhost:7197/api/Movie/UpdateComingSoon",
         data: send,
+        headers: { "Authorization": "Bearer " + token },
         success: function () {
             window.location.href = "https://localhost:44465/dashboard/coming-soon";
         },

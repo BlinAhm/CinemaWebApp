@@ -9,7 +9,7 @@
         public string Description { get; set; }
         public virtual List<Actor> Actors { get; set; }
         public virtual List<HallMovie> HallMovies { get; set; }
-        public int? Length { get; set; }
+        public int? Duration { get; set; }
         public double Price { get; set; }
         public float Rating { get; set; }
         public Director? Director { get; set; }
