@@ -11,5 +11,11 @@
 
         public int MovieId { get; set; }
         public Movie Movie { get; set; }
+
+        public HallMovie()
+        {
+            Bookings = new List<Bookings>();
+            VipSeats = new List<VipSeats>();
+        }
     }
 }

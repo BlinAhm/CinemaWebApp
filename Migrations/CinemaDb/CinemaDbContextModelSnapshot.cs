@@ -135,36 +135,6 @@ namespace CinemaApp.Migrations.CinemaDb
                     b.ToTable("ComingSoonMovies", (string)null);
                 });
 
-
-            modelBuilder.Entity("CinemaApp.Models.ContactUs", b =>
-            {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-                    
-                     b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Message")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-                    b.ToTable("ContactUs", (string)null);
-              });
-
-
             modelBuilder.Entity("CinemaApp.Models.Director", b =>
                 {
                     b.Property<int>("Id")
@@ -183,7 +153,7 @@ namespace CinemaApp.Migrations.CinemaDb
 
                     b.HasKey("Id");
 
-                    b.ToTable("Director");
+                    b.ToTable("Director", (string)null);
                 });
 
             modelBuilder.Entity("CinemaApp.Models.FeaturedMovies", b =>
@@ -237,7 +207,7 @@ namespace CinemaApp.Migrations.CinemaDb
 
                     b.HasIndex("MovieId");
 
-                    b.ToTable("HallMovies");
+                    b.ToTable("HallMovies", (string)null);
                 });
 
             modelBuilder.Entity("CinemaApp.Models.Movie", b =>
@@ -317,7 +287,7 @@ namespace CinemaApp.Migrations.CinemaDb
 
                     b.HasIndex("HallMovieHallId", "HallMovieMovieId", "HallMovieDate");
 
-                    b.ToTable("VipSeats");
+                    b.ToTable("VipSeats", (string)null);
                 });
 
             modelBuilder.Entity("ActorMovie", b =>

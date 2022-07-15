@@ -59,7 +59,8 @@ namespace CinemaApp.Controllers
         [HttpGet]
         public string[] VipSeats(int hallId, int movieId, DateTime date)
         {
-            var seats = _context.HallMovies.Include("VipSeats").Where(x => x.HallId == hallId && x.MovieId == movieId && x.Date == date).First().VipSeats.First().Seats;
+            var seatsHm = _context.HallMovies.Include("VipSeats").Where(x => x.HallId == hallId && x.MovieId == movieId && x.Date == date).FirstOrDefault();
+            var seats = seatsHm.VipSeats.FirstOrDefault().Seats;
             return seats.Split('-');
         }
 
