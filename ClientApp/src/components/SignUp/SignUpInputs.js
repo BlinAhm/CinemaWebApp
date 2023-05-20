@@ -14,7 +14,7 @@ const SignUpInputs = () => {
                 var values = $('#form').serialize();
                 $.ajax({
                     method: 'POST',
-                    url: 'https://localhost:7197/api/Authenticate/register',
+                    url: 'https://localhost:7197/api/Authenticate/register-admin',//Changed to admin for software testing
                     data: values,
                     success: function() {
                         window.location.href = "https://localhost:44465/log-in";
