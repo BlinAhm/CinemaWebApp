@@ -51,8 +51,6 @@ namespace CinemaApp.Database
                 .HasOne(hm => hm.Movie)
                 .WithMany(m => m.HallMovies)
                 .HasForeignKey(hm => hm.MovieId);
-
-
         }
     }
 }

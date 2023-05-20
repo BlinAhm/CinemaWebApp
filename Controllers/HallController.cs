@@ -60,8 +60,10 @@ namespace CinemaApp.Controllers
         public string[] VipSeats(int hallId, int movieId, DateTime date)
         {
             var seatsHm = _context.HallMovies.Include("VipSeats").Where(x => x.HallId == hallId && x.MovieId == movieId && x.Date == date).FirstOrDefault();
-            var seats = seatsHm.VipSeats.FirstOrDefault().Seats;
-            return seats.Split('-');
+            var seats = seatsHm?.VipSeats?.FirstOrDefault()?.Seats;
+            if(seats != null)
+                return seats.Split('-');
+            return new string[] { };
         }
 
         [Route("GetDatesForMovie/{hallId}&{movieId}")]
